@@ -1,0 +1,2 @@
+# NoteApp
+Python Django app
