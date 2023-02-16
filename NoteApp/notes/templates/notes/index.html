@@ -1,9 +1,15 @@
-{% if notes %}
-<ul>
-{% for note in notes %}
-    <li><a href="{% url 'show' note.id %}">{{ note.title }}</a></li>
-{% endfor %}
-</ul>
-{% else %}
-<p>No notes are available.</p>
-{% endif %}
+{% extends 'notes/base.html' %}
+
+{% block title %} NoteApp {% endblock %}
+
+{% block content %}
+    {% if notes %}
+    <ul>
+    {% for note in notes %}
+        <li><a href="{% url 'show' note.id %}">{{ note.title }}</a></li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p>No notes are available.</p>
+    {% endif %}
+{% endblock %}
