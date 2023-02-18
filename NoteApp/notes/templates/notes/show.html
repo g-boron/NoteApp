@@ -1,7 +1,7 @@
 {% extends 'notes/base.html' %}
 
 {% block content %}
-    <h1>{{ note.title }}</h1>
-    <p>{{ note.note_text }}</p>
-    <p>{{ note.add_date }}</p>
+    <h1 class="display-4">{{ note.title }}</h1>
+    <h1 class="display-6 text-muted mb-5 text-end"><i>{{ note.add_date }}</i></h1>
+    <h2 class="pt-5 text-left text-start">{{ note.note_text | linebreaks }}</h2>
 {% endblock %}
