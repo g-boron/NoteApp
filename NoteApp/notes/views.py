@@ -36,6 +36,7 @@ def add_note(request):
             f_note_text = form.cleaned_data['note_text']
             n = Note(title=f_title, note_text=f_note_text, add_date=timezone.now())
             n.save()
+            request.user.note.add(n)
             return redirect('show_notes')
     else:
         form = AddNewNote()
