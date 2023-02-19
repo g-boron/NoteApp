@@ -1,0 +1,12 @@
+{% extends 'notes/base.html' %}
+
+{% block title %} Add new note {% endblock %}
+
+{% block content %}
+    <h1 class="display-4">Add new note</h1>
+    <form method="POST" action="#">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" name="add">Add</button>
+    </form>
+{% endblock %}
