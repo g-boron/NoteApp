@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Note
 from .forms import AddNewNote
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
@@ -9,12 +10,15 @@ def index(request):
     return render(request, 'notes/index.html')
 
 
+@login_required(login_url='/login/')
 def show_notes(request):
     notes = Note.objects.all()
     context = {'notes': notes}
 
     return render(request, 'notes/show_notes.html', context)
 
+
+@login_required(login_url='/login/')
 def show(request, note_id):
     note = get_object_or_404(Note, pk=note_id)
     context = {'note': note}
@@ -22,6 +26,7 @@ def show(request, note_id):
     return render(request, 'notes/show.html', context)
 
 
+@login_required(login_url='/login/')
 def add_note(request):
     if request.method == 'POST':
         form = AddNewNote(request.POST)
