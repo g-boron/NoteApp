@@ -2,11 +2,13 @@
 
 {% block title %} Add new note {% endblock %}
 
+{% load crispy_forms_tags %}
+
 {% block content %}
     <h1 class="display-4">Add new note</h1>
-    <form method="POST" action="#">
+    <form method="POST" class="m-5" action="#">
         {% csrf_token %}
-        {{ form }}
-        <button type="submit" name="add">Add</button>
+        {{ form|crispy }}
+        <button type="submit" name="add" class="btn btn-primary">Add</button>
     </form>
 {% endblock %}
