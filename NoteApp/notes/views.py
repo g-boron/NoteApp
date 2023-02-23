@@ -50,3 +50,10 @@ def add_note(request):
     context = {'form': form}    
 
     return render(request, 'notes/add_note.html', context)
+
+
+def delete(request, note_id):
+    note = get_object_or_404(Note, id=note_id)
+    note.delete()
+
+    return redirect('show_notes')
