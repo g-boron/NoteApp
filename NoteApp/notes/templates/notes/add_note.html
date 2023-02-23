@@ -6,7 +6,7 @@
 
 {% block content %}
     <h1 class="display-4">Add new note</h1>
-    <form method="POST" class="m-5" action="#">
+    <form method="POST" class="m-5" action="#" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form|crispy }}
         <button type="submit" name="add" class="btn btn-primary">Add</button>

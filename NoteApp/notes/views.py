@@ -34,12 +34,13 @@ def show(request, note_id):
 @login_required(login_url='/login/')
 def add_note(request):
     if request.method == 'POST':
-        form = AddNewNote(request.POST)
+        form = AddNewNote(request.POST, request.FILES)
 
         if form.is_valid():
             f_title = form.cleaned_data['title']
             f_note_text = form.cleaned_data['note_text']
-            n = Note(title=f_title, note_text=f_note_text, add_date=timezone.now())
+            f_img = form.cleaned_data['img']
+            n = Note(title=f_title, note_text=f_note_text, add_date=timezone.now(), img=f_img)
             n.save()
             request.user.note.add(n)
             return redirect('show_notes')
