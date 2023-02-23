@@ -20,10 +20,15 @@ def show_notes(request):
 
 @login_required(login_url='/login/')
 def show(request, note_id):
-    note = get_object_or_404(Note, pk=note_id)
-    context = {'note': note}
+    n = Note.objects.get(user=request.user)
 
-    return render(request, 'notes/show.html', context)
+    note = get_object_or_404(Note, pk=note_id)
+
+    if note.user == n.user:
+        context = {'note': note}
+        return render(request, 'notes/show.html', context)
+    else:
+        return render(request, 'notes/error.html', {})
 
 
 @login_required(login_url='/login/')
