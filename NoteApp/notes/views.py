@@ -20,11 +20,11 @@ def show_notes(request):
 
 @login_required(login_url='/login/')
 def show(request, note_id):
-    n = Note.objects.get(user=request.user)
+    n = Note.objects.filter(user=request.user)
 
     note = get_object_or_404(Note, pk=note_id)
 
-    if note.user == n.user:
+    if note.user == request.user:
         context = {'note': note}
         return render(request, 'notes/show.html', context)
     else:
