@@ -128,4 +128,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 NoteApp/notes/media/
-NoteApp/notes/migrations/
+*.env
