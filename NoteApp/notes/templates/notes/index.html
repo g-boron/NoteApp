@@ -6,4 +6,11 @@
     <h1 class="display-3">Welcome on NoteApp!</h1>
     <br><br>
     <p class="h4">You can make your own notes here.</p>
+    <p class="h4">Also you can add image to your note!</p>
+
+    {% if user.is_authenticated and last_note%}
+        <h1 class="display-5 mt-5">Your last note:</h1>
+
+        <a class="btn btn-primary m-2 p-4 fs-4" href="{% url 'show' last_note.id %}">{{ last_note.title }}</a>
+    {% endif %}
 {% endblock %}
