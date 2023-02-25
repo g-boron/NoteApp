@@ -4,6 +4,8 @@ from .forms import AddNewNote
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import TemplateView
+from django.views.generic import ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 class IndexPageView(TemplateView):
@@ -17,14 +19,12 @@ class IndexPageView(TemplateView):
             context['last_note'] = None
 
         return context
+  
 
-
-@login_required(login_url='/login/')
-def show_notes(request):
-    notes = Note.objects.all()
-    context = {'notes': notes}
-
-    return render(request, 'notes/show_notes.html', context)
+class NotesListView(LoginRequiredMixin, ListView):
+    login_url = '/login/'
+    model = Note
+    template_name = 'notes/show_notes.html'
 
 
 @login_required(login_url='/login/')
