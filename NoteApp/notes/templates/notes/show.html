@@ -8,7 +8,10 @@
     {% if note.img %}
         <img src="{{ note.img.url }}" alt="Image" class="img-fluid mb-5">
     {% endif %}
-
-    <p><a class="btn btn-danger" href="{% url 'delete' note_id=note.id %}">Delete</a></p>
+    
+    <form method="post" action="{% url 'delete' note.id %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-danger" value="Delete">
+    </form>
     
 {% endblock %}

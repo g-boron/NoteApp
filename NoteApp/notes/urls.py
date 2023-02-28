@@ -8,8 +8,8 @@ urlpatterns = [
     path('', views.IndexPageView.as_view(), name='index'),
     path('<int:pk>/', views.NoteDetailView.as_view(), name='show'),
     path('show_notes/', views.NotesListView.as_view(), name='show_notes'),
-    path('add_note/', views.CreateNote.as_view(), name='add_note'),
-    path('<int:note_id>/delete/', views.delete, name='delete'),
+    path('add_note/', views.CreateNoteView.as_view(), name='add_note'),
+    path('<int:pk>/delete/', views.DeleteNoteView.as_view(), name='delete'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
