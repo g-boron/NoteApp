@@ -2,9 +2,11 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Note
 from .forms import AddNewNote
 from django.utils import timezone
+from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import TemplateView
 from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
@@ -48,25 +50,16 @@ class NoteDetailView(LoginRequiredMixin, DetailView):
             return render(request, 'notes/error.html')
 
 
-@login_required(login_url='/login/')
-def add_note(request):
-    if request.method == 'POST':
-        form = AddNewNote(request.POST, request.FILES)
+class CreateNote(CreateView):
+    model = Note
+    template_name = 'notes/add_note.html'
+    form_class = AddNewNote
+    success_url = reverse_lazy('show_notes')
 
-        if form.is_valid():
-            f_title = form.cleaned_data['title']
-            f_note_text = form.cleaned_data['note_text']
-            f_img = form.cleaned_data['img']
-            n = Note(title=f_title, note_text=f_note_text, add_date=timezone.now(), img=f_img)
-            n.save()
-            request.user.note.add(n)
-            return redirect('show_notes')
-    else:
-        form = AddNewNote()
-
-    context = {'form': form}    
-
-    return render(request, 'notes/add_note.html', context)
+    def form_valid(self, form):
+        form.instance.add_date = timezone.now()
+        form.instance.user = self.request.user
+        return super(CreateNote, self).form_valid(form)
 
 
 def delete(request, note_id):

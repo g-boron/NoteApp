@@ -8,7 +8,7 @@ urlpatterns = [
     path('', views.IndexPageView.as_view(), name='index'),
     path('<int:pk>/', views.NoteDetailView.as_view(), name='show'),
     path('show_notes/', views.NotesListView.as_view(), name='show_notes'),
-    path('add_note/', views.add_note, name='add_note'),
+    path('add_note/', views.CreateNote.as_view(), name='add_note'),
     path('<int:note_id>/delete/', views.delete, name='delete'),
 ]
 

@@ -1,9 +1,8 @@
 from django import forms
-from PIL import Image
-from django.core.files.uploadedfile import SimpleUploadedFile
+from .models import Note
 
 
-class AddNewNote(forms.Form):
-    title = forms.CharField(label='Title', max_length=200)
-    note_text = forms.CharField(label='Note', widget=forms.Textarea)
-    img = forms.ImageField(required=False)
+class AddNewNote(forms.ModelForm):
+    class Meta:
+        model = Note
+        fields = ['title', 'note_text', 'img', ]
