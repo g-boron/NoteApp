@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from .models import Note
 from .forms import AddNewNote
 from django.utils import timezone
@@ -54,12 +54,14 @@ class CreateNoteView(CreateView):
     model = Note
     template_name = 'notes/add_note.html'
     form_class = AddNewNote
-    success_url = reverse_lazy('show_notes')
+
+    def get_success_url(self):
+        return reverse('show', kwargs={'pk' : self.object.pk})
 
     def form_valid(self, form):
         form.instance.add_date = timezone.now()
         form.instance.user = self.request.user
-        return super(CreateNote, self).form_valid(form)
+        return super(CreateNoteView, self).form_valid(form)
 
 
 class DeleteNoteView(DeleteView):
@@ -72,7 +74,9 @@ class EditNoteView(UpdateView):
     model = Note
     template_name = 'notes/add_note.html'
     form_class = AddNewNote
-    success_url = reverse_lazy('show_notes')
+
+    def get_success_url(self):
+        return reverse('show', kwargs={'pk' : self.object.pk})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
