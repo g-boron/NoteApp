@@ -74,4 +74,7 @@ class EditNoteView(UpdateView):
     form_class = AddNewNote
     success_url = reverse_lazy('show_notes')
 
-    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = self.form_class(instance=self.object)
+        return context
