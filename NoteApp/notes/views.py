@@ -8,6 +8,8 @@ from django.views.generic.base import TemplateView
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
+
 
 # Create your views here.
 class IndexPageView(TemplateView):
@@ -27,6 +29,21 @@ class NotesListView(LoginRequiredMixin, ListView):
     login_url = '/login/'
     model = Note
     template_name = 'notes/show_notes.html'
+
+    paginate_by = 3
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        notes = self.get_queryset()
+        paginator = Paginator(notes, self.paginate_by)
+        page = self.request.GET.get('page')
+        notes_page = paginator.get_page(page)
+        context['notes'] = notes_page
+        return context
+
+    def get_queryset(self):
+        queryset = Note.objects.filter(user=self.request.user)
+        return queryset
 
 
 class NoteDetailView(LoginRequiredMixin, DetailView):

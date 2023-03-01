@@ -3,14 +3,41 @@
 {% block title %} My notes {% endblock %}
 
 {% block content %}
-    <h1 class="display-3 mb-5">My notes</h1>
-    {% if user.note.all %}
-    <ul class="list-group d-inline-block fs-5">
-    {% for note in user.note.all %}
-        <li class="list-group-item list-group-item-action list-group-item-dark p-4"><a href="{% url 'show' note.id %}" class="text-decoration-none">{{ note.title }}</a></li>
-    {% endfor %}
-    </ul>
+    <div class="container">
+        <h1 class="display-3 mb-5">My notes</h1>
+        <div class="row">
+    {% if notes %}
+        {% for note in notes %}
+        
+                <div class="col-md-12 mb-5">
+                    <div class="card mx-auto bg-secondary" style="width: 18rem;">
+                        <div class="card-body">
+                        <h5 class="card-title text-dark text-start fs-3">{{ note.title }}</h5>
+                        <h6 class="card-subtitle mb-2 text-white-50 text-end">{{ note.add_date }}</h6>
+                        <a href="{% url 'show' note.id %}" class="btn btn-primary mt-3 fs-5">See note</a>
+                        </div>
+                    </div>
+                </div>
+
+        {% endfor %}
+        <div class="pagination justify-content-center mb-5">
+            <span class="step-links">
+                {% if notes.has_previous %}
+                    <a href="?page={{ notes.previous_page_number }}">previous</a>
+                {% endif %}
+
+                <span class="current-page">
+                    Page {{ notes.number }} of {{ notes.paginator.num_pages }}.
+                </span>
+
+                {% if notes.has_next %}
+                    <a href="?page={{ notes.next_page_number }}">next</a>
+                {% endif %}
+            </span>
+        </div>
     {% else %}
-    <p>No notes are available.</p>
+        <p>No notes are available.</p>
     {% endif %}
+        </div>
+    </div>
 {% endblock %}
