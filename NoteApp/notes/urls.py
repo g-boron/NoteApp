@@ -10,6 +10,7 @@ urlpatterns = [
     path('show_notes/', views.NotesListView.as_view(), name='show_notes'),
     path('add_note/', views.CreateNoteView.as_view(), name='add_note'),
     path('<int:pk>/delete/', views.DeleteNoteView.as_view(), name='delete'),
+    path('<int:pk>/edit/', views.EditNoteView.as_view(), name='edit'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

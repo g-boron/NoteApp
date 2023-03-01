@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import TemplateView
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView, DeleteView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
@@ -66,3 +66,12 @@ class DeleteNoteView(DeleteView):
     model = Note
     template_name = 'notes/show.html'
     success_url = reverse_lazy('show_notes')
+
+
+class EditNoteView(UpdateView):
+    model = Note
+    template_name = 'notes/add_note.html'
+    form_class = AddNewNote
+    success_url = reverse_lazy('show_notes')
+
+    

@@ -9,9 +9,19 @@
         <img src="{{ note.img.url }}" alt="Image" class="img-fluid mb-5">
     {% endif %}
     
-    <form method="post" action="{% url 'delete' note.id %}" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="submit" class="btn btn-danger" value="Delete">
-    </form>
+    <div class="row">
+        <div class="col-md-6 text-center mb-5">
+            <form method="post" action="{% url 'delete' note.id %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="submit" class="btn btn-danger" value="Delete">
+            </form>
+        </div>
+        <div class="col-md-6 text-center mb-5">
+            <form method="post" action="{% url 'edit' note.id %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="submit" class="btn btn-secondary" value="Edit">
+            </form>
+        </div>
+    </div>
     
 {% endblock %}
