@@ -9,6 +9,7 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
+from datetime import timedelta
 
 
 # Create your views here.
@@ -99,3 +100,34 @@ class EditNoteView(UpdateView):
         context = super().get_context_data(**kwargs)
         context['form'] = self.form_class(instance=self.object)
         return context
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        if self.object.edit_dates is None:
+            self.object.edit_dates = []
+        date = timezone.now()
+        correct_date = date + timedelta(hours=1) 
+        self.object.edit_dates.append(correct_date.strftime("%Y-%m-%d %H:%M:%S"))
+        self.object.save()
+        return super().form_valid(form) #dziala dodawanie dat edycji, teraz wyswietlic
+
+
+class StatsNoteView(LoginRequiredMixin, DetailView):
+    login_url = '/login/'
+    model = Note
+    template_name = 'notes/stats.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        note = self.get_object()
+        if note.user == self.request.user:
+            context['note'] = note
+
+        return context
+
+    def get(self, request, *args, **kwargs):
+        note = self.get_object()
+        if note.user == self.request.user:
+            return super().get(request, *args, **kwargs)
+        else:
+            return render(request, 'notes/error.html')

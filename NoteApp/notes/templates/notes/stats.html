@@ -1,0 +1,14 @@
+{% extends 'notes/base.html' %}
+
+{% block title %}Statistics{% endblock %}
+
+{% block content %}
+    <h1 class="display-4 mb-5">Statistics for note: {{ note.title }}</h1>
+
+    <h1>Edit dates:</h1>
+    <ul class="list-group d-inline-block">
+        {% for e in note.edit_dates %}
+            <li class="list-group-item fs-5 list-group-item-dark">{{ e }}</li> 
+        {% endfor %}
+    </ul>
+{% endblock %}
