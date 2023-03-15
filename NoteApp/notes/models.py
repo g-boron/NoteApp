@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import ArrayField
+import os
 
 # Create your models here.
 class Note(models.Model):
@@ -9,6 +10,7 @@ class Note(models.Model):
     note_text = models.TextField()
     add_date = models.DateTimeField('added date')
     img = models.ImageField(upload_to='images', blank=True)
+    doc = models.FileField(upload_to='files', blank=True)
     edit_dates = ArrayField(
         models.DateTimeField('edit dates', blank=True, null=True),
         default=list,
@@ -16,3 +18,7 @@ class Note(models.Model):
 
     def __str__(self):
         return self.title
+
+    @property
+    def filename(self):
+        return os.path.basename(self.doc.name)

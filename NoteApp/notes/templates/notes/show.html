@@ -10,9 +10,15 @@
         <h1 class="display-6 text-muted mb-5 text-end"><i>{{ note.add_date }}</i></h1>
     {% endif %}
     <h2 class="pt-5 text-left text-start">{{ note.note_text | linebreaksbr }}</h2>
-
+    
     {% if note.img %}
         <img src="{{ note.img.url }}" alt="Image" class="img-fluid mb-5">
+    {% endif %}
+
+    {% if note.doc %}
+        <div class="container-fluid mb-5">
+            <a href="{{ note.doc.url }}" download>Download a file</a>
+        </div>
     {% endif %}
     
     <div class="row">
