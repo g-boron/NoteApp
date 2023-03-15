@@ -77,7 +77,6 @@ class CreateNoteView(CreateView):
         return reverse('show', kwargs={'pk' : self.object.pk})
 
     def form_valid(self, form):
-        form.instance.add_date = timezone.now()
         form.instance.user = self.request.user
         return super(CreateNoteView, self).form_valid(form)
 
@@ -109,7 +108,7 @@ class EditNoteView(UpdateView):
         correct_date = date + timedelta(hours=1) 
         self.object.edit_dates.append(correct_date.strftime("%Y-%m-%d %H:%M:%S"))
         self.object.save()
-        return super().form_valid(form) #dziala dodawanie dat edycji, teraz wyswietlic
+        return super().form_valid(form)
 
 
 class StatsNoteView(LoginRequiredMixin, DetailView):
