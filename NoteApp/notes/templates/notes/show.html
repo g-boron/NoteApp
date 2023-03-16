@@ -9,7 +9,13 @@
     {% else %}
         <h1 class="display-6 text-muted mb-5 text-end"><i>{{ note.add_date }}</i></h1>
     {% endif %}
-    <h2 class="pt-5 text-left text-start">{{ note.note_text | linebreaksbr }}</h2>
+
+    <div class="card text-dark mb-5 bg-secondary w-75 mx-auto">
+        <div class="card-body">
+            <h2 class="pt-5 text-start mb-5">{{ note.note_text | linebreaksbr }}</h2>
+
+        </div>
+    </div>
     
     {% if note.img %}
         <img src="{{ note.img.url }}" alt="Image" class="img-fluid mb-5">

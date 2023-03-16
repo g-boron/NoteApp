@@ -9,15 +9,15 @@
     {% if notes %}
         {% for note in notes %}
         
-                <div class="col-md-12 mb-5">
-                    <div class="card mx-auto bg-secondary mt-4" style="width: 18rem;">
-                        <div class="card-body">
-                        <h5 class="card-title text-dark text-start fs-3">{{ note.title }}</h5>
-                        <h6 class="card-subtitle mb-2 text-white-50 text-end">{{ note.add_date }}</h6>
-                        <a href="{% url 'show' note.id %}" class="btn btn-primary mt-3 fs-5">See note</a>
-                        </div>
-                    </div>
+        <div class="col-md-12 mb-5">
+            <div class="card mx-auto bg-secondary mt-5 w-xl-25 w-lg-25 w-md-25 w-sm-75">
+                <div class="card-body">
+                <h5 class="card-title text-dark text-start fs-3">{{ note.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-white-50 text-end">{{ note.add_date }}</h6>
+                <a href="{% url 'show' note.id %}" class="btn btn-primary mt-3 fs-5">See note</a>
                 </div>
+            </div>
+        </div>
 
         {% endfor %}
         <div class="pagination justify-content-center mb-5">
