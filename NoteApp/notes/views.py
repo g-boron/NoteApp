@@ -10,6 +10,7 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from datetime import timedelta
+from django.db.models import Q
 
 
 # Create your views here.
@@ -130,3 +131,28 @@ class StatsNoteView(LoginRequiredMixin, DetailView):
             return super().get(request, *args, **kwargs)
         else:
             return render(request, 'notes/error.html')
+
+class SearchResultsView(LoginRequiredMixin, ListView):
+    login_url = '/login/'
+    model = Note
+    template_name = 'notes/search_results.html'
+
+    paginate_by = 3
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        notes = self.get_queryset()
+        paginator = Paginator(notes, self.paginate_by)
+        page = self.request.GET.get('page')
+        notes_page = paginator.get_page(page)
+        context['notes'] = notes_page
+        context['query'] = self.request.GET.get('q')
+        return context
+
+    
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        object_list = Note.objects.filter(
+            Q(title__icontains=query) & Q(user=self.request.user)
+        )
+        return object_list

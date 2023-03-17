@@ -4,13 +4,8 @@
 
 {% block content %}
     <div class="container">
-        <h1 class="display-3 mb-5">My notes</h1>
+        <h1 class="display-3 mb-5">Search results</h1>
         <div class="row">
-
-        <form action="{% url 'search' %}" method="get">
-            <input name="q" type="text" class="fs-5" placeholder="Search..." style="border-radius: 8px;">
-            <input type="submit" class="btn btn-primary fs-4 ms-2" value="Search">
-        </form>
     {% if notes %}
         {% for note in notes %}
         
@@ -23,12 +18,11 @@
                 </div>
             </div>
         </div>
-
         {% endfor %}
         <div class="pagination justify-content-center mb-5">
             <span class="step-links">
                 {% if notes.has_previous %}
-                    <a href="?page={{ notes.previous_page_number }}">previous</a>
+                    <a href="?page={{ notes.previous_page_number }}&q={{ query }}">previous</a>
                 {% endif %}
 
                 <span class="current-page">
@@ -36,10 +30,11 @@
                 </span>
 
                 {% if notes.has_next %}
-                    <a href="?page={{ notes.next_page_number }}">next</a>
+                    <a href="?page={{ notes.next_page_number }}&q={{ query }}">next</a>
                 {% endif %}
             </span>
         </div>
+
     {% else %}
         <p>No notes are available.</p>
     {% endif %}
