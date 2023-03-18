@@ -5,12 +5,13 @@ from django.utils import timezone
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import TemplateView
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, View
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from datetime import timedelta
 from django.db.models import Q
+from django.http import HttpResponse, Http404
 
 
 # Create your views here.
@@ -79,6 +80,12 @@ class CreateNoteView(CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+
+        form_files = self.request.FILES.getlist('file_field')
+        if form_files:
+            for f in form_files:
+                form.instance.files.append(f)
+
         return super(CreateNoteView, self).form_valid(form)
 
 

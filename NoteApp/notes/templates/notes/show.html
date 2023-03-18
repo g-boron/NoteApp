@@ -17,23 +17,20 @@
         </div>
     </div>
     
-    {% if note.img %}
-        <div class="container-fluid mb-5">
-            <div class="card mx-auto bg-secondary mt-5 w-75">
-                <div class="card-body">
-                    <h5 class="card-title text-dark text-start fs-3">Image:</h5>
-                    <img src="{{ note.img.url }}" alt="Image" class="img-fluid mb-5">
-                </div>
-            </div>
-        </div>
-    {% endif %}
-
-    {% if note.doc %}
+    {% if note.files %}
         <div class="container-fluid mb-5">
             <div class="card mx-auto bg-secondary mt-5 w-xl-25 w-lg-25 w-md-25 w-sm-75">
                 <div class="card-body">
-                    <h5 class="card-title text-dark text-start fs-3">File:</h5>
-                    <a href="{{ note.doc.url }}" download>{{ note.doc|cut:'files/' }}</a>
+                    <!--<h5 class="card-title text-dark text-start fs-3">File:</h5>
+                    <a href="{{ note.doc.url }}" download>{{ note.doc|cut:'files/' }}</a>-->
+
+                    <ul>
+                    {% for f in note.files %}
+                        <li class="text-start">
+                            <a href="{{ f }}">{{ f }}</a> 
+                        </li>
+                    {% endfor %}
+                    </ul>
                 </div>
             </div>
         </div>
