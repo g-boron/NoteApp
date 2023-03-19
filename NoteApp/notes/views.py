@@ -113,6 +113,7 @@ class EditNoteView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = self.form_class(instance=self.object)
+        context['files'] = self.object.notefile_set.all()
         return context
 
     def form_valid(self, form):
@@ -123,6 +124,16 @@ class EditNoteView(UpdateView):
         correct_date = date + timedelta(hours=1) 
         self.object.edit_dates.append(correct_date.strftime("%Y-%m-%d %H:%M:%S"))
         self.object.save()
+
+        self.object.notefile_set.all().delete()
+
+        form_files = self.request.FILES.getlist('file_field')
+        if form_files:
+            for f in form_files:
+                note_file = NoteFile(note=form.instance)
+                note_file.file.save(f.name, f)
+                note_file.save()
+                
         return super().form_valid(form)
 
 
