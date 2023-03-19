@@ -17,19 +17,16 @@
         </div>
     </div>
     
-    {% if note.files %}
+    {% if note.notefile_set.all %}
         <div class="container-fluid mb-5">
             <div class="card mx-auto bg-secondary mt-5 w-xl-25 w-lg-25 w-md-25 w-sm-75">
                 <div class="card-body">
-                    <!--<h5 class="card-title text-dark text-start fs-3">File:</h5>
-                    <a href="{{ note.doc.url }}" download>{{ note.doc|cut:'files/' }}</a>-->
-
                     <ul>
-                    {% for f in note.files %}
-                        <li class="text-start">
-                            <a href="{{ f }}">{{ f }}</a> 
-                        </li>
-                    {% endfor %}
+                        {% for note_file in note.notefile_set.all %}
+                            <li class="text-start">
+                                <a href="{% url 'download' note_file.id %}">{{ note_file.filename }}</a> 
+                            </li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>

@@ -9,10 +9,6 @@ class Note(models.Model):
     title = models.CharField(max_length=200)
     note_text = models.TextField()
     add_date = models.DateTimeField('added date', auto_now_add=True)
-    files = ArrayField(
-        models.FileField(upload_to='files', blank=True),
-        default=list,
-    )
     edit_dates = ArrayField(
         models.DateTimeField('edit dates', blank=True, null=True),
         default=list,
@@ -21,6 +17,11 @@ class Note(models.Model):
     def __str__(self):
         return self.title
 
+
+class NoteFile(models.Model):
+    note = models.ForeignKey(Note, on_delete=models.CASCADE, null=True)
+    file = models.FileField(upload_to='files', blank=True)
+
     @property
     def filename(self):
-        return os.path.basename(self.files.name)
+        return os.path.basename(self.file.name)

@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
-from .models import Note
+from .models import Note, NoteFile
 from .forms import AddNewNote
 from django.utils import timezone
 from django.urls import reverse_lazy
@@ -11,7 +11,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from datetime import timedelta
 from django.db.models import Q
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse
+import os
+import mimetypes
+from wsgiref.util import FileWrapper
+
 
 
 # Create your views here.
@@ -80,11 +84,14 @@ class CreateNoteView(CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+        form.save()
 
         form_files = self.request.FILES.getlist('file_field')
         if form_files:
             for f in form_files:
-                form.instance.files.append(f)
+                note_file = NoteFile(note=form.instance)
+                note_file.file.save(f.name, f)
+                note_file.save()
 
         return super(CreateNoteView, self).form_valid(form)
 
@@ -163,3 +170,14 @@ class SearchResultsView(LoginRequiredMixin, ListView):
             Q(title__icontains=query) & Q(user=self.request.user)
         )
         return object_list
+
+def download(request, file_id):
+    note_file = get_object_or_404(NoteFile, id=file_id)
+    file_path = note_file.file.path
+    file_name = note_file.file.name
+    file_wrapper = FileWrapper(open(file_path, 'rb'))
+    content_type = mimetypes.guess_type(file_path)[0]
+    response = HttpResponse(file_wrapper, content_type=content_type)
+    response['Content-Length'] = os.path.getsize(file_path)
+    response['Content-Disposition'] = f'attachment; filename="{file_name}"'
+    return response
