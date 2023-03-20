@@ -25,3 +25,7 @@ class NoteFile(models.Model):
     @property
     def filename(self):
         return os.path.basename(self.file.name)
+
+    def extension(self):
+        name, extension = os.path.splitext(self.file.name)
+        return extension

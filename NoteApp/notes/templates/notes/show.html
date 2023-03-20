@@ -18,19 +18,23 @@
     </div>
     
     {% if note.notefile_set.all %}
-        <div class="container-fluid mb-5">
-            <div class="card mx-auto bg-secondary mt-5 w-xl-25 w-lg-25 w-md-25 w-sm-75">
-                <div class="card-body">
-                    <ul>
-                        {% for note_file in note.notefile_set.all %}
-                            <li class="text-start">
-                                <a href="{% url 'download' note_file.id %}">{{ note_file.filename }}</a> 
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        </div>
+        {% for note_file in note.notefile_set.all %}
+            {% if note_file.extension == '.PNG' or note_file.extension == '.png' %}
+                <img src="{{ note_file.file.url }}" alt="Image" class="img-fluid mb-5">
+            {% endif %}
+        {% endfor %}
+
+        <ul>
+            {% for note_file in note.notefile_set.all %}
+                {% if note_file.extension != '.PNG' and note_file.extension != '.png' %}
+                    <li class="text-start">
+                        <a href="{% url 'download' note_file.id %}">{{ note_file.filename }}</a>
+                        <h1>{{ note_file.extension }}</h1> 
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+
     {% endif %}
     
     <div class="row">
