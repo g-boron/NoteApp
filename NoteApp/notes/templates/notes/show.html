@@ -24,6 +24,15 @@
             {% endif %}
         {% endfor %}
 
+        {% for note_file in note.notefile_set.all %}
+            {% if note_file.extension|lower == '.mp4' or note_file.extension|lower == '.mkv' or note_file.extension|lower == '.avi' or note_file.extension|lower == '.wmv' or note_file.extension|lower == '.mov' %}
+                <video style="width: 75%" controls>
+                    <source src="{{ note_file.file.url }}" type="video/mp4">
+                    Your browser does not support HTML video.
+                </video>
+            {% endif %}
+        {% endfor %}
+
         <ul>
             {% for note_file in note.notefile_set.all %}
                 <li class="text-start">
