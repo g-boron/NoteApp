@@ -58,14 +58,6 @@ class NoteDetailView(LoginRequiredMixin, DetailView):
     model = Note
     template_name = 'notes/show.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        note = self.get_object()
-        if note.user == self.request.user:
-            context['note'] = note
-
-        return context
-
     def get(self, request, *args, **kwargs):
         note = self.get_object()
         if note.user == self.request.user:

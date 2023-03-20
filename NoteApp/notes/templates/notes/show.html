@@ -19,19 +19,16 @@
     
     {% if note.notefile_set.all %}
         {% for note_file in note.notefile_set.all %}
-            {% if note_file.extension == '.PNG' or note_file.extension == '.png' %}
+            {% if note_file.extension|lower == '.png' or note_file.extension|lower == '.jpg' or note_file.extension|lower == '.jpeg' or note_file.extension|lower == '.gif' %}
                 <img src="{{ note_file.file.url }}" alt="Image" class="img-fluid mb-5">
             {% endif %}
         {% endfor %}
 
         <ul>
             {% for note_file in note.notefile_set.all %}
-                {% if note_file.extension != '.PNG' and note_file.extension != '.png' %}
-                    <li class="text-start">
-                        <a href="{% url 'download' note_file.id %}">{{ note_file.filename }}</a>
-                        <h1>{{ note_file.extension }}</h1> 
-                    </li>
-                {% endif %}
+                <li class="text-start">
+                    <a href="{% url 'download' note_file.id %}">{{ note_file.filename }}</a>
+                </li>
             {% endfor %}
         </ul>
 
