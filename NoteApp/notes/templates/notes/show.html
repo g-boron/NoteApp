@@ -3,26 +3,56 @@
 {% block title %} {{ note.title }} {% endblock %}
 
 {% block content %}
-    <h1 class="display-4">{{ note.title }}</h1>
-    {% if note.edit_dates %}
-        <h1 class="display-6 text-muted mb-5 text-end"><i><a href="{% url 'stats' note.id %}">(edited)</a>  {{ note.add_date }}</i></h1>
-    {% else %}
-        <h1 class="display-6 text-muted mb-5 text-end"><i>{{ note.add_date }}</i></h1>
-    {% endif %}
+    <div class="container">
+        <h1 class="display-4">{{ note.title }}</h1>
+        {% if note.edit_dates %}
+            <h1 class="display-6 text-muted mb-5 text-end"><i><a href="{% url 'stats' note.id %}">(edited)</a>  {{ note.add_date }}</i></h1>
+        {% else %}
+            <h1 class="display-6 text-muted mb-5 text-end"><i>{{ note.add_date }}</i></h1>
+        {% endif %}
 
-    <div class="card text-dark mb-5 bg-secondary w-75 mx-auto">
-        <div class="card-body">
-            <h5 class="card-title text-dark text-start fs-3">Note:</h5>
-            <h2 class="pt-5 text-start mb-5">{{ note.note_text | linebreaksbr }}</h2>
+        <div class="card text-dark mb-5 bg-secondary mx-auto">
+            <div class="card-body">
+                <h5 class="card-title text-dark text-start fs-3">Note:</h5>
+                <h2 class="pt-5 text-start mb-5">{{ note.note_text | linebreaksbr }}</h2>
+            </div>
         </div>
     </div>
     
     {% if note.notefile_set.all %}
-        {% for note_file in note.notefile_set.all %}
-            {% if note_file.extension|lower == '.png' or note_file.extension|lower == '.jpg' or note_file.extension|lower == '.jpeg' or note_file.extension|lower == '.gif' %}
-                <img src="{{ note_file.file.url }}" alt="Image" class="img-fluid mb-5">
-            {% endif %}
-        {% endfor %}
+        <div class="container">
+            <h1 class="fw-light text-center text-lg-start mt-4 mb-0">Images</h1>  
+            <hr class="mt-2 mb-5">
+            <div class="row text-center text-lg-start">
+                {% for note_file in note.notefile_set.all %}
+                    {% if note_file.extension|lower == '.png' or note_file.extension|lower == '.jpg' or note_file.extension|lower == '.jpeg' or note_file.extension|lower == '.gif' %}
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <a href="#" class="d-block mb-4 h-100" data-bs-toggle="modal" data-bs-target="#modal-id">
+                                <img class="img-fluid img-thumbnail" src="{{ note_file.file.url }}" alt="">
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal-id" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <img class="img-fluid" src="" alt="" id="modal-image">
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <script>
+            $('a[data-bs-toggle="modal"]').on('click', function(e) {
+                e.preventDefault();
+                var imageUrl = $(this).find('img').attr('src');
+                $('#modal-image').attr('src', imageUrl);
+            }); 
+        </script>
 
         {% for note_file in note.notefile_set.all %}
             {% if note_file.extension|lower == '.mp4' or note_file.extension|lower == '.mkv' or note_file.extension|lower == '.avi' or note_file.extension|lower == '.wmv' or note_file.extension|lower == '.mov' %}
@@ -33,13 +63,19 @@
             {% endif %}
         {% endfor %}
 
-        <ul>
-            {% for note_file in note.notefile_set.all %}
-                <li class="text-start">
-                    <a href="{% url 'download' note_file.id %}">{{ note_file.filename }}</a>
-                </li>
-            {% endfor %}
-        </ul>
+        <div class="container">
+            <h1 class="fw-light text-center text-lg-start mt-4 mb-0">Files</h1>  
+            <hr class="mt-2 mb-5">
+            <ul>
+                {% for note_file in note.notefile_set.all %}
+                    <li class="text-start">
+                        <a href="{% url 'download' note_file.id %}">
+                            {{ note_file.filename|slice:':30' }}{% if note_file.filename|length > 30 %}...{% endif %}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
 
     {% endif %}
     
