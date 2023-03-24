@@ -49,7 +49,7 @@ class NotesListView(LoginRequiredMixin, ListView):
         return context
 
     def get_queryset(self):
-        queryset = Note.objects.filter(user=self.request.user)
+        queryset = Note.objects.filter(members__contains = [self.request.user])
         return queryset
 
 
@@ -60,7 +60,7 @@ class NoteDetailView(LoginRequiredMixin, DetailView):
 
     def get(self, request, *args, **kwargs):
         note = self.get_object()
-        if note.user == self.request.user:
+        if Note.objects.filter(members__contains = [self.request.user], id=note.id):
             return super().get(request, *args, **kwargs)
         else:
             return render(request, 'notes/error.html')
@@ -207,10 +207,11 @@ def invite_user(request, pk):
 
         if form.is_valid():
             username = form.cleaned_data['username']
-            if User.objects.filter(username=username).exists() and username != request.user.username:
-                print('Istnieje! @@@@@@@@@@@222222')
+            if User.objects.filter(username=username).exists() and username != request.user.username and not Note.objects.filter(members__contains = [username], id=note.id):
+                note.members.append(username)
+                note.save()
             else:
-                print('Nie ma @@@@@@@@@@')
+                print('Error')
 
             return redirect('show', pk=note.id)
 

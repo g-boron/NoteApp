@@ -6,10 +6,11 @@
     <div class="container">
         <h1 class="display-4">{{ note.title }}</h1>
         {% if note.edit_dates %}
-            <h1 class="display-6 text-muted mb-5 text-end"><i><a href="{% url 'stats' note.id %}">(edited)</a>  {{ note.add_date }}</i></h1>
+            <h1 class="display-6 text-muted mb-2 text-end"><i><a href="{% url 'stats' note.id %}">(edited)</a>  {{ note.add_date }}</i></h1>
         {% else %}
-            <h1 class="display-6 text-muted mb-5 text-end"><i>{{ note.add_date }}</i></h1>
+            <h1 class="display-6 text-muted mb-2 text-end"><i>{{ note.add_date }}</i></h1>
         {% endif %}
+        <h1 class="display-6 text-muted mb-5 text-end"><i>Author - {{ note.user }}</i></h1>
 
         <div class="card text-dark mb-5 bg-secondary mx-auto">
             <div class="card-body">
