@@ -13,6 +13,9 @@ class Note(models.Model):
         models.DateTimeField('edit dates', blank=True, null=True),
         default=list,
     )
+    members = ArrayField(
+        models.CharField(max_length=200)
+    )
 
     def __str__(self):
         return self.title
@@ -29,3 +32,10 @@ class NoteFile(models.Model):
     def extension(self):
         name, extension = os.path.splitext(self.file.name)
         return extension
+
+
+class Notification(models.Model):
+    is_read = models.BooleanField(default=False)
+    message = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)

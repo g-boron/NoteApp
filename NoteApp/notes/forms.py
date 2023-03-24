@@ -13,3 +13,11 @@ class AddNewNote(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(AddNewNote, self).__init__(*args, **kwargs)
         self.fields['file_field'].label = "Files"
+
+
+class InviteUser(forms.ModelForm):
+    username = forms.CharField(max_length=200)
+
+    class Meta:
+        model = Note
+        fields = ['username',]

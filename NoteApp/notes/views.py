@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
-from .models import Note, NoteFile
-from .forms import AddNewNote
+from .models import Note, NoteFile, User
+from .forms import AddNewNote, InviteUser
 from django.utils import timezone
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
@@ -65,6 +65,11 @@ class NoteDetailView(LoginRequiredMixin, DetailView):
         else:
             return render(request, 'notes/error.html')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = InviteUser()
+        return context
+
 
 class CreateNoteView(CreateView):
     model = Note
@@ -76,7 +81,11 @@ class CreateNoteView(CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        form.save()
+        if form.instance.members is None:
+            form.instance.members = [self.request.user]
+        form.save(commit=False)
+        
+        form.instance.save()
 
         form_files = self.request.FILES.getlist('file_field')
         if form_files:
@@ -84,6 +93,7 @@ class CreateNoteView(CreateView):
                 note_file = NoteFile(note=form.instance)
                 note_file.file.save(f.name, f)
                 note_file.save()
+        
 
         return super(CreateNoteView, self).form_valid(form)
 
@@ -149,6 +159,7 @@ class StatsNoteView(LoginRequiredMixin, DetailView):
         else:
             return render(request, 'notes/error.html')
 
+
 class SearchResultsView(LoginRequiredMixin, ListView):
     login_url = '/login/'
     model = Note
@@ -174,6 +185,7 @@ class SearchResultsView(LoginRequiredMixin, ListView):
         )
         return object_list
 
+
 def download(request, file_id):
     note_file = get_object_or_404(NoteFile, id=file_id)
     file_path = note_file.file.path
@@ -184,3 +196,26 @@ def download(request, file_id):
     response['Content-Length'] = os.path.getsize(file_path)
     response['Content-Disposition'] = f'attachment; filename="{file_name}"'
     return response
+
+
+def invite_user(request, pk):
+    note = get_object_or_404(Note, pk=pk)
+    form = InviteUser()
+
+    if request.method == 'POST':
+        form = InviteUser(request.POST)
+
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            if User.objects.filter(username=username).exists() and username != request.user.username:
+                print('Istnieje! @@@@@@@@@@@222222')
+            else:
+                print('Nie ma @@@@@@@@@@')
+
+            return redirect('show', pk=note.id)
+
+    context = {
+        'form': form
+    }
+
+    return render(request, context)
