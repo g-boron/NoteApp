@@ -11,7 +11,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from datetime import timedelta
 from django.db.models import Q
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 import os
 import mimetypes
 from wsgiref.util import FileWrapper
@@ -25,6 +25,8 @@ class IndexPageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.request.user.is_authenticated:
+            unread_notifications = Notification.objects.filter(user=self.request.user, is_read=False).count()
+            context["unread_notifications"] = unread_notifications
             context['last_note'] = Note.objects.filter(user=self.request.user).last()
         else:
             context['last_note'] = None
@@ -247,3 +249,16 @@ class DeclineNotificationView(DeleteView):
     model = Notification
     template_name = 'notes/notifications.html'
     success_url = reverse_lazy('show_notifications')
+
+
+def check(request, pk):
+    notification = get_object_or_404(Notification, pk=pk)
+
+    if notification.is_read == True:
+        notification.is_read = False
+        notification.save()
+    else:
+        notification.is_read = True
+        notification.save()
+
+    return HttpResponseRedirect(reverse('show_notifications'))

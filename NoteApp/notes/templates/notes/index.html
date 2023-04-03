@@ -13,4 +13,8 @@
 
         <a class="btn btn-primary m-2 p-4 fs-4" href="{% url 'show' last_note.id %}">{{ last_note.title }}</a>
     {% endif %}
+    {% if unread_notifications %}
+        <h1 class="display-5 mt-5">You have {{ unread_notifications }} unread notification{{ unread_notifications|pluralize }}.</h1>
+        <a href="{% url 'show_notifications' %}" class="btn btn-primary fs-4 p-4 m-2">See</a>
+    {% endif %}
 {% endblock %}
