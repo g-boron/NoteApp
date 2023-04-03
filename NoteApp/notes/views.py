@@ -239,7 +239,7 @@ class NotificationsListView(LoginRequiredMixin, ListView):
         return context
 
     def get_queryset(self):
-        queryset = Notification.objects.filter(user__id = self.request.user.id)
+        queryset = Notification.objects.filter(user__id = self.request.user.id).order_by("-timestamp")
         return queryset
 
 
