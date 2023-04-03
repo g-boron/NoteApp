@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
-from .models import Note, NoteFile, User
+from .models import Note, NoteFile, User, Notification
 from .forms import AddNewNote, InviteUser
 from django.utils import timezone
 from django.urls import reverse_lazy
@@ -208,8 +208,8 @@ def invite_user(request, pk):
         if form.is_valid():
             username = form.cleaned_data['username']
             if User.objects.filter(username=username).exists() and username != request.user.username and not Note.objects.filter(members__contains = [username], id=note.id):
-                note.members.append(username)
-                note.save()
+                notification = Notification(is_read=False, message=f"Do you want to join to {User.objects.get(username=note.user)}'s note: {note.title}?", user=User.objects.get(username=username))
+                notification.save()
             else:
                 print('Error')
 
