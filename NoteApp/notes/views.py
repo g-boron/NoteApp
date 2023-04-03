@@ -210,7 +210,7 @@ def invite_user(request, pk):
         if form.is_valid():
             username = form.cleaned_data['username']
             if User.objects.filter(username=username).exists() and username != request.user.username and not Note.objects.filter(members__contains = [username], id=note.id):
-                notification = Notification(is_read=False, message=f"Do you want to join to {User.objects.get(username=note.user)}'s note: {note.title}?", user=User.objects.get(username=username))
+                notification = Notification(message=f"Do you want to join to {User.objects.get(username=note.user)}'s note: {note.title}?", user=User.objects.get(username=username), note_id=note.id)
                 notification.save()
             else:
                 print('Error')
@@ -262,3 +262,14 @@ def check(request, pk):
         notification.save()
 
     return HttpResponseRedirect(reverse('show_notifications'))
+
+
+def accept_invitation(request, pk):
+    notification = get_object_or_404(Notification, pk=pk)
+    note = get_object_or_404(Note, pk=notification.note_id)
+    user = get_object_or_404(User, pk=notification.user_id)
+    note.members.append(user.username)
+    note.save()
+    notification.delete()
+
+    return HttpResponseRedirect(reverse('show_notes'))
