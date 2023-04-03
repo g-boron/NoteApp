@@ -17,8 +17,20 @@
                     <div class="card-text text-dark mb-5 bg-secondary mx-auto">
                         <h2 class="pt-5 text-start mb-5">{{ notification.message }}</h2>
                     </div>
-                    <a href="#" class="btn btn-success mt-2 fs-5">Accept</a>
-                    <a href="#" class="btn btn-danger mt-2 fs-5">Decline</a>
+                    <div class="row">
+                        <div class="col-md-6 mb-1">
+                            <form method="post" action="{% url 'decline_notification' notification.id %}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <input type="submit" class="btn btn-danger" value="Delete">
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <form method="post" action="#" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <input type="submit" class="btn btn-success" value="Accept">
+                            </form>
+                        </div>  
+                    </div>
                 </div>
             </div>
         </div>

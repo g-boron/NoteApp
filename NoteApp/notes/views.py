@@ -241,3 +241,9 @@ class NotificationsListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         queryset = Notification.objects.filter(user__id = self.request.user.id)
         return queryset
+
+
+class DeclineNotificationView(DeleteView):
+    model = Notification
+    template_name = 'notes/notifications.html'
+    success_url = reverse_lazy('show_notifications')
