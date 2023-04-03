@@ -14,7 +14,8 @@ urlpatterns = [
     path('<int:pk>/stats/', views.StatsNoteView.as_view(), name='stats'),
     path('search/', views.SearchResultsView.as_view(), name='search'),
     path('download/<int:file_id>/', views.download, name='download'),
-    path('invite/<int:pk>', views.invite_user, name='invite')
+    path('invite/<int:pk>', views.invite_user, name='invite'),
+    path('show_notifications/', views.NotificationsListView.as_view(), name='show_notifications'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

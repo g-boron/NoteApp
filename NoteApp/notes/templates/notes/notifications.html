@@ -1,0 +1,47 @@
+{% extends 'notes/base.html' %}
+
+{% block title %} Notifications {% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="display-3 mb-5">My notifications</h1>
+        <div class="row">
+    {% if notifications %}
+        {% for notification in notifications %}
+        
+        <div class="col-md-12 mb-5 mt-5">
+            <div class="card mx-auto bg-secondary">
+                <div class="card-body">
+                    <h5 class="card-title text-dark text-start fs-3">New notification!</h5>
+                    <h6 class="card-subtitle mb-2 text-white-50 text-end">{{ notification.timestamp }}</h6>
+                    <div class="card-text text-dark mb-5 bg-secondary mx-auto">
+                        <h2 class="pt-5 text-start mb-5">{{ notification.message }}</h2>
+                    </div>
+                    <a href="#" class="btn btn-success mt-2 fs-5">Accept</a>
+                    <a href="#" class="btn btn-danger mt-2 fs-5">Decline</a>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+        <div class="pagination justify-content-center mb-5">
+            <span class="step-links">
+                {% if notes.has_previous %}
+                    <a href="?page={{ notes.previous_page_number }}">previous</a>
+                {% endif %}
+
+                <span class="current-page">
+                    Page {{ notes.number }} of {{ notes.paginator.num_pages }}.
+                </span>
+
+                {% if notes.has_next %}
+                    <a href="?page={{ notes.next_page_number }}">next</a>
+                {% endif %}
+            </span>
+        </div>
+    {% else %}
+        <p>There is no notifcations.</p>
+    {% endif %}
+        </div>
+    </div>
+{% endblock %}

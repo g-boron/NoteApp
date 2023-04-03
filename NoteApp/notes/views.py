@@ -220,3 +220,24 @@ def invite_user(request, pk):
     }
 
     return render(request, context)
+
+
+class NotificationsListView(LoginRequiredMixin, ListView):
+    login_url = '/login/'
+    model = Notification
+    template_name = 'notes/notifications.html'
+
+    paginate_by = 3
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        notes = self.get_queryset()
+        paginator = Paginator(notes, self.paginate_by)
+        page = self.request.GET.get('page')
+        notes_page = paginator.get_page(page)
+        context['notifications'] = notes_page
+        return context
+
+    def get_queryset(self):
+        queryset = Notification.objects.filter(user__id = self.request.user.id)
+        return queryset
