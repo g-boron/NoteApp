@@ -129,8 +129,6 @@ class EditNoteView(UpdateView):
         self.object.edit_dates.append(correct_date.strftime("%Y-%m-%d %H:%M:%S"))
         self.object.save()
 
-        self.object.notefile_set.all().delete()
-
         form_files = self.request.FILES.getlist('file_field')
         if form_files:
             for f in form_files:
@@ -275,3 +273,11 @@ def accept_invitation(request, pk):
     notification.delete()
 
     return HttpResponseRedirect(reverse('show_notes'))
+    
+
+def detele_file(request, pk, note):
+    note = get_object_or_404(Note, pk=note)
+    file = NoteFile.objects.get(id=pk)
+    file.delete()
+
+    return redirect('show', pk=note.id)

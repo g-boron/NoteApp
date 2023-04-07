@@ -38,8 +38,6 @@
     
     {% if note.notefile_set.all %}
         <div class="container">
-            <h1 class="fw-light text-center text-lg-start mt-4 mb-0">Images</h1>  
-            <hr class="mt-2 mb-5">
             <div class="row text-center text-lg-start">
                 {% for note_file in note.notefile_set.all %}
                     {% if note_file.extension|lower == '.png' or note_file.extension|lower == '.jpg' or note_file.extension|lower == '.jpeg' or note_file.extension|lower == '.gif' %}
@@ -85,11 +83,20 @@
             <hr class="mt-2 mb-5">
             <ul>
                 {% for note_file in note.notefile_set.all %}
-                    <li class="text-start">
-                        <a href="{% url 'download' note_file.id %}">
-                            {{ note_file.filename|slice:':30' }}{% if note_file.filename|length > 30 %}...{% endif %}
-                        </a>
-                    </li>
+                <div class="row">
+                    <div class="col-md-6">
+                        <li class="text-start mb-3">
+                            <a href="{% url 'download' note_file.id %}">
+                                {{ note_file.filename|slice:':30' }}{% if note_file.filename|length > 30 %}...{% endif %}
+                            </a>
+                        </li>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="{% url 'delete_file' note_file.id note.id %}" class="btn btn-danger p-1">X</a>
+                    </div>
+
+                </div>
+
                 {% endfor %}
             </ul>
         </div>
