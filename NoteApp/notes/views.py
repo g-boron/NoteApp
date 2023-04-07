@@ -15,7 +15,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 import os
 import mimetypes
 from wsgiref.util import FileWrapper
-
+from django.contrib import messages
 
 
 # Create your views here.
@@ -212,8 +212,10 @@ def invite_user(request, pk):
             if User.objects.filter(username=username).exists() and username != request.user.username and not Note.objects.filter(members__contains = [username], id=note.id):
                 notification = Notification(message=f"Do you want to join to {User.objects.get(username=note.user)}'s note: {note.title}?", user=User.objects.get(username=username), note_id=note.id)
                 notification.save()
+                messages.success(request, 'Successfully added new user!')
             else:
                 print('Error')
+                messages.error(request, 'You cannot add this user!')
 
             return redirect('show', pk=note.id)
 

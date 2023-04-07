@@ -12,6 +12,22 @@
         {% endif %}
         <h1 class="display-6 text-muted mb-5 text-end"><i>Author - {{ note.user }}</i></h1>
 
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == 'success' %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% else %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
         <div class="card text-dark mb-5 bg-secondary mx-auto">
             <div class="card-body">
                 <h5 class="card-title text-dark text-start fs-3">Note:</h5>
