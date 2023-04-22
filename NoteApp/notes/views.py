@@ -47,6 +47,8 @@ class NotesListView(LoginRequiredMixin, ListView):
         paginator = Paginator(notes, self.paginate_by)
         page = self.request.GET.get('page')
         notes_page = paginator.get_page(page)
+        unread_notifications = Notification.objects.filter(user=self.request.user, is_read=False).count()
+        context["unread_notifications"] = unread_notifications
         context['notes'] = notes_page
         return context
 
@@ -70,6 +72,8 @@ class NoteDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = InviteUser()
+        unread_notifications = Notification.objects.filter(user=self.request.user, is_read=False).count()
+        context["unread_notifications"] = unread_notifications
         return context
 
 
@@ -99,6 +103,12 @@ class CreateNoteView(CreateView):
 
         return super(CreateNoteView, self).form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        unread_notifications = Notification.objects.filter(user=self.request.user, is_read=False).count()
+        context["unread_notifications"] = unread_notifications
+        return context
+
 
 class DeleteNoteView(DeleteView):
     model = Note
@@ -116,6 +126,8 @@ class EditNoteView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        unread_notifications = Notification.objects.filter(user=self.request.user, is_read=False).count()
+        context["unread_notifications"] = unread_notifications
         context['form'] = self.form_class(instance=self.object)
         context['files'] = self.object.notefile_set.all()
         return context
@@ -147,14 +159,16 @@ class StatsNoteView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         note = self.get_object()
-        if note.user == self.request.user:
+        unread_notifications = Notification.objects.filter(user=self.request.user, is_read=False).count()
+        context["unread_notifications"] = unread_notifications
+        if Note.objects.filter(members__contains = [self.request.user], id=note.id):
             context['note'] = note
 
         return context
 
     def get(self, request, *args, **kwargs):
         note = self.get_object()
-        if note.user == self.request.user:
+        if Note.objects.filter(members__contains = [self.request.user], id=note.id):
             return super().get(request, *args, **kwargs)
         else:
             return render(request, 'notes/error.html')
@@ -173,6 +187,8 @@ class SearchResultsView(LoginRequiredMixin, ListView):
         paginator = Paginator(notes, self.paginate_by)
         page = self.request.GET.get('page')
         notes_page = paginator.get_page(page)
+        unread_notifications = Notification.objects.filter(user=self.request.user, is_read=False).count()
+        context["unread_notifications"] = unread_notifications
         context['notes'] = notes_page
         context['query'] = self.request.GET.get('q')
         return context
@@ -210,7 +226,7 @@ def invite_user(request, pk):
             if User.objects.filter(username=username).exists() and username != request.user.username and not Note.objects.filter(members__contains = [username], id=note.id):
                 notification = Notification(message=f"Do you want to join to {User.objects.get(username=note.user)}'s note: {note.title}?", user=User.objects.get(username=username), note_id=note.id)
                 notification.save()
-                messages.success(request, 'Successfully added new user!')
+                messages.success(request, 'Successfully invited user!')
             else:
                 print('Error')
                 messages.error(request, 'You cannot add this user!')
@@ -237,6 +253,8 @@ class NotificationsListView(LoginRequiredMixin, ListView):
         paginator = Paginator(notes, self.paginate_by)
         page = self.request.GET.get('page')
         notes_page = paginator.get_page(page)
+        unread_notifications = Notification.objects.filter(user=self.request.user, is_read=False).count()
+        context["unread_notifications"] = unread_notifications
         context['notifications'] = notes_page
         return context
 
