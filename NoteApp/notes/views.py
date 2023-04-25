@@ -53,7 +53,7 @@ class NotesListView(LoginRequiredMixin, ListView):
         return context
 
     def get_queryset(self):
-        queryset = Note.objects.filter(members__contains = [self.request.user])
+        queryset = Note.objects.filter(members__contains = [self.request.user]).order_by('-add_date')
         return queryset
 
 
@@ -198,7 +198,7 @@ class SearchResultsView(LoginRequiredMixin, ListView):
         query = self.request.GET.get('q')
         object_list = Note.objects.filter(
             Q(title__icontains=query) & Q(members__contains=[self.request.user])
-        )
+        ).order_by('-add_date')
         return object_list
 
 
