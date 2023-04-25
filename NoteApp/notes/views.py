@@ -197,7 +197,7 @@ class SearchResultsView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         query = self.request.GET.get('q')
         object_list = Note.objects.filter(
-            Q(title__icontains=query) & Q(user=self.request.user)
+            Q(title__icontains=query) & Q(members__contains=[self.request.user])
         )
         return object_list
 
