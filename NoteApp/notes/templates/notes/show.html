@@ -106,7 +106,7 @@
                         </li>
                     </div>
                     <div class="col-md-6">
-                        <a href="{% url 'delete_file' note_file.id note.id %}" class="btn btn-danger p-1">X</a>
+                        <a href="{% url 'delete_file' note_file.id note.id %}" class="btn btn-danger p-1 confirm-delete">X</a>
                     </div>
 
                 </div>
@@ -121,7 +121,7 @@
         <div class="col-md-4 text-center mb-5">
             <form method="post" action="{% url 'delete' note.id %}" enctype="multipart/form-data">
                 {% csrf_token %}
-                <input type="submit" class="btn btn-danger" value="Delete">
+                <input type="submit" class="btn btn-danger confirm-delete" value="Delete">
             </form>
         </div>
         <div class="col-md-4 text-center mb-5">
@@ -138,5 +138,11 @@
             </form>
         </div>
     </div>
+
+    <script>
+        $(document).on('click', '.confirm-delete', function(){
+            return confirm('Are you sure you want to delete this?');
+        })
+    </script>
     
 {% endblock %}
