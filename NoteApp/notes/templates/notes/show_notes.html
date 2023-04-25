@@ -19,8 +19,10 @@
                 <div class="card-body">
                 {% if note.user != user %}
                     <h5 class="card-title text-dark text-start fs-3">{{ note.title }} - {{ note.user }}</h5>
+                    <p class="card-title text-dark text-start fs-4 fst-italic">{{ note.category.name }}</p>
                 {% else %}
                     <h5 class="card-title text-dark text-start fs-3">{{ note.title }}</h5>
+                    <p class="card-title text-dark text-start fs-4 fst-italic">{{ note.category.name }}</p>
                 {% endif %}
                 <h6 class="card-subtitle mb-2 text-white-50 text-end">{{ note.add_date }}</h6>
                 <a href="{% url 'show' note.id %}" class="btn btn-primary mt-3 fs-5">See note</a>
