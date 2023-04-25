@@ -8,7 +8,7 @@ class AddNewNote(forms.ModelForm):
 
     class Meta:
         model = Note
-        fields = ['title', 'note_text', ]
+        fields = ['title', 'note_text', 'category', ]
 
     def __init__(self, *args, **kwargs):
         super(AddNewNote, self).__init__(*args, **kwargs)
