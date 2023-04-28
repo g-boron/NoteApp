@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
-from .models import Note, NoteFile, User, Notification
+from .models import Note, NoteFile, User, Notification, Category
 from .forms import AddNewNote, InviteUser
 from django.utils import timezone
 from django.urls import reverse_lazy
@@ -50,10 +50,18 @@ class NotesListView(LoginRequiredMixin, ListView):
         unread_notifications = Notification.objects.filter(user=self.request.user, is_read=False).count()
         context["unread_notifications"] = unread_notifications
         context['notes'] = notes_page
+        categories = Category.objects.all()
+        context['categories'] = categories
+        context['selected_category'] = self.request.GET.get('category')
         return context
 
     def get_queryset(self):
         queryset = Note.objects.filter(members__contains = [self.request.user]).order_by('-add_date')
+        category = self.request.GET.get('category')
+
+        if category:
+            queryset = queryset.filter(category__slug=category)
+            
         return queryset
 
 
