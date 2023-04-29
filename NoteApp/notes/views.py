@@ -53,12 +53,17 @@ class NotesListView(LoginRequiredMixin, ListView):
         categories = Category.objects.all()
         context['categories'] = categories
         context['selected_category'] = self.request.GET.get('category')
+        context['searched'] = self.request.GET.get('q')
         return context
 
     def get_queryset(self):
         queryset = Note.objects.filter(members__contains = [self.request.user]).order_by('-add_date')
         category = self.request.GET.get('category')
+        search = self.request.GET.get('q')
 
+        if search:
+            queryset = queryset.filter(Q(title__icontains=search) & Q(members__contains=[self.request.user]))
+            
         if category:
             queryset = queryset.filter(category__slug=category)
             
@@ -180,34 +185,6 @@ class StatsNoteView(LoginRequiredMixin, DetailView):
             return super().get(request, *args, **kwargs)
         else:
             return render(request, 'notes/error.html')
-
-
-class SearchResultsView(LoginRequiredMixin, ListView):
-    login_url = '/login/'
-    model = Note
-    template_name = 'notes/search_results.html'
-
-    paginate_by = 3
-    
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        notes = self.get_queryset()
-        paginator = Paginator(notes, self.paginate_by)
-        page = self.request.GET.get('page')
-        notes_page = paginator.get_page(page)
-        unread_notifications = Notification.objects.filter(user=self.request.user, is_read=False).count()
-        context["unread_notifications"] = unread_notifications
-        context['notes'] = notes_page
-        context['query'] = self.request.GET.get('q')
-        return context
-
-    
-    def get_queryset(self):
-        query = self.request.GET.get('q')
-        object_list = Note.objects.filter(
-            Q(title__icontains=query) & Q(members__contains=[self.request.user])
-        ).order_by('-add_date')
-        return object_list
 
 
 def download(request, file_id):

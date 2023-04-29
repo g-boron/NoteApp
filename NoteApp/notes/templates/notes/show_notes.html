@@ -7,8 +7,12 @@
         <h1 class="display-3 mb-5">My notes</h1>
         <div class="row">
             <div class="col-md-6">
-                <form action="{% url 'search' %}" method="get">
-                    <input name="q" type="text" class="fs-5" placeholder="Search..." style="border-radius: 8px;">
+                <form action="{% url 'show_notes' %}" method="get">
+                    {% if searched %}
+                        <input name="q" type="text" class="fs-5" placeholder="Search..." style="border-radius: 8px;", value="{{ searched }}">
+                    {% else %}
+                        <input name="q" type="text" class="fs-5" placeholder="Search..." style="border-radius: 8px;">
+                    {% endif %}
                     <input type="submit" class="btn btn-primary btn-lg ms-2" value="Search">
                 </form>        
             </div>
@@ -29,6 +33,7 @@
                     </ul>
                 </div>
             </div>
+        </div>
     {% if notes %}
         {% for note in notes %}
         
