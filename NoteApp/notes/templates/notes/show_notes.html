@@ -5,35 +5,29 @@
 {% block content %}
     <div class="container">
         <h1 class="display-3 mb-5">My notes</h1>
-        <div class="row">
-            <div class="col-md-6">
-                <form action="{% url 'show_notes' %}" method="get">
+        <form action="{% url 'show_notes' %}" method="get">
+            <div class="row">
+                <div class="col-md-6">
                     {% if searched %}
                         <input name="q" type="text" class="fs-5" placeholder="Search..." style="border-radius: 8px;", value="{{ searched }}">
                     {% else %}
                         <input name="q" type="text" class="fs-5" placeholder="Search..." style="border-radius: 8px;">
                     {% endif %}
-                    <input type="submit" class="btn btn-primary btn-lg ms-2" value="Search">
-                </form>        
-            </div>
-            <div class="col-md-6">
-                <div class="dropdown">
-                    <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-bs-toggle="dropdown">
-                        {% if selected_category %}
-                            {{ selected_category|title }}
-                        {% else %}
-                            All categories
-                        {% endif %}
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{% url 'show_notes' %}">All categories</a></li>
+                </div>
+                <div class="col-md-6">
+                    <select name="category" type="text" class="p-2" aria-label="Select category" style="width: auto; border-radius: 8px;">
+                        <option selected>All</option>
                         {% for category in categories %}
-                            <li><a class="dropdown-item" href="?category={{ category.slug }}">{{ category.name }}</a></li>
+                            <option value="{{ category.slug }}" {% if category.slug == selected_category %} selected {% endif %}>{{ category.name }}</option>
                         {% endfor %}
-                    </ul>
+                    </select>    
                 </div>
             </div>
-        </div>
+            <button type="submit" class="btn btn-primary btn-lg ms-2 mt-3" id="button-search">Search</button>       
+        </form>        
+
+      
+
     {% if notes %}
         {% for note in notes %}
         

@@ -60,13 +60,14 @@ class NotesListView(LoginRequiredMixin, ListView):
         queryset = Note.objects.filter(members__contains = [self.request.user]).order_by('-add_date')
         category = self.request.GET.get('category')
         search = self.request.GET.get('q')
-
-        if search:
-            queryset = queryset.filter(Q(title__icontains=search) & Q(members__contains=[self.request.user]))
-            
-        if category:
+        
+        if search and category and category != 'All':
+            queryset = queryset.filter(Q(title__icontains=search) & Q(category__slug=category))
+        elif category and category != 'All':
             queryset = queryset.filter(category__slug=category)
-            
+        elif search:
+            queryset = queryset.filter(title__icontains=search)
+        
         return queryset
 
 
