@@ -7,19 +7,27 @@
         <h1 class="display-3 mb-5">My notes</h1>
         <form action="{% url 'show_notes' %}" method="get">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     {% if searched %}
                         <input name="q" type="text" class="fs-5" placeholder="Search..." style="border-radius: 8px;", value="{{ searched }}">
                     {% else %}
                         <input name="q" type="text" class="fs-5" placeholder="Search..." style="border-radius: 8px;">
                     {% endif %}
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <select name="category" type="text" class="p-2" aria-label="Select category" style="width: auto; border-radius: 8px;">
                         <option selected>All</option>
                         {% for category in categories %}
                             <option value="{{ category.slug }}" {% if category.slug == selected_category %} selected {% endif %}>{{ category.name }}</option>
                         {% endfor %}
+                    </select>    
+                </div>
+                <div class="col-md-4">
+                    <select name="sortby" type="text" class="p-2" aria-label="Sort by" style="width: auto; border-radius: 8px;">
+                        <option selected>Latest</option>
+                        <option value="Oldest" {% if sort_value == 'Oldest' %} selected {% endif %}>Oldest</option>
+                        <option value="A-z" {% if sort_value == 'A-z' %} selected {% endif %}>A-z</option>
+                        <option value="Z-a" {% if sort_value == 'Z-a' %} selected {% endif %}>Z-a</option>
                     </select>    
                 </div>
             </div>
