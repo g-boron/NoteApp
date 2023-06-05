@@ -59,7 +59,7 @@
         <div class="pagination justify-content-center mb-5">
             <span class="step-links">
                 {% if notes.has_previous %}
-                    <a href="?page={{ notes.previous_page_number }}">previous</a>
+                    <a href="?page={{ notes.previous_page_number }}{% if selected_category %}&category={{ selected_category }}{% endif %}{% if searched %}&q={{ searched }}{% endif %}{% if sort_value %}&sortby={{ sort_value }}{% endif %}">previous</a>
                 {% endif %}
 
                 <span class="current-page">
@@ -67,7 +67,7 @@
                 </span>
 
                 {% if notes.has_next %}
-                    <a href="?page={{ notes.next_page_number }}">next</a>
+                    <a href="?page={{ notes.next_page_number }}{% if selected_category %}&category={{ selected_category }}{% endif %}{% if searched %}&q={{ searched }}{% endif %}{% if sort_value %}&sortby={{ sort_value }}{% endif %}">next</a>
                 {% endif %}
             </span>
         </div>
