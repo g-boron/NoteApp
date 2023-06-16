@@ -6,15 +6,26 @@
 
 {% block content %}
     <h1 class="display-4">Add new note</h1>
-    <form method="POST" class="m-5" action="#" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form|crispy }}
-        {% for file in files %}
-            <div class="form-group">
-                <label>Current file:</label>
-                <a href="{{ file.file.url }}" target="_blank">{{ file.filename }}</a>
+    <div class="container">
+        <div class="col-md-12">
+            <div class="w-xl-50 w-lg-50 w-md-25 w-sm-75 mt-5 mx-auto">
+                <form method="POST" class="m-5" action="#" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    {% if files %}
+                        <label>Current files:</label>
+                    {% endif %}
+                    {% for file in files %}
+                        <div class="form-group">
+                            <a href="{{ file.file.url }}" target="_blank" class="file-link">{{ file.filename|slice:':20' }}{% if file.filename|length > 20 %}...{% endif %}</a>
+                        </div>
+                    {% endfor %}
+                    <button type="submit" name="add" class="btn btn-primary mt-3">Save</button>
+                </form>
             </div>
-        {% endfor %}
-        <button type="submit" name="add" class="btn btn-primary">Save</button>
-    </form>
+        
+        </div>
+
+    
+    </div>
 {% endblock %}
