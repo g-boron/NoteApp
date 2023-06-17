@@ -2,7 +2,7 @@
     "version": 2,
     "builds": [
         {
-            "src": "NoteApp/NoteApp/wsgi.py",
+            "src": "NoteApp/wsgi.py",
             "use": "@vercel/python",
             "config": {
                 "maxLambdaSize": "15mb",
@@ -24,7 +24,7 @@
         },
         {
             "src": "/(.*)",
-            "dest": "NoteApp/NoteApp/wsgi.py"
+            "dest": "NoteApp/wsgi.py"
         }
     ]
 }
