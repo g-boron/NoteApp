@@ -131,3 +131,5 @@ NoteApp/notes/media/
 *.env
 
 .vscode
+
+/notes/media
