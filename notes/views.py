@@ -296,3 +296,16 @@ def detele_file(request, pk, note):
     file.delete()
 
     return redirect('show', pk=note.id)
+    
+
+def check_edit(request, pk):
+    note = get_object_or_404(Note, pk=pk)
+
+    if note.allow_edits:
+        note.allow_edits = False
+        note.save()
+    else:
+        note.allow_edits = True
+        note.save()
+
+    return redirect('show', pk=note.id)

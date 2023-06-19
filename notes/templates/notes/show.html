@@ -137,23 +137,49 @@
         </div>
         <div class="col-md-4 text-center mb-5">
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Invite user
+                Settings
             </button>
           
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title text-dark" id="exampleModalLabel">Invite user</h5>
+                            <h5 class="modal-title text-dark" id="exampleModalLabel">Note's settings</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="w-xl-50 w-lg-50 w-md-25 w-sm-75 mx-auto">
-                            <form method="post" action="{% url 'invite' note.id %}" class='text-dark' enctype="multipart/form-data">
-                                {% csrf_token %}
-                                {{ form|crispy }}
-                                <input type="submit" class="btn btn-success" value="Invite">
-                            </form>
+                                <form method="post" action="{% url 'invite' note.id %}" class='text-dark' enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    {{ form|crispy }}
+                                    <input type="submit" class="btn btn-success" value="Invite">
+                                </form>   
+                                {% if user == note.user %}
+                                    <div class="container mt-4">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p class="text-dark">Allow edits?</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-check form-switch d-flex justify-content-center">
+                                                    {% if note.allow_edits %}
+                                                        <input class="form-check-input" type="checkbox" id="edit_switch" checked>
+                                                    {% else %}
+                                                        <input class="form-check-input" type="checkbox" id="edit_switch">
+                                                    {% endif %}   
+                                                </div>
+
+                                                <script>
+                                                    const switchCheckbox = document.getElementById('edit_switch');
+                                                  
+                                                    switchCheckbox.addEventListener('change', function() {
+                                                        window.location.href = "/{{ note.id }}/check_edit";
+                                                    });
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </div>      
+                                {% endif %}
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -163,13 +189,15 @@
                 </div>
             </div>
         </div>
-          
-        <div class="col-md-4 text-center mb-5">
-            <form method="post" action="{% url 'edit' note.id %}" enctype="multipart/form-data">
-                {% csrf_token %}
-                <input type="submit" class="btn btn-secondary" value="Edit">
-            </form>
-        </div>
+        
+        {% if user == note.user or note.allow_edits %}
+            <div class="col-md-4 text-center mb-5">
+                <form method="post" action="{% url 'edit' note.id %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-secondary" value="Edit">
+                </form>
+            </div>
+        {% endif %}
     </div>
 
     <script>

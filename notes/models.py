@@ -33,6 +33,7 @@ class Note(models.Model):
     members = ArrayField(
         models.CharField(max_length=200)
     )
+    allow_edits = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
