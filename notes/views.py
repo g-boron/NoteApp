@@ -246,13 +246,13 @@ class NotificationsListView(LoginRequiredMixin, ListView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        notes = self.get_queryset()
-        paginator = Paginator(notes, self.paginate_by)
+        notifications = self.get_queryset()
+        paginator = Paginator(notifications, self.paginate_by)
         page = self.request.GET.get('page')
-        notes_page = paginator.get_page(page)
+        notifications_page = paginator.get_page(page)
         unread_notifications = Notification.objects.filter(user=self.request.user, is_read=False).count()
         context["unread_notifications"] = unread_notifications
-        context['notifications'] = notes_page
+        context['notifications'] = notifications_page
         return context
 
     def get_queryset(self):

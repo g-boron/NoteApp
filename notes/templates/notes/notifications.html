@@ -58,22 +58,32 @@
 
         {% endfor %}
         <div class="pagination justify-content-center mb-5">
-            <span class="step-links">
-                {% if notes.has_previous %}
-                    <a href="?page={{ notes.previous_page_number }}">previous</a>
+            <ul class="pagination">
+                {% if notifications.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ notifications.previous_page_number }}">
+                            Previous
+                        </a>
+                    </li>
                 {% endif %}
-
-                <span class="current-page">
-                    Page {{ notes.number }} of {{ notes.paginator.num_pages }}.
-                </span>
-
-                {% if notes.has_next %}
-                    <a href="?page={{ notes.next_page_number }}">next</a>
+                
+                <li class="page-item active">
+                    <span class="page-link">
+                        Page {{ notifications.number }} of {{ notifications.paginator.num_pages }}
+                    </span>
+                </li>
+        
+                {% if notifications.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ notifications.next_page_number }}">
+                            Next
+                        </a>
+                    </li>
                 {% endif %}
-            </span>
+            </ul>
         </div>
     {% else %}
-        <p>There is no notifcations.</p>
+        <h1 class="display-5 mt-5">There is no notifcations.</h1>
     {% endif %}
         </div>
     </div>

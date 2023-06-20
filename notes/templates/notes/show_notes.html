@@ -57,22 +57,32 @@
 
         {% endfor %}
         <div class="pagination justify-content-center mb-5">
-            <span class="step-links">
+            <ul class="pagination">
                 {% if notes.has_previous %}
-                    <a href="?page={{ notes.previous_page_number }}{% if selected_category %}&category={{ selected_category }}{% endif %}{% if searched %}&q={{ searched }}{% endif %}{% if sort_value %}&sortby={{ sort_value }}{% endif %}">previous</a>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ notes.previous_page_number }}{% if selected_category %}&category={{ selected_category }}{% endif %}{% if searched %}&q={{ searched }}{% endif %}{% if sort_value %}&sortby={{ sort_value }}{% endif %}">
+                            Previous
+                        </a>
+                    </li>
                 {% endif %}
-
-                <span class="current-page">
-                    Page {{ notes.number }} of {{ notes.paginator.num_pages }}.
-                </span>
-
+        
+                <li class="page-item active">
+                    <span class="page-link">
+                        Page {{ notes.number }} of {{ notes.paginator.num_pages }}
+                    </span>
+                </li>
+        
                 {% if notes.has_next %}
-                    <a href="?page={{ notes.next_page_number }}{% if selected_category %}&category={{ selected_category }}{% endif %}{% if searched %}&q={{ searched }}{% endif %}{% if sort_value %}&sortby={{ sort_value }}{% endif %}">next</a>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ notes.next_page_number }}{% if selected_category %}&category={{ selected_category }}{% endif %}{% if searched %}&q={{ searched }}{% endif %}{% if sort_value %}&sortby={{ sort_value }}{% endif %}">
+                            Next
+                        </a>
+                    </li>
                 {% endif %}
-            </span>
+            </ul>
         </div>
     {% else %}
-        <p>No notes are available.</p>
+        <h1 class="display-5 mt-5">No notes are available.</h1>
     {% endif %}
         </div>
     </div>
