@@ -8,10 +8,10 @@
     <div class="container text-start">
         <h1 class="display-4 text-center">Register new account</h1>
         <div class="w-xl-50 w-lg-50 w-md-25 w-sm-75 mt-5 mx-auto">
-            <form method="POST" class="m-5" action="#">
+            <form method="POST" class="m-5 fs-5" action="#">
                 {% csrf_token %}
                 {{form|crispy}}
-                <button type="submit" class="btn btn-success">Register</button>
+                <button type="submit" class="btn btn-success fs-5">Register</button>
             </form>
     
         </div>

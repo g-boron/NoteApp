@@ -14,7 +14,7 @@
                         <input name="q" type="text" class="fs-5" placeholder="Search..." style="border-radius: 8px;">
                     {% endif %}
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 fs-5">
                     <select name="category" type="text" class="p-2" aria-label="Select category" style="width: auto; border-radius: 8px;">
                         <option selected>All</option>
                         {% for category in categories %}
@@ -22,7 +22,7 @@
                         {% endfor %}
                     </select>    
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 fs-5">
                     <select name="sortby" type="text" class="p-2" aria-label="Sort by" style="width: auto; border-radius: 8px;">
                         <option selected>Latest</option>
                         <option value="Oldest" {% if sort_value == 'Oldest' %} selected {% endif %}>Oldest</option>
@@ -31,7 +31,7 @@
                     </select>    
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary btn-lg ms-2 mt-3" id="button-search">Search</button>       
+            <button type="submit" class="btn btn-primary btn-lg ms-2 mt-3 fs-5" id="button-search">Search</button>       
         </form>        
 
       

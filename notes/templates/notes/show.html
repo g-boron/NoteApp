@@ -46,7 +46,7 @@
 
         <div class="card text-dark mb-5 mx-auto" style="background-color: #C3CEDA;">
             <div class="card-body">
-                <h2 class="pt-5 text-start mb-5">{{ note.note_text | linebreaksbr }}</h2>
+                <h2 class="pt-5 text-start mb-5 display-5">{{ note.note_text | linebreaksbr }}</h2>
             </div>
         </div>
     </div>
@@ -124,7 +124,7 @@
         <div class=" d-flex justify-content-center">
             <ul class="list-group">
                 {% for member in note.members %}
-                    <li class="list-group-item text-white" style="background-color: #051537; border-color: #777b8c;">{{ member }} {% if member != note.user.username and note.user == user %} <a href="{% url 'delete_member' note.id member %}" class="btn btn-danger p-1 ms-3 confirm-delete"> </a> {% endif %}</li>
+                    <li class="list-group-item text-white fs-3" style="background-color: #051537; border-color: #777b8c;">{{ member }} {% if member != note.user.username and note.user == user %} <a href="{% url 'delete_member' note.id member %}" class="btn btn-danger p-1 ms-3 confirm-delete"> </a> {% endif %}</li>
                 {% endfor %}
             </ul>
         </div>
@@ -139,12 +139,12 @@
             <div class="col-md-4 text-center mb-5">
                 <form method="post" action="{% url 'delete' note.id %}" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <input type="submit" class="btn btn-danger confirm-delete" value="Delete">
+                    <input type="submit" class="btn btn-danger confirm-delete fs-4" value="Delete">
                 </form>
             </div>
         {% endif %}
         <div class="col-md-4 text-center mb-5">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-primary fs-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Settings
             </button>
           
@@ -157,23 +157,23 @@
                         </div>
                         <div class="modal-body">
                             <div class="w-xl-50 w-lg-50 w-md-25 w-sm-75 mx-auto">
-                                <form method="post" action="{% url 'invite' note.id %}" class='text-dark' enctype="multipart/form-data">
+                                <form method="post" action="{% url 'invite' note.id %}" class='text-dark fs-5' enctype="multipart/form-data">
                                     {% csrf_token %}
                                     {{ form|crispy }}
-                                    <input type="submit" class="btn btn-success" value="Invite">
+                                    <input type="submit" class="btn btn-success fs-5" value="Invite">
                                 </form>   
                                 {% if user == note.user %}
                                     <div class="container mt-4">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <p class="text-dark">Allow edits?</p>
+                                                <p class="text-dark fs-5">Allow edits?</p>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-check form-switch d-flex justify-content-center">
                                                     {% if note.allow_edits %}
-                                                        <input class="form-check-input" type="checkbox" id="edit_switch" checked>
+                                                        <input class="form-check-input fs-5 mt-4" type="checkbox" id="edit_switch" checked>
                                                     {% else %}
-                                                        <input class="form-check-input" type="checkbox" id="edit_switch">
+                                                        <input class="form-check-input fs-5 mt-4" type="checkbox" id="edit_switch">
                                                     {% endif %}   
                                                 </div>
 
@@ -191,7 +191,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary fs-5" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
@@ -202,7 +202,7 @@
             <div class="col-md-4 text-center mb-5">
                 <form method="post" action="{% url 'edit' note.id %}" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <input type="submit" class="btn btn-secondary" value="Edit">
+                    <input type="submit" class="btn btn-secondary fs-4" value="Edit">
                 </form>
             </div>
         {% endif %}

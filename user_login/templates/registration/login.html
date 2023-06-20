@@ -7,11 +7,11 @@
     <div class="container text-start">
         <h1 class="display-4 text-center">Login</h1>
         <div class="w-xl-50 w-lg-50 w-md-25 w-sm-75 mt-5 mx-auto">
-            <form method='POST' class="m-5">
+            <form method='POST' class="m-5 fs-5">
                 {% csrf_token %}
                 {{form|crispy}}
                 <p>If you don't have an account you can create <a href="{% url 'register' %}">here</a>!</p>
-                <button type="submit" class="btn btn-success">Login</button>
+                <button type="submit" class="btn btn-success fs-5">Login</button>
             </form>
     
         </div>
