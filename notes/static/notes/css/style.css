@@ -155,3 +155,10 @@ svg.checkmark:hover
 {
     opacity: 0.6;
 }
+
+body {
+    background: #fff;
+    background-image: linear-gradient(#eee .1em,
+            transparent .1em);
+    background-size: 100% 2em;
+}
