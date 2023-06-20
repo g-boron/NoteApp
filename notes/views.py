@@ -309,3 +309,11 @@ def check_edit(request, pk):
         note.save()
 
     return redirect('show', pk=note.id)
+
+
+def delete_member(request, pk, username):
+    note = get_object_or_404(Note, pk=pk)
+    note.members.remove(username)
+    note.save()
+
+    return redirect('show', pk=note.id)

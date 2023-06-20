@@ -20,6 +20,7 @@ urlpatterns = [
     path('<int:pk>/accept', views.accept_invitation, name='accept'),
     path('delete_file/<int:pk>/<int:note>', views.detele_file, name='delete_file'),
     path('<int:pk>/check_edit', views.check_edit, name='check_edit'),
+    path('delete_member/<int:pk>/<str:username>', views.delete_member, name='delete_member'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

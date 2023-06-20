@@ -118,31 +118,31 @@
 
     {% endif %}
 
-    {% if note.user == user %}
-        <div class="container mb-5">
-            <h1 class="fw-light text-center text-lg-start mt-4 mb-0">Manage your members</h1>  
-            <hr class="mt-2 mb-5">
-            <div class=" d-flex justify-content-center">
-                <ul class="list-group">
-                    {% for member in note.members %}
-                        <li class="list-group-item text-white" style="background-color: #051537; border-color: #777b8c;">{{ member }} {% if member != note.user.username %} <a href="#" class="btn btn-danger p-1 ms-3 confirm-delete"> </a> {% endif %}</li>
-                    {% endfor %}
-                </ul>
-            </div>
+    <div class="container mb-5">
+        <h1 class="fw-light text-center text-lg-start mt-4 mb-0">Members</h1>  
+        <hr class="mt-2 mb-5">
+        <div class=" d-flex justify-content-center">
+            <ul class="list-group">
+                {% for member in note.members %}
+                    <li class="list-group-item text-white" style="background-color: #051537; border-color: #777b8c;">{{ member }} {% if member != note.user.username and note.user == user %} <a href="{% url 'delete_member' note.id member %}" class="btn btn-danger p-1 ms-3 confirm-delete"> </a> {% endif %}</li>
+                {% endfor %}
+            </ul>
         </div>
-    {% endif %}
+    </div>
     
     <div class="container">
         <hr class="mt-2 mb-5">
     </div>
 
     <div class="row">
-        <div class="col-md-4 text-center mb-5">
-            <form method="post" action="{% url 'delete' note.id %}" enctype="multipart/form-data">
-                {% csrf_token %}
-                <input type="submit" class="btn btn-danger confirm-delete" value="Delete">
-            </form>
-        </div>
+        {% if note.user == user %}
+            <div class="col-md-4 text-center mb-5">
+                <form method="post" action="{% url 'delete' note.id %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-danger confirm-delete" value="Delete">
+                </form>
+            </div>
+        {% endif %}
         <div class="col-md-4 text-center mb-5">
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Settings
