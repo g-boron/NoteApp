@@ -5,10 +5,10 @@
 {% load static %}
 
 {% block content %}
-    <div class="containers">
+    <div class="container mb-5">
         <div class="card mx-auto mt-5" style="background-color: #C3CEDA; width: 75%">
             <div class="card-header ps-5 pt-3">
-                <h1 class="display-2 text-start">Hello {{ user.first_name }}</h1>
+                <h1 class="display-2 text-start">Hello {% if user.first_name %} {{ user.first_name }}{% else %} {{ user.username }}{% endif %}!</h1>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -17,7 +17,7 @@
                         <hr>
                         <p class="card-text h1 text-start">First name: {{ user.first_name }}</p>
                         <p class="card-text h1 text-start">Last name: {{ user.last_name }}</p>
-                        <p class="card-text h1 text-start">E-mail: {{ user.email }}</p>
+                        <p class="card-text h1 text-start mb-3">E-mail: {{ user.email }}</p>
                     </div>
                     <div class="col-md-6">
                         <h1 class="display-5 card-title text-start">Avatar</h1>
