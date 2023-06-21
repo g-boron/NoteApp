@@ -5,9 +5,9 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <h1 class="display-4">Add new note</h1>
-    <div class="container">
+    <div class="container h-100 d-flex justify-content-center align-items-center">
         <div class="col-md-12">
+            <h1 class="display-4">Add new note</h1>
             <div class="w-xl-50 w-lg-50 w-md-25 w-sm-75 mt-5 mx-auto">
                 <form method="POST" class="m-5 fs-5" action="#" enctype="multipart/form-data">
                     {% csrf_token %}
