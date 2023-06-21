@@ -4,10 +4,10 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <div class="container text-start">
-        <h1 class="display-4 text-center">Login</h1>
+    <div class="container h-100 d-flex justify-content-center align-items-center">
         <div class="w-xl-50 w-lg-50 w-md-25 w-sm-75 mt-5 mx-auto">
-            <form method='POST' class="m-5 fs-5">
+            <h1 class="display-4 text-center">Login</h1>
+            <form method='POST' class="fs-5 text-start">
                 {% csrf_token %}
                 {{form|crispy}}
                 <p>If you don't have an account you can create <a href="{% url 'register' %}">here</a>!</p>
