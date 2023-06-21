@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from .models import Note, NoteFile, User, Notification, Category
-from .forms import AddNewNote, InviteUser
+from .forms import AddNewNote, InviteUser, EditProfileForm
 from django.utils import timezone
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
@@ -324,3 +324,20 @@ class UserProfileView(LoginRequiredMixin, DetailView):
     model = User
     template_name = 'notes/profile.html'
     context_object_name = 'user'
+
+
+class EditUserProfileView(LoginRequiredMixin, UpdateView):
+    login_url = '/login/'
+    model = User
+    template_name = 'notes/edit_profile.html'
+    form_class = EditProfileForm
+
+    def get_success_url(self):
+        return reverse('profile', kwargs={'pk' : self.request.user.id})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        unread_notifications = Notification.objects.filter(user=self.request.user, is_read=False).count()
+        context["unread_notifications"] = unread_notifications
+        context['form'] = self.form_class(instance=self.object)
+        return context

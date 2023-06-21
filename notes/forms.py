@@ -1,5 +1,5 @@
 from django import forms
-from .models import Note
+from .models import Note, User
 from django.forms.widgets import ClearableFileInput
 
 
@@ -21,3 +21,9 @@ class InviteUser(forms.ModelForm):
     class Meta:
         model = Note
         fields = ['username',]
+
+
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email', ]
