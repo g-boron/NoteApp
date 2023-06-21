@@ -317,3 +317,10 @@ def delete_member(request, pk, username):
     note.save()
 
     return redirect('show', pk=note.id)
+
+
+class UserProfileView(LoginRequiredMixin, DetailView):
+    login_url = '/login/'
+    model = User
+    template_name = 'notes/profile.html'
+    context_object_name = 'user'
