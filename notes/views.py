@@ -102,7 +102,8 @@ class NoteDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class CreateNoteView(CreateView):
+class CreateNoteView(LoginRequiredMixin, CreateView):
+    login_url = '/login/'
     model = Note
     template_name = 'notes/add_note.html'
     form_class = AddNewNote
@@ -141,7 +142,8 @@ class DeleteNoteView(DeleteView):
     success_url = reverse_lazy('show_notes')
 
 
-class EditNoteView(UpdateView):
+class EditNoteView(LoginRequiredMixin, UpdateView):
+    login_url = '/login/'
     model = Note
     template_name = 'notes/add_note.html'
     form_class = AddNewNote
