@@ -364,4 +364,4 @@ class EditUserProfileView(LoginRequiredMixin, UpdateView):
         unread_notifications = Notification.objects.filter(user=self.request.user, is_read=False).count()
         context["unread_notifications"] = unread_notifications
         context['form'] = self.form_class(instance=self.object)
-        return 
+        return context
