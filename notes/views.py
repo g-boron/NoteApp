@@ -327,6 +327,12 @@ class UserProfileView(LoginRequiredMixin, DetailView):
     template_name = 'notes/profile.html'
     context_object_name = 'user'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        unread_notifications = Notification.objects.filter(user=self.request.user, is_read=False).count()
+        context["unread_notifications"] = unread_notifications
+        return context
+
 
 class EditUserProfileView(LoginRequiredMixin, UpdateView):
     login_url = '/login/'
