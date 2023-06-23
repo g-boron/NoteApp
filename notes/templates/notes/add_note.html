@@ -5,11 +5,10 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <div class="container h-100 d-flex justify-content-center align-items-center">
+    <div class="container">
         <div class="col-md-12">
-            <h1 class="display-4">Add new note</h1>
             <div class="w-xl-50 w-lg-50 w-md-25 w-sm-75 mt-5 mx-auto">
-                <form method="POST" class="m-5 fs-5" action="#" enctype="multipart/form-data">
+                <form method="POST" class="fs-3" action="#" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form|crispy }}
                     {% if files %}
@@ -20,7 +19,7 @@
                             <a href="{{ file.file.url }}" target="_blank" class="file-link">{{ file.filename|slice:':20' }}{% if file.filename|length > 20 %}...{% endif %}</a>
                         </div>
                     {% endfor %}
-                    <button type="submit" name="add" class="btn btn-primary mt-3 fs-5">Save</button>
+                    <button type="submit" name="add" class="btn btn-primary mt-2 mb-1 fs-3">Save</button>
                 </form>
             </div>
         
