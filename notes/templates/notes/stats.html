@@ -3,12 +3,50 @@
 {% block title %}Statistics{% endblock %}
 
 {% block content %}
-    <h1 class="display-4 mb-5">Statistics for note: {{ note.title }}</h1>
+    <h1 class="display-4 mb-5">Number of edits in {{ note.title }}</h1>
 
-    <h1>Edit dates:</h1>
-    <ul class="list-group d-inline-block">
-        {% for e in note.edit_dates %}
-            <li class="list-group-item fs-5 list-group-item-dark">{{ e }}</li> 
-        {% endfor %}
-    </ul>
+    <div class="chart-container p-1" style="position: relative; height: 60%; width: 95%;">
+        <canvas id="myChart"></canvas>
+    </div>
+      
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      
+    <script>
+    const ctx = document.getElementById('myChart');
+    
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {{ labels|safe }},
+            datasets: [{
+                label: 'Number of edits',
+                data: {{ data|safe }},
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero:true,
+                    ticks: {
+                        stepSize: 1,
+                        font: {
+                            size: 20,
+                        }
+                    }
+                },
+                x: {
+                    ticks: {
+                        font: {
+                            size: 20,
+                        },
+                    }
+                }
+            },
+          
+        }
+    });
+    </script>
 {% endblock %}

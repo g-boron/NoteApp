@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from .models import Note, NoteFile, User, Notification, Category
 from .forms import AddNewNote, InviteUser, EditProfileForm
-from django.utils import timezone
+from django.utils import timezone as dj_timezone
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import TemplateView
@@ -9,13 +9,14 @@ from django.views.generic import ListView, DetailView, View
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
-from datetime import timedelta
+from datetime import timedelta, datetime, timezone
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect
 import os
 import mimetypes
 from wsgiref.util import FileWrapper
 from django.contrib import messages
+from collections import Counter
 
 
 # Create your views here.
@@ -163,7 +164,7 @@ class EditNoteView(LoginRequiredMixin, UpdateView):
         self.object = form.save(commit=False)
         if self.object.edit_dates is None:
             self.object.edit_dates = []
-        date = timezone.now()
+        date = dj_timezone.now()
         correct_date = date + timedelta(hours=1) 
         self.object.edit_dates.append(correct_date.strftime("%Y-%m-%d %H:%M:%S"))
         self.object.save()
@@ -190,6 +191,21 @@ class StatsNoteView(LoginRequiredMixin, DetailView):
         context["unread_notifications"] = unread_notifications
         if Note.objects.filter(members__contains = [self.request.user], id=note.id):
             context['note'] = note
+        
+        if note.add_date.date() == datetime.now(timezone.utc).date():
+            num_days = (datetime.now(timezone.utc) - note.add_date).days + 1
+        else:
+            num_days = (datetime.now(timezone.utc) - note.add_date).days + 2
+            
+        date_list = [note.add_date + timedelta(days=i) for i in range(num_days)]
+        date_list = [date.date() for date in date_list]
+        labels = [date.strftime('%Y-%m-%d') for date in date_list]
+
+        edit_counts = Counter(date.date() for date in note.edit_dates)
+        data = [edit_counts[date] for date in date_list]
+        
+        context['labels'] = labels
+        context['data'] = data
 
         return context
 
