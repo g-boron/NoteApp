@@ -331,8 +331,6 @@ class UserProfileView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         unread_notifications = Notification.objects.filter(user=self.request.user, is_read=False).count()
         context["unread_notifications"] = unread_notifications
-        all_notes = Note.objects.filter(user=self.request.user).count()
-        context['all_notes'] = all_notes
         other_cat = Note.objects.filter(user=self.request.user, category_id=7).count()
         private_cat = Note.objects.filter(user=self.request.user, category_id=1).count()
         work_cat = Note.objects.filter(user=self.request.user, category_id=2).count()
@@ -340,13 +338,10 @@ class UserProfileView(LoginRequiredMixin, DetailView):
         shopping_cat = Note.objects.filter(user=self.request.user, category_id=6).count()
         cooking_cat = Note.objects.filter(user=self.request.user, category_id=4).count()
         travel_cat = Note.objects.filter(user=self.request.user, category_id=5).count()
-        context['other_cat'] = other_cat
-        context['private_cat'] = private_cat
-        context['work_cat'] = work_cat
-        context['school_cat'] = school_cat
-        context['shopping_cat'] = shopping_cat
-        context['cooking_cat'] = cooking_cat
-        context['travel_cat'] = travel_cat
+        labels = ['Other', 'Private', 'Work', 'School', 'Shopping', 'Cooking', 'Travel']
+        data = [other_cat, private_cat, work_cat, school_cat, shopping_cat, cooking_cat, travel_cat]
+        context['labels'] = labels
+        context['data'] = data
         return context
 
 

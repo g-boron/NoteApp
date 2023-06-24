@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="container mb-5">
-        <div class="card mx-auto mt-5" style="background-color: #C3CEDA; width: 75%">
+        <div class="card mx-auto mt-5" style="background-color: #C3CEDA; width: 85%;">
             <div class="card-header ps-3 pt-3">
                 <h1 class="display-3 text-start">Hello {% if user.first_name %} {{ user.first_name }}{% else %} {{ user.username }}{% endif %}!</h1>
             </div>
@@ -22,61 +22,64 @@
                     <div class="col-md-6">
                         <h1 class="display-5 card-title text-start">Summary</h1>
                         <hr>
-                        <div style="display: flex; justify-content: space-between;">
-                            <p class="card-text h1 text-start d-inline">All notes:</p>
-                            <p class="h1 text-end d-inline"><span style="color: #e8594f;">{{ all_notes }}</span></p>
+                        <div class="chart-container" style="position: relative; height: 85%; width: 100%;">
+                            <canvas id="myChart"></canvas>
                         </div>
-                        <br><br>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div style="display: flex; justify-content: space-between;">
-                                    <p class="card-text h1 text-start">Other:</p>
-                                    <p class="h1 text-end d-inline"><span style="color: #e8594f;">{{ other_cat }}</span></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div style="display: flex; justify-content: space-between;">
-                                    <p class="card-text h1 text-start">Private:</p>
-                                    <p class="h1 text-end d-inline"><span style="color: #e8594f;">{{ private_cat }}</span></p>
-                                </div>                            
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div style="display: flex; justify-content: space-between;">
-                                    <p class="card-text h1 text-start">Work:</p>
-                                    <p class="h1 text-end d-inline"><span style="color: #e8594f;">{{ work_cat }}</span></p>
-                                </div>                            
-                            </div>
-                            <div class="col-md-6">
-                                <div style="display: flex; justify-content: space-between;">
-                                    <p class="card-text h1 text-start">School:</p>
-                                    <p class="h1 text-end d-inline"><span style="color: #e8594f;">{{ school_cat }}</span></p>
-                                </div>                            
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div style="display: flex; justify-content: space-between;">
-                                    <p class="card-text h1 text-start">Cooking:</p>
-                                    <p class="h1 text-end d-inline"><span style="color: #e8594f;">{{ cooking_cat }}</span></p>
-                                </div>                            
-                            </div>
-                            <div class="col-md-6">
-                                <div style="display: flex; justify-content: space-between;">
-                                    <p class="card-text h1 text-start">Travel:</p>
-                                    <p class="h1 text-end d-inline"><span style="color: #e8594f;">{{ travel_cat }}</span></p>
-                                </div>                            
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div style="display: flex; justify-content: space-between;">
-                                    <p class="card-text h1 text-start">Shopping:</p>
-                                    <p class="h1 text-end d-inline"><span style="color: #e8594f;">{{ shopping_cat }}</span></p>
-                                </div>                            
-                            </div>    
-                        </div>
+                          
+                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                          
+                        <script>
+                        const ctx = document.getElementById('myChart');
+                        
+                        new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: {{ labels|safe }},
+                                datasets: [{
+                                    label: 'Number of notes',
+                                    data: {{ data|safe }},
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scaleShowValues: true,
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                scales: {
+                                    y: {
+                                        beginAtZero:true,
+                                        ticks: {
+                                            stepSize: 1,
+                                            font: {
+                                                size: 20,
+                                            }
+                                        }
+                                    },
+                                    x: {
+                                        ticks: {
+                                            font: {
+                                                size: 20,
+                                            },
+                                            autoSkip: false
+                                        }
+                                    }
+                                },
+                                plugins: { 
+                                    title: {
+                                    display: true, 
+                                    text: "Number of notes in each category" ,
+                                    padding: {
+                                        top: 10,
+                                        bottom: 10
+                                    },
+                                    font: {
+                                        size: 20,
+                                    }
+                                }
+                              }
+                            }
+                        });
+                        </script>
                     </div>
                 </div>
                 <div class="row">
