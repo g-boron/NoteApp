@@ -96,24 +96,15 @@
         <div class="container">
             <h1 class="fw-light text-center text-lg-start mt-4 mb-0">Files</h1>  
             <hr class="mt-2 mb-5">
-            <ul>
-                {% for note_file in note.notefile_set.all %}
-                <div class="row">
-                    <div class="col-md-6">
-                        <li class="text-start mb-3">
-                            <a href="{% url 'download' note_file.id %}">
-                                {{ note_file.filename|slice:':30' }}{% if note_file.filename|length > 30 %}...{% endif %}
-                            </a>
-                        </li>
-                    </div>
-                    <div class="col-md-6">
-                        <a href="{% url 'delete_file' note_file.id note.id %}" class="btn btn-danger p-1 confirm-delete">X</a>
-                    </div>
-
-                </div>
-
-                {% endfor %}
-            </ul>
+            <div class="d-flex justify-content-center">
+                <ul class="list-group">
+                    {% for note_file in note.notefile_set.all %}
+                        <a href="{% url 'download' note_file.id %}">
+                            <li class="list-group-item text-white fs-5" style="background-color: #051537; border-color: #777b8c;">{{ note_file.filename|slice:':20' }}{% if note_file.filename|length > 20 %}...{% endif %}<a href="{% url 'delete_file' note_file.id note.id %}" class="btn btn-danger p-1 ms-3 confirm-delete"> </a></li>
+                        </a>
+                    {% endfor %}
+                </ul>
+            </div>            
         </div>
 
     {% endif %}
@@ -121,7 +112,7 @@
     <div class="container mb-5">
         <h1 class="fw-light text-center text-lg-start mt-4 mb-0">Members</h1>  
         <hr class="mt-2 mb-5">
-        <div class=" d-flex justify-content-center">
+        <div class="d-flex justify-content-center">
             <ul class="list-group">
                 {% for member in note.members %}
                     <li class="list-group-item text-white fs-3" style="background-color: #051537; border-color: #777b8c;">{{ member }} {% if member != note.user.username and note.user == user %} <a href="{% url 'delete_member' note.id member %}" class="btn btn-danger p-1 ms-3 confirm-delete"> </a> {% endif %}</li>
