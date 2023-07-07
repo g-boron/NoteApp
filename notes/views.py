@@ -18,6 +18,9 @@ from wsgiref.util import FileWrapper
 from django.contrib import messages
 from collections import Counter
 from datetime import datetime
+import json
+from django.core.serializers.json import DjangoJSONEncoder
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -391,9 +394,38 @@ def add_reminder(request, note_id):
         whole_date = datetime.combine(date, time)
 
         note = Note.objects.get(pk=note_id)
-        reminder = Reminder.objects.create(title=title, remind_date=whole_date, note=note)
+        reminder = Reminder.objects.create(title=title, remind_date=whole_date, note=note, user=request.user)
         messages.success(request, 'Successfully added reminder!')
         
         return redirect('show', pk=note_id)
     
     return render(request, 'add_reminder.html')
+
+
+class RemindersListView(LoginRequiredMixin, TemplateView):
+    login_url = '/login/'
+    template_name = 'notes/reminders.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        unread_notifications = Notification.objects.filter(user=self.request.user, is_read=False).count()
+        context["unread_notifications"] = unread_notifications
+
+        return context
+
+
+def events(request):
+    reminders = Reminder.objects.filter(user = request.user)
+
+    events = []
+    for reminder in reminders:
+        end_date = reminder.remind_date.replace(hour=23, minute=59, second=59)
+        data = {
+            'title': reminder.title,
+            'start': reminder.remind_date.isoformat(),
+            'end': end_date.isoformat(),
+            'url': reverse('show', args=[reminder.note.id]),
+        }
+        events.append(data)
+
+    return JsonResponse(events, safe=False, encoder=DjangoJSONEncoder)

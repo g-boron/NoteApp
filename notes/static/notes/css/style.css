@@ -162,3 +162,8 @@ body {
             transparent .1em);
     background-size: 100% 2em;
 }
+
+#calendar {
+  max-width: 1100px;
+  margin: 40px auto;
+}

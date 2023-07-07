@@ -64,3 +64,4 @@ class Reminder(models.Model):
     title = models.CharField(max_length=250)
     remind_date = models.DateTimeField()
     note = models.ForeignKey(Note, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
