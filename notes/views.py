@@ -17,7 +17,6 @@ import mimetypes
 from wsgiref.util import FileWrapper
 from django.contrib import messages
 from collections import Counter
-from datetime import datetime
 import json
 from django.core.serializers.json import DjangoJSONEncoder
 from django.http import JsonResponse
@@ -419,6 +418,7 @@ def events(request):
 
     events = []
     for reminder in reminders:
+        reminder.remind_date += timedelta(hours=2)
         end_date = reminder.remind_date.replace(hour=23, minute=59, second=59)
         data = {
             'title': reminder.title,

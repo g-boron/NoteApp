@@ -15,7 +15,7 @@
             headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+                right: window.innerWidth < 576 ? 'timeGridDay,listMonth' : 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
                 },
             weekNumbers: true,
             dayMaxEvents: true,
@@ -25,7 +25,9 @@
                 hour: '2-digit',
                 minute: '2-digit',
                 hour12: false
-            }
+            },
+            initialView: window.innerWidth < 576 ? 'timeGridDay' : 'dayGridMonth',
+            height: window.innerWidth < 576 ? '90%' : '90%'
         });
 
         calendar.render();
