@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
-from .models import Note, NoteFile, User, Notification, Category
+from .models import Note, NoteFile, User, Notification, Category, Reminder
 from .forms import AddNewNote, InviteUser, EditProfileForm
 from django.utils import timezone as dj_timezone
 from django.urls import reverse_lazy
@@ -17,6 +17,7 @@ import mimetypes
 from wsgiref.util import FileWrapper
 from django.contrib import messages
 from collections import Counter
+from datetime import datetime
 
 
 # Create your views here.
@@ -376,3 +377,23 @@ class EditUserProfileView(LoginRequiredMixin, UpdateView):
         context["unread_notifications"] = unread_notifications
         context['form'] = self.form_class(instance=self.object)
         return context
+
+
+def add_reminder(request, note_id):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        date = request.POST.get('date')
+        time = request.POST.get('time')
+        
+        date = datetime.strptime(date, '%Y-%m-%d').date()
+        time = datetime.strptime(time, '%H:%M').time()
+
+        whole_date = datetime.combine(date, time)
+
+        note = Note.objects.get(pk=note_id)
+        reminder = Reminder.objects.create(title=title, remind_date=whole_date, note=note)
+        messages.success(request, 'Successfully added reminder!')
+        
+        return redirect('show', pk=note_id)
+    
+    return render(request, 'add_reminder.html')

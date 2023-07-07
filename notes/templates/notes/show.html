@@ -148,11 +148,52 @@
                         </div>
                         <div class="modal-body">
                             <div class="w-xl-50 w-lg-50 w-md-25 w-sm-75 mx-auto">
+                                <h1 class="display-6">Invite user</h1>
                                 <form method="post" action="{% url 'invite' note.id %}" class='text-dark fs-5' enctype="multipart/form-data">
                                     {% csrf_token %}
                                     {{ form|crispy }}
                                     <input type="submit" class="btn btn-success fs-5" value="Invite">
-                                </form>   
+                                </form>  
+                                <h1 class="display-6 mt-3">Set reminder</h1> 
+                                <form method="post" action="{% url 'add_reminder' note.id %}" class="text-dark fs-5">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label for="reminder_title" class="form-label">Title:</label>
+                                        <input type="text" id="reminder_title" name="title" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="reminder_date" class="form-label">Date:</label>
+                                        <input type="date" id="reminder_date" name="date" min="{% now 'Y-m-d' %}" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="reminder_time" class="form-label">Time:</label>
+                                        <input type="time" id="reminder_time" name="time" id="reminder_time" class="form-control" required>
+                                    </div>
+                                    <input type="submit" class="btn btn-success fs-5 mt-3" value="Add a reminder">
+                                </form>
+                                
+                                <script>
+                                    const timeInput = document.getElementById('reminder_time');
+                                    const dateInput = document.getElementById('reminder_date');
+                                    
+                                    dateInput.addEventListener('change', function() {
+                                        const selectedDate = new Date(this.value);
+                                        const currentDate = new Date();
+                                        
+                                        if (selectedDate.toDateString() === currentDate.toDateString()) {
+                                            const currentHour = currentDate.getHours();
+                                            const currentMinute = currentDate.getMinutes();
+                                            
+                                            const minHour = currentHour;
+                                            const minMinute = currentMinute + 5;
+                                            
+                                            timeInput.min = `${String(minHour).padStart(2, '0')}:${String(minMinute).padStart(2, '0')}`;
+                                        } else {
+                                            timeInput.min = '';
+                                        }
+                                    });
+                                </script>
+                                
                                 {% if user == note.user %}
                                     <div class="container mt-4">
                                         <div class="row">
@@ -204,5 +245,4 @@
             return confirm('Are you sure you want to delete this?');
         })
     </script>
-    
 {% endblock %}
