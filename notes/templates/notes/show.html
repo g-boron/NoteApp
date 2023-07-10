@@ -127,14 +127,14 @@
 
     <div class="row">
         {% if note.user == user %}
-            <div class="col-md-4 text-center mb-5">
+            <div class="col-md-3 text-center mb-5">
                 <form method="post" action="{% url 'delete' note.id %}" enctype="multipart/form-data">
                     {% csrf_token %}
                     <input type="submit" class="btn btn-danger confirm-delete fs-4" value="Delete">
                 </form>
             </div>
         {% endif %}
-        <div class="col-md-4 text-center mb-5">
+        <div class="col-md-3 text-center mb-5">
             <button type="button" class="btn btn-primary fs-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Settings
             </button>
@@ -154,6 +154,57 @@
                                     {{ form|crispy }}
                                     <input type="submit" class="btn btn-success fs-5" value="Invite">
                                 </form>  
+
+                                {% if user == note.user %}
+                                    <div class="container mt-4">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p class="text-dark fs-5">Allow edits?</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-check form-switch d-flex justify-content-center">
+                                                    {% if note.allow_edits %}
+                                                        <input class="form-check-input fs-5 mt-4" type="checkbox" id="edit_switch" checked>
+                                                    {% else %}
+                                                        <input class="form-check-input fs-5 mt-4" type="checkbox" id="edit_switch">
+                                                    {% endif %}   
+                                                </div>
+
+                                                <script>
+                                                    const switchCheckbox = document.getElementById('edit_switch');
+                                                  
+                                                    switchCheckbox.addEventListener('change', function() {
+                                                        window.location.href = "/{{ note.id }}/check_edit";
+                                                    });
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </div>      
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary fs-5" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 text-center mb-5">
+            <button type="button" class="btn btn-warning fs-4" data-bs-toggle="modal" data-bs-target="#reminderModal">
+                Reminders
+            </button>
+          
+            <div class="modal fade" id="reminderModal" tabindex="-1" aria-labelledby="reminderModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-dark" id="exampleModalLabel">Reminders</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="w-xl-50 w-lg-50 w-md-25 w-sm-75 mx-auto"> 
                                 <h1 class="display-6 mt-3">Set reminder</h1> 
                                 <form method="post" action="{% url 'add_reminder' note.id %}" class="text-dark fs-5">
                                     {% csrf_token %}
@@ -194,32 +245,12 @@
                                     });
                                 </script>
                                 
-                                {% if user == note.user %}
-                                    <div class="container mt-4">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <p class="text-dark fs-5">Allow edits?</p>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-check form-switch d-flex justify-content-center">
-                                                    {% if note.allow_edits %}
-                                                        <input class="form-check-input fs-5 mt-4" type="checkbox" id="edit_switch" checked>
-                                                    {% else %}
-                                                        <input class="form-check-input fs-5 mt-4" type="checkbox" id="edit_switch">
-                                                    {% endif %}   
-                                                </div>
-
-                                                <script>
-                                                    const switchCheckbox = document.getElementById('edit_switch');
-                                                  
-                                                    switchCheckbox.addEventListener('change', function() {
-                                                        window.location.href = "/{{ note.id }}/check_edit";
-                                                    });
-                                                </script>
-                                            </div>
-                                        </div>
-                                    </div>      
-                                {% endif %}
+                                <h1 class="display-6 mt-3">My reminders</h1>
+                                <ul class="list-group">
+                                    {% for reminder in reminders %}
+                                        <li class="list-group-item fs-4 text-white" style="background-color: #051537; border-color: #777b8c;"><a href="{% url 'reminders' %}" style="text-decoration: none;">{{ reminder.title }}</a><a href="{% url 'delete_reminder' reminder.id note.id %}" class="btn btn-danger p-1 ms-3 confirm-delete"></a></a></li>
+                                    {% endfor %}
+                                </ul>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -231,7 +262,7 @@
         </div>
         
         {% if user == note.user or note.allow_edits %}
-            <div class="col-md-4 text-center mb-5">
+            <div class="col-md-3 text-center mb-5">
                 <form method="post" action="{% url 'edit' note.id %}" enctype="multipart/form-data">
                     {% csrf_token %}
                     <input type="submit" class="btn btn-secondary fs-4" value="Edit">

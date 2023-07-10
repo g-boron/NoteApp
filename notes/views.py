@@ -103,6 +103,8 @@ class NoteDetailView(LoginRequiredMixin, DetailView):
         context['form'] = InviteUser()
         unread_notifications = Notification.objects.filter(user=self.request.user, is_read=False).count()
         context["unread_notifications"] = unread_notifications
+        reminders = Reminder.objects.filter(note=self.object.id, user=self.request.user)
+        context['reminders'] = reminders
         return context
 
 
@@ -429,3 +431,11 @@ def events(request):
         events.append(data)
 
     return JsonResponse(events, safe=False, encoder=DjangoJSONEncoder)
+
+
+def delete_reminder(request, pk, note_id):
+    note = get_object_or_404(Note, pk=note_id)
+    reminder = get_object_or_404(Reminder, pk=pk)
+    reminder.delete()
+
+    return redirect('show', pk=note.id)
