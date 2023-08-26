@@ -4,6 +4,7 @@ from django.contrib.postgres.fields import ArrayField
 from django.utils.text import slugify
 import os
 
+
 # Create your models here.
 class Category(models.Model):
     name = models.CharField(max_length=200)

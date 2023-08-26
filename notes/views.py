@@ -3,9 +3,8 @@ from .models import Note, NoteFile, User, Notification, Category, Reminder
 from .forms import AddNewNote, InviteUser, EditProfileForm
 from django.utils import timezone as dj_timezone
 from django.urls import reverse_lazy
-from django.contrib.auth.decorators import login_required
 from django.views.generic.base import TemplateView
-from django.views.generic import ListView, DetailView, View
+from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
@@ -17,7 +16,6 @@ import mimetypes
 from wsgiref.util import FileWrapper
 from django.contrib import messages
 from collections import Counter
-import json
 from django.core.serializers.json import DjangoJSONEncoder
 from django.http import JsonResponse
 
@@ -62,7 +60,7 @@ class NotesListView(LoginRequiredMixin, ListView):
         return context
 
     def get_queryset(self):
-        queryset = Note.objects.filter(members__contains = [self.request.user]).order_by('-add_date')
+        queryset = Note.objects.filter(members__contains=[self.request.user]).order_by('-add_date')
         category = self.request.GET.get('category')
         search = self.request.GET.get('q')
         sort = self.request.GET.get('sortby')
@@ -93,7 +91,7 @@ class NoteDetailView(LoginRequiredMixin, DetailView):
 
     def get(self, request, *args, **kwargs):
         note = self.get_object()
-        if Note.objects.filter(members__contains = [self.request.user], id=note.id):
+        if Note.objects.filter(members__contains=[self.request.user], id=note.id):
             return super().get(request, *args, **kwargs)
         else:
             return render(request, 'notes/error.html')
@@ -115,7 +113,7 @@ class CreateNoteView(LoginRequiredMixin, CreateView):
     form_class = AddNewNote
 
     def get_success_url(self):
-        return reverse('show', kwargs={'pk' : self.object.pk})
+        return reverse('show', kwargs={'pk': self.object.pk})
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -131,7 +129,6 @@ class CreateNoteView(LoginRequiredMixin, CreateView):
                 note_file = NoteFile(note=form.instance)
                 note_file.file.save(f.name, f)
                 note_file.save()
-        
 
         return super(CreateNoteView, self).form_valid(form)
 
@@ -155,7 +152,7 @@ class EditNoteView(LoginRequiredMixin, UpdateView):
     form_class = AddNewNote
 
     def get_success_url(self):
-        return reverse('show', kwargs={'pk' : self.object.pk})
+        return reverse('show', kwargs={'pk': self.object.pk})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -194,7 +191,7 @@ class StatsNoteView(LoginRequiredMixin, DetailView):
         note = self.get_object()
         unread_notifications = Notification.objects.filter(user=self.request.user, is_read=False).count()
         context["unread_notifications"] = unread_notifications
-        if Note.objects.filter(members__contains = [self.request.user], id=note.id):
+        if Note.objects.filter(members__contains=[self.request.user], id=note.id):
             context['note'] = note
         
         if note.add_date.date() == datetime.now(timezone.utc).date():
@@ -216,7 +213,7 @@ class StatsNoteView(LoginRequiredMixin, DetailView):
 
     def get(self, request, *args, **kwargs):
         note = self.get_object()
-        if Note.objects.filter(members__contains = [self.request.user], id=note.id):
+        if Note.objects.filter(members__contains=[self.request.user], id=note.id):
             return super().get(request, *args, **kwargs)
         else:
             return render(request, 'notes/error.html')
@@ -243,8 +240,13 @@ def invite_user(request, pk):
 
         if form.is_valid():
             username = form.cleaned_data['username']
-            if User.objects.filter(username=username).exists() and username != request.user.username and not Note.objects.filter(members__contains = [username], id=note.id):
-                notification = Notification(message=f"Do you want to join to {User.objects.get(username=note.user)}'s note: {note.title}?", user=User.objects.get(username=username), note_id=note.id)
+            if User.objects.filter(username=username).exists() and username != request.user.username and not \
+                    Note.objects.filter(members__contains=[username], id=note.id):
+                notification = Notification(
+                    message=f"Do you want to join to {User.objects.get(username=note.user)}'s note: {note.title}?",
+                    user=User.objects.get(username=username),
+                    note_id=note.id
+                )
                 notification.save()
                 messages.success(request, 'Successfully invited user!')
             else:
@@ -279,7 +281,7 @@ class NotificationsListView(LoginRequiredMixin, ListView):
         return context
 
     def get_queryset(self):
-        queryset = Notification.objects.filter(user__id = self.request.user.id).order_by("-timestamp")
+        queryset = Notification.objects.filter(user__id=self.request.user.id).order_by("-timestamp")
         return queryset
 
 
@@ -292,7 +294,7 @@ class DeclineNotificationView(DeleteView):
 def check(request, pk):
     notification = get_object_or_404(Notification, pk=pk)
 
-    if notification.is_read == True:
+    if notification.is_read:
         notification.is_read = False
         notification.save()
     else:
@@ -373,7 +375,7 @@ class EditUserProfileView(LoginRequiredMixin, UpdateView):
     form_class = EditProfileForm
 
     def get_success_url(self):
-        return reverse('profile', kwargs={'pk' : self.request.user.id})
+        return reverse('profile', kwargs={'pk': self.request.user.id})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -399,8 +401,6 @@ def add_reminder(request, note_id):
         messages.success(request, 'Successfully added reminder!')
         
         return redirect('show', pk=note_id)
-    
-    return render(request, 'add_reminder.html')
 
 
 class RemindersListView(LoginRequiredMixin, TemplateView):
@@ -416,9 +416,9 @@ class RemindersListView(LoginRequiredMixin, TemplateView):
 
 
 def events(request):
-    reminders = Reminder.objects.filter(user = request.user)
+    reminders = Reminder.objects.filter(user=request.user)
 
-    events = []
+    events_list = []
     for reminder in reminders:
         reminder.remind_date += timedelta(hours=2)
         end_date = reminder.remind_date.replace(hour=23, minute=59, second=59)
@@ -428,9 +428,9 @@ def events(request):
             'end': end_date.isoformat(),
             'url': reverse('show', args=[reminder.note.id]),
         }
-        events.append(data)
+        events_list.append(data)
 
-    return JsonResponse(events, safe=False, encoder=DjangoJSONEncoder)
+    return JsonResponse(events_list, safe=False, encoder=DjangoJSONEncoder)
 
 
 def delete_reminder(request, pk, note_id):

@@ -1,10 +1,11 @@
 from django import forms
 from .models import Note, User
-from django.forms.widgets import ClearableFileInput
 
 
 class AddNewNote(forms.ModelForm):
-    file_field = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True, 'style': 'font-size: 22px;'}), required=False)
+    file_field = forms.FileField(widget=forms.ClearableFileInput(attrs={
+        'multiple': True, 'style': 'font-size: 22px;'}
+    ), required=False)
 
     class Meta:
         model = Note
@@ -14,7 +15,6 @@ class AddNewNote(forms.ModelForm):
             'title': forms.TextInput(attrs={'style': 'font-size: 22px;'}),
             'note_text': forms.Textarea(attrs={'style': 'font-size: 22px;'}),
         }
-        
 
     def __init__(self, *args, **kwargs):
         super(AddNewNote, self).__init__(*args, **kwargs)
@@ -26,7 +26,7 @@ class InviteUser(forms.ModelForm):
 
     class Meta:
         model = Note
-        fields = ['username',]
+        fields = ['username', ]
 
 
 class EditProfileForm(forms.ModelForm):
