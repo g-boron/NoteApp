@@ -57,6 +57,7 @@ class NotesListView(LoginRequiredMixin, ListView):
         context['selected_category'] = self.request.GET.get('category')
         context['searched'] = self.request.GET.get('q')
         context['sort_value'] = self.request.GET.get('sortby')
+        context['current_language'] = self.request.LANGUAGE_CODE
         return context
 
     def get_queryset(self):
@@ -65,12 +66,20 @@ class NotesListView(LoginRequiredMixin, ListView):
         search = self.request.GET.get('q')
         sort = self.request.GET.get('sortby')
         
+        if category == 'Wszystkie':
+            category = 'All'
+        
         if search and category and category != 'All':
             queryset = queryset.filter(Q(title__icontains=search) & Q(category__slug=category))
         elif category and category != 'All':
             queryset = queryset.filter(category__slug=category)
         elif search:
             queryset = queryset.filter(title__icontains=search)
+        
+        if sort == 'Najnowsze':
+            sort = 'Latest'
+        elif sort == 'Najstarsze':
+            sort = 'Oldest'
 
         if sort == 'Oldest':
             queryset = queryset.order_by('add_date')

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-18 19:10+0200\n"
+"POT-Creation-Date: 2023-09-30 16:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -582,7 +582,7 @@ msgid "Order"
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\forms\formsets.py:433
-#: .\notes\templates\notes\show.html:134
+#: .\notes\templates\notes\show.html:142
 msgid "Delete"
 msgstr ""
 
@@ -1239,97 +1239,133 @@ msgstr ""
 msgid "Username"
 msgstr "Użytkownik"
 
-#: .\notes\templates\notes\show.html:17
+#: .\notes\templates\notes\show.html:21
 msgid "(edited)"
 msgstr "(edytowano)"
 
-#: .\notes\templates\notes\show.html:30
+#: .\notes\templates\notes\show.html:38
 msgid "Author"
 msgstr "Autor"
 
-#: .\notes\templates\notes\show.html:98
+#: .\notes\templates\notes\show.html:106
 msgid "Files"
 msgstr "Pliki"
 
-#: .\notes\templates\notes\show.html:114
+#: .\notes\templates\notes\show.html:122
 msgid "Members"
 msgstr "Członkowie"
 
-#: .\notes\templates\notes\show.html:140
+#: .\notes\templates\notes\show.html:148
 msgid "Settings"
 msgstr "Ustawienia"
 
-#: .\notes\templates\notes\show.html:147
+#: .\notes\templates\notes\show.html:155
 msgid "Note's settings"
 msgstr "Ustawienia notatki"
 
-#: .\notes\templates\notes\show.html:152
+#: .\notes\templates\notes\show.html:160
 msgid "Invite user"
 msgstr "Zaproś użytkownika"
 
-#: .\notes\templates\notes\show.html:156
+#: .\notes\templates\notes\show.html:164
 msgid "Invite"
 msgstr "Zaproś"
 
-#: .\notes\templates\notes\show.html:163
+#: .\notes\templates\notes\show.html:171
 msgid "Allow edits?"
 msgstr "Zezwolić na edycję?"
 
-#: .\notes\templates\notes\show.html:188 .\notes\templates\notes\show.html:260
+#: .\notes\templates\notes\show.html:196 .\notes\templates\notes\show.html:268
 msgid "Close"
 msgstr "Zamknij"
 
-#: .\notes\templates\notes\show.html:197 .\notes\templates\notes\show.html:204
+#: .\notes\templates\notes\show.html:205 .\notes\templates\notes\show.html:212
 msgid "Reminders"
 msgstr "Przypomnienia"
 
-#: .\notes\templates\notes\show.html:209
+#: .\notes\templates\notes\show.html:217
 msgid "Set reminder"
 msgstr "Ustaw przypomnienie"
 
-#: .\notes\templates\notes\show.html:213
+#: .\notes\templates\notes\show.html:221
 msgid "Title:"
 msgstr "Tytuł:"
 
-#: .\notes\templates\notes\show.html:217
+#: .\notes\templates\notes\show.html:225
 msgid "Date:"
 msgstr "Data:"
 
-#: .\notes\templates\notes\show.html:221
+#: .\notes\templates\notes\show.html:229
 msgid "Time:"
 msgstr "Czas:"
 
-#: .\notes\templates\notes\show.html:224
+#: .\notes\templates\notes\show.html:232
 msgid "Add a reminder"
 msgstr "Ustaw przypomnienie"
 
-#: .\notes\templates\notes\show.html:250
+#: .\notes\templates\notes\show.html:258
 msgid "My reminders"
 msgstr "Moje przypomnienia"
 
-#: .\notes\templates\notes\show.html:271
+#: .\notes\templates\notes\show.html:279
 msgid "Edit"
 msgstr "Edytuj"
 
-#: .\notes\templates\notes\show.html:279
+#: .\notes\templates\notes\show.html:287
 msgid "Are you sure you want to delete this?"
 msgstr "Czy na pewno chcesz to usunąć?"
 
-#: .\notes\templates\notes\show_notes.html:17
-msgid "Change language"
-msgstr "Zmień język"
-
-#: .\notes\templates\notes\show_notes.html:20
+#: .\notes\templates\notes\show_notes.html:7
 msgid "My notes"
 msgstr "Moje notatki"
 
-#: .\notes\templates\notes\show_notes.html:47
+#: .\notes\templates\notes\show_notes.html:12
+#: .\notes\templates\notes\show_notes.html:14
+msgid "Search..."
+msgstr "Wyszukaj..."
+
+#: .\notes\templates\notes\show_notes.html:19
+msgid "All"
+msgstr "Wszystkie"
+
+#: .\notes\templates\notes\show_notes.html:27
+msgid "Latest"
+msgstr "Najnowsze"
+
+#: .\notes\templates\notes\show_notes.html:28
+msgid "Oldest"
+msgstr "Najstarsze"
+
+#: .\notes\templates\notes\show_notes.html:34
 msgid "Search"
 msgstr "Wyszukaj"
 
-#: .\notes\views.py:61
-msgid "notes/templates/notes/show_notes.html"
-msgstr ""
+#: .\notes\templates\notes\show_notes.html:53
+msgid "See note"
+msgstr "Zobacz notatkę"
+
+#: .\notes\templates\notes\show_notes.html:64
+msgid "Previous"
+msgstr "Poprzednia"
+
+#: .\notes\templates\notes\show_notes.html:71
+msgid "Page"
+msgstr "Strona"
+
+#: .\notes\templates\notes\show_notes.html:71
+msgid "of"
+msgstr "z"
+
+#: .\notes\templates\notes\show_notes.html:78
+msgid "Next"
+msgstr "Następna"
+
+#: .\notes\templates\notes\show_notes.html:85
+msgid "No notes are available."
+msgstr "Nie ma żadnych notatek"
+
+#~ msgid "Change language"
+#~ msgstr "Zmień język"
 
 #~ msgid "Note"
 #~ msgstr "Notatka"
