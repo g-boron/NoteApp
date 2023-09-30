@@ -11,19 +11,27 @@
         {% if note.edit_dates %}
             <div class="row">
                 <div class="col-md-6">
-                    <h1 class="display-6 text-muted mb-2 text-start"><i>{{ note.category.name }}</i></h1>
+                    {% if current_language == 'en' %}
+                        <h1 class="display-6 text-muted mb-2 text-start"><i>{{ note.category.name }}</i></h1>
+                    {% elif current_language == 'pl' %}
+                        <h1 class="display-6 text-muted mb-2 text-start"><i>{{ note.category.name_pl }}</i></h1>
+                    {% endif %}
                 </div>
                 <div class="col-md-6">
-                    <h1 class="display-6 text-muted mb-2 text-end"><i><a href="{% url 'stats' note.id %}">{% trans '(edited)' %}</a>  {{ note.add_date }}</i></h1>
+                    <h1 class="display-6 text-muted mb-2 text-end"><i><a href="{% url 'stats' note.id %}">{% trans '(edited)' %}</a>  {{ note.add_date|date:'d-m-Y H:i:s' }}</i></h1>
                 </div>
             </div>
         {% else %}
             <div class="row">
                 <div class="col-md-6">
-                    <h1 class="display-6 text-muted mb-2 text-start"><i>{{ note.category.name }}</i></h1>
+                    {% if current_language == 'en' %}
+                        <h1 class="display-6 text-muted mb-2 text-start"><i>{{ note.category.name }}</i></h1>
+                    {% elif current_language == 'pl' %}
+                        <h1 class="display-6 text-muted mb-2 text-start"><i>{{ note.category.name_pl }}</i></h1>
+                    {% endif %}
                 </div>
                 <div class="col-md-6">
-                    <h1 class="display-6 text-muted mb-2 text-end"><i>{{ note.add_date }}</i></h1>
+                    <h1 class="display-6 text-muted mb-2 text-end"><i>{{ note.add_date|date:'d-m-Y H:i:s' }}</i></h1>
                 </div>
             </div>
         {% endif %}

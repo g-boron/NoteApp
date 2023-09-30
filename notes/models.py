@@ -8,6 +8,7 @@ import os
 # Create your models here.
 class Category(models.Model):
     name = models.CharField(max_length=200)
+    name_pl = models.CharField(max_length=200, default='none')
     slug = models.SlugField()
 
     def __str__(self):

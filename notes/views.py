@@ -103,6 +103,7 @@ class NoteDetailView(LoginRequiredMixin, DetailView):
         context["unread_notifications"] = unread_notifications
         reminders = Reminder.objects.filter(note=self.object.id, user=self.request.user)
         context['reminders'] = reminders
+        context['current_language'] = self.request.LANGUAGE_CODE
         return context
 
 
