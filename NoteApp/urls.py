@@ -18,10 +18,12 @@ from django.urls import path, include
 from user_login import views as login_v
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls.i18n import set_language
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', login_v.register, name='register'),
     path('', include('notes.urls')),
     path('', include('django.contrib.auth.urls')),
+    path('i18n/', include('django.conf.urls.i18n')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

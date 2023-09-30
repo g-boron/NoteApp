@@ -167,3 +167,17 @@ body {
   max-width: 1100px;
   margin: 40px auto;
 }
+
+#language-form button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+#language-form button[value="pl"] {
+    background-image: url('{% static "notes/images/pl.png" %}');
+}
+
+#language-form button[value="en"] {
+    background-image: url('{% static "notes/images/en.png" %}');
+}

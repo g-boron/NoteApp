@@ -1,5 +1,6 @@
 from django import forms
 from .models import Note, User
+from django.utils.translation import gettext_lazy as _
 
 
 class AddNewNote(forms.ModelForm):
@@ -22,7 +23,7 @@ class AddNewNote(forms.ModelForm):
 
 
 class InviteUser(forms.ModelForm):
-    username = forms.CharField(max_length=200)
+    username = forms.CharField(max_length=200, label=_('Username'))
 
     class Meta:
         model = Note
