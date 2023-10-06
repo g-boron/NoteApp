@@ -364,13 +364,13 @@ class UserProfileView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         unread_notifications = Notification.objects.filter(user=self.request.user, is_read=False).count()
         context["unread_notifications"] = unread_notifications
-        other_cat = Note.objects.filter(user=self.request.user, category_id=7).count()
-        private_cat = Note.objects.filter(user=self.request.user, category_id=1).count()
-        work_cat = Note.objects.filter(user=self.request.user, category_id=2).count()
-        school_cat = Note.objects.filter(user=self.request.user, category_id=3).count()
-        shopping_cat = Note.objects.filter(user=self.request.user, category_id=6).count()
-        cooking_cat = Note.objects.filter(user=self.request.user, category_id=4).count()
-        travel_cat = Note.objects.filter(user=self.request.user, category_id=5).count()
+        other_cat = Note.objects.filter(user=self.request.user, category_id=8).count()
+        private_cat = Note.objects.filter(user=self.request.user, category_id=14).count()
+        work_cat = Note.objects.filter(user=self.request.user, category_id=13).count()
+        school_cat = Note.objects.filter(user=self.request.user, category_id=12).count()
+        shopping_cat = Note.objects.filter(user=self.request.user, category_id=9).count()
+        cooking_cat = Note.objects.filter(user=self.request.user, category_id=11).count()
+        travel_cat = Note.objects.filter(user=self.request.user, category_id=10).count()
         labels = ['Other', 'Private', 'Work', 'School', 'Shopping', 'Cooking', 'Travel']
         data = [other_cat, private_cat, work_cat, school_cat, shopping_cat, cooking_cat, travel_cat]
         context['labels'] = labels
