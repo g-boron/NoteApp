@@ -258,10 +258,16 @@ def invite_user(request, pk):
                     note_id=note.id
                 )
                 notification.save()
-                messages.success(request, 'Successfully invited user!')
+                if request.LANGUAGE_CODE == 'en':
+                    messages.success(request, 'Successfully invited user!')
+                else:
+                    messages.success(request, 'Pomyślne zaproszono użytkownika!')
             else:
                 print('Error')
-                messages.error(request, 'You cannot add this user!')
+                if request.LANGUAGE_CODE == 'en':
+                    messages.error(request, 'You cannot add this user!')
+                else:
+                    messages.error(request, 'Nie można dodać tego użytkownika!')
 
             return redirect('show', pk=note.id)
 
@@ -408,7 +414,10 @@ def add_reminder(request, note_id):
 
         note = Note.objects.get(pk=note_id)
         reminder = Reminder.objects.create(title=title, remind_date=whole_date, note=note, user=request.user)
-        messages.success(request, 'Successfully added reminder!')
+        if request.LANGUAGE_CODE == 'en':
+            messages.success(request, 'Successfully added reminder!')
+        else:
+            messages.success(request, 'Pomyślnie dodano przypomnienie!')
         
         return redirect('show', pk=note_id)
 
