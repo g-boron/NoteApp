@@ -19,7 +19,10 @@ class AddNewNote(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(AddNewNote, self).__init__(*args, **kwargs)
-        self.fields['file_field'].label = "Files"
+        self.fields['file_field'].label = _("Files")
+        self.fields['title'].label = _("Title")
+        self.fields['note_text'].label = _("Note text")
+        self.fields['category'].label = _("Category")
 
 
 class InviteUser(forms.ModelForm):

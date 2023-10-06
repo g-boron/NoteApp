@@ -4,6 +4,7 @@
 {% block title %} Add new note {% endblock %}
 
 {% load crispy_forms_tags %}
+{% load i18n %}
 
 {% block content %}
     <div class="container">
@@ -13,14 +14,14 @@
                     {% csrf_token %}
                     {{ form|crispy }}
                     {% if files %}
-                        <label>Current files:</label>
+                        <label>{% trans 'Current files:'%}</label>
                     {% endif %}
                     {% for file in files %}
                         <div class="form-group">
                             <a href="{{ file.file.url }}" target="_blank" class="file-link">{{ file.filename|slice:':20' }}{% if file.filename|length > 20 %}...{% endif %}</a>
                         </div>
                     {% endfor %}
-                    <button type="submit" name="add" class="btn btn-primary mt-2 mb-1 fs-3">Save</button>
+                    <button type="submit" name="add" class="btn btn-primary mt-2 mb-1 fs-3">{% trans 'Save' %}</button>
                 </form>
             </div>
         

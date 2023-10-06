@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-30 16:07+0200\n"
+"POT-Creation-Date: 2023-10-06 15:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1235,9 +1235,73 @@ msgstr ""
 msgid "Invalid media_type. Valid types are: %(valid_types)s"
 msgstr ""
 
-#: .\notes\forms.py:26
+#: .\notes\forms.py:22 .\notes\templates\notes\show.html:106
+msgid "Files"
+msgstr "Pliki"
+
+#: .\notes\forms.py:23
+msgid "Title"
+msgstr "Tytuł"
+
+#: .\notes\forms.py:24
+msgid "Note text"
+msgstr "Tekst notatki"
+
+#: .\notes\forms.py:25
+msgid "Category"
+msgstr "Kategoria"
+
+#: .\notes\forms.py:29
 msgid "Username"
 msgstr "Użytkownik"
+
+#: .\notes\templates\notes\add_note.html:17
+msgid "Current files:"
+msgstr "Wybrane pliki:"
+
+#: .\notes\templates\notes\add_note.html:24
+msgid "Save"
+msgstr "Zapisz"
+
+#: .\notes\templates\notes\base.html:30
+msgid "Home"
+msgstr "Strona główna"
+
+#: .\notes\templates\notes\base.html:39
+#: .\notes\templates\notes\show_notes.html:7
+msgid "My notes"
+msgstr "Moje notatki"
+
+#: .\notes\templates\notes\base.html:48
+#, fuzzy
+#| msgid "See note"
+msgid "Add new note"
+msgstr "Zobacz notatkę"
+
+#: .\notes\templates\notes\base.html:57 .\notes\templates\notes\base.html:64
+msgid "Notifications"
+msgstr "Powiadomienia"
+
+#: .\notes\templates\notes\base.html:74
+msgid "Profile"
+msgstr "Profil"
+
+#: .\notes\templates\notes\base.html:83 .\notes\templates\notes\show.html:205
+#: .\notes\templates\notes\show.html:212
+msgid "Reminders"
+msgstr "Przypomnienia"
+
+#: .\notes\templates\notes\base.html:92
+msgid "Logout"
+msgstr "Wyloguj"
+
+#: .\notes\templates\notes\base.html:102
+msgid "Login"
+msgstr "Logowanie"
+
+#: .\notes\templates\notes\base.html:111
+msgid "Register"
+msgstr "Rejestracja"
 
 #: .\notes\templates\notes\show.html:21
 msgid "(edited)"
@@ -1246,10 +1310,6 @@ msgstr "(edytowano)"
 #: .\notes\templates\notes\show.html:38
 msgid "Author"
 msgstr "Autor"
-
-#: .\notes\templates\notes\show.html:106
-msgid "Files"
-msgstr "Pliki"
 
 #: .\notes\templates\notes\show.html:122
 msgid "Members"
@@ -1278,10 +1338,6 @@ msgstr "Zezwolić na edycję?"
 #: .\notes\templates\notes\show.html:196 .\notes\templates\notes\show.html:268
 msgid "Close"
 msgstr "Zamknij"
-
-#: .\notes\templates\notes\show.html:205 .\notes\templates\notes\show.html:212
-msgid "Reminders"
-msgstr "Przypomnienia"
 
 #: .\notes\templates\notes\show.html:217
 msgid "Set reminder"
@@ -1314,10 +1370,6 @@ msgstr "Edytuj"
 #: .\notes\templates\notes\show.html:287
 msgid "Are you sure you want to delete this?"
 msgstr "Czy na pewno chcesz to usunąć?"
-
-#: .\notes\templates\notes\show_notes.html:7
-msgid "My notes"
-msgstr "Moje notatki"
 
 #: .\notes\templates\notes\show_notes.html:12
 #: .\notes\templates\notes\show_notes.html:14
@@ -1366,6 +1418,3 @@ msgstr "Nie ma żadnych notatek"
 
 #~ msgid "Change language"
 #~ msgstr "Zmień język"
-
-#~ msgid "Note"
-#~ msgstr "Notatka"
