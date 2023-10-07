@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-07 13:55+0200\n"
+"POT-Creation-Date: 2023-10-07 14:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1236,23 +1236,23 @@ msgstr ""
 msgid "Invalid media_type. Valid types are: %(valid_types)s"
 msgstr ""
 
-#: .\notes\forms.py:21 .\notes\templates\notes\show.html:106
+#: .\notes\forms.py:22 .\notes\templates\notes\show.html:106
 msgid "Files"
 msgstr "Pliki"
 
-#: .\notes\forms.py:22
+#: .\notes\forms.py:23
 msgid "Title"
 msgstr "Tytuł"
 
-#: .\notes\forms.py:23
+#: .\notes\forms.py:24
 msgid "Note text"
 msgstr "Tekst notatki"
 
-#: .\notes\forms.py:24
+#: .\notes\forms.py:25
 msgid "Category"
 msgstr "Kategoria"
 
-#: .\notes\forms.py:28
+#: .\notes\forms.py:29
 msgid "Username"
 msgstr "Użytkownik"
 
@@ -1435,6 +1435,14 @@ msgstr "Zobacz notatkę"
 #: .\notes\templates\notes\show_notes.html:85
 msgid "No notes are available."
 msgstr "Nie ma żadnych notatek"
+
+#: .\notes\templates\notes\stats.html:7
+msgid "Number of edits in"
+msgstr "Ilość edycji w "
+
+#: .\notes\templates\notes\stats.html:23
+msgid "Number of edits"
+msgstr "Ilość edycji"
 
 #~ msgid "Change language"
 #~ msgstr "Zmień język"

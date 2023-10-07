@@ -1,9 +1,10 @@
 {% extends 'notes/base.html' %}
+{% load i18n %}
 
 {% block title %}Statistics{% endblock %}
 
 {% block content %}
-    <h1 class="display-4 mb-5">Number of edits in {{ note.title }}</h1>
+    <h1 class="display-4 mb-5">{% trans 'Number of edits in' %} {{ note.title }}</h1>
 
     <div class="chart-container p-1" style="position: relative; height: 60%; width: 95%;">
         <canvas id="myChart"></canvas>
@@ -19,7 +20,7 @@
         data: {
             labels: {{ labels|safe }},
             datasets: [{
-                label: 'Number of edits',
+                label: '{% trans "Number of edits" %}',
                 data: {{ data|safe }},
                 borderWidth: 1
             }]
