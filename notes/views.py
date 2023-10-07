@@ -380,8 +380,12 @@ class UserProfileView(LoginRequiredMixin, DetailView):
         cooking_cat = Note.objects.filter(user=self.request.user, category_id=11).count()
         travel_cat = Note.objects.filter(user=self.request.user, category_id=10).count()
         labels = ['Other', 'Private', 'Work', 'School', 'Shopping', 'Cooking', 'Travel']
+        labels_pl = ['Inne', 'Prywatne', 'Praca', 'Szkoła', 'Zakupy', 'Gotowanie', 'Podróżowanie']
         data = [other_cat, private_cat, work_cat, school_cat, shopping_cat, cooking_cat, travel_cat]
-        context['labels'] = labels
+        if self.request.LANGUAGE_CODE == 'en':
+            context['labels'] = labels
+        else:
+            context['labels'] = labels_pl
         context['data'] = data
         return context
 

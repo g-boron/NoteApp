@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-07 14:00+0200\n"
+"POT-Creation-Date: 2023-10-07 14:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -637,6 +637,7 @@ msgid "Currently"
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\forms\widgets.py:405
+#: .\notes\templates\notes\profile.html:31
 msgid "Change"
 msgstr ""
 
@@ -1343,6 +1344,46 @@ msgstr "Następna"
 msgid "There is no notifications."
 msgstr "Nie ma żadnych powiadomień."
 
+#: .\notes\templates\notes\profile.html:12
+msgid "Hello"
+msgstr "Cześć"
+
+#: .\notes\templates\notes\profile.html:17
+msgid "Informations"
+msgstr "Informacje"
+
+#: .\notes\templates\notes\profile.html:19
+msgid "First name:"
+msgstr "Imię:"
+
+#: .\notes\templates\notes\profile.html:20
+msgid "Last name:"
+msgstr "Nazwisko:"
+
+#: .\notes\templates\notes\profile.html:23
+msgid "Choose language:"
+msgstr "Wybierz język:"
+
+#: .\notes\templates\notes\profile.html:45
+msgid "Summary"
+msgstr "Podsumowanie"
+
+#: .\notes\templates\notes\profile.html:61
+msgid "Number of notes"
+msgstr "Ilość notatek"
+
+#: .\notes\templates\notes\profile.html:92
+msgid "Number of notes in each category"
+msgstr "Ilość notatek w każdej kategorii"
+
+#: .\notes\templates\notes\profile.html:109
+msgid "Edit informations"
+msgstr "Edytuj informacje"
+
+#: .\notes\templates\notes\profile.html:112
+msgid "See notes"
+msgstr "Zobacz notatki"
+
 #: .\notes\templates\notes\show.html:21
 msgid "(edited)"
 msgstr "(edytowano)"
@@ -1443,6 +1484,3 @@ msgstr "Ilość edycji w "
 #: .\notes\templates\notes\stats.html:23
 msgid "Number of edits"
 msgstr "Ilość edycji"
-
-#~ msgid "Change language"
-#~ msgstr "Zmień język"
