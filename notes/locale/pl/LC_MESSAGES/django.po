@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-06 15:11+0200\n"
+"POT-Creation-Date: 2023-10-07 13:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -582,9 +582,10 @@ msgid "Order"
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\forms\formsets.py:433
+#: .\notes\templates\notes\notifications.html:25
 #: .\notes\templates\notes\show.html:142
 msgid "Delete"
-msgstr ""
+msgstr "Usuń"
 
 #: .\venv\Lib\site-packages\django\forms\models.py:767
 #, python-format
@@ -1235,23 +1236,23 @@ msgstr ""
 msgid "Invalid media_type. Valid types are: %(valid_types)s"
 msgstr ""
 
-#: .\notes\forms.py:22 .\notes\templates\notes\show.html:106
+#: .\notes\forms.py:21 .\notes\templates\notes\show.html:106
 msgid "Files"
 msgstr "Pliki"
 
-#: .\notes\forms.py:23
+#: .\notes\forms.py:22
 msgid "Title"
 msgstr "Tytuł"
 
-#: .\notes\forms.py:24
+#: .\notes\forms.py:23
 msgid "Note text"
 msgstr "Tekst notatki"
 
-#: .\notes\forms.py:25
+#: .\notes\forms.py:24
 msgid "Category"
 msgstr "Kategoria"
 
-#: .\notes\forms.py:29
+#: .\notes\forms.py:28
 msgid "Username"
 msgstr "Użytkownik"
 
@@ -1273,10 +1274,8 @@ msgid "My notes"
 msgstr "Moje notatki"
 
 #: .\notes\templates\notes\base.html:48
-#, fuzzy
-#| msgid "See note"
 msgid "Add new note"
-msgstr "Zobacz notatkę"
+msgstr "Dodaj nową notatkę"
 
 #: .\notes\templates\notes\base.html:57 .\notes\templates\notes\base.html:64
 msgid "Notifications"
@@ -1302,6 +1301,47 @@ msgstr "Logowanie"
 #: .\notes\templates\notes\base.html:111
 msgid "Register"
 msgstr "Rejestracja"
+
+#: .\notes\templates\notes\notifications.html:8
+msgid "My notifications"
+msgstr "Moje powiadomienia"
+
+#: .\notes\templates\notes\notifications.html:16
+msgid "New notification!"
+msgstr "Nowe powiadomienie!"
+
+#: .\notes\templates\notes\notifications.html:31
+msgid "Accept"
+msgstr "Akceptuj"
+
+#: .\notes\templates\notes\notifications.html:56
+#: .\notes\templates\notes\show.html:287
+msgid "Are you sure you want to delete this?"
+msgstr "Czy na pewno chcesz to usunąć?"
+
+#: .\notes\templates\notes\notifications.html:66
+#: .\notes\templates\notes\show_notes.html:64
+msgid "Previous"
+msgstr "Poprzednia"
+
+#: .\notes\templates\notes\notifications.html:73
+#: .\notes\templates\notes\show_notes.html:71
+msgid "Page"
+msgstr "Strona"
+
+#: .\notes\templates\notes\notifications.html:73
+#: .\notes\templates\notes\show_notes.html:71
+msgid "of"
+msgstr "z"
+
+#: .\notes\templates\notes\notifications.html:80
+#: .\notes\templates\notes\show_notes.html:78
+msgid "Next"
+msgstr "Następna"
+
+#: .\notes\templates\notes\notifications.html:87
+msgid "There is no notifications."
+msgstr "Nie ma żadnych powiadomień."
 
 #: .\notes\templates\notes\show.html:21
 msgid "(edited)"
@@ -1367,10 +1407,6 @@ msgstr "Moje przypomnienia"
 msgid "Edit"
 msgstr "Edytuj"
 
-#: .\notes\templates\notes\show.html:287
-msgid "Are you sure you want to delete this?"
-msgstr "Czy na pewno chcesz to usunąć?"
-
 #: .\notes\templates\notes\show_notes.html:12
 #: .\notes\templates\notes\show_notes.html:14
 msgid "Search..."
@@ -1395,22 +1431,6 @@ msgstr "Wyszukaj"
 #: .\notes\templates\notes\show_notes.html:53
 msgid "See note"
 msgstr "Zobacz notatkę"
-
-#: .\notes\templates\notes\show_notes.html:64
-msgid "Previous"
-msgstr "Poprzednia"
-
-#: .\notes\templates\notes\show_notes.html:71
-msgid "Page"
-msgstr "Strona"
-
-#: .\notes\templates\notes\show_notes.html:71
-msgid "of"
-msgstr "z"
-
-#: .\notes\templates\notes\show_notes.html:78
-msgid "Next"
-msgstr "Następna"
 
 #: .\notes\templates\notes\show_notes.html:85
 msgid "No notes are available."

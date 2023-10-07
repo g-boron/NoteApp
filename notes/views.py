@@ -254,6 +254,7 @@ def invite_user(request, pk):
                     Note.objects.filter(members__contains=[username], id=note.id):
                 notification = Notification(
                     message=f"Do you want to join to {User.objects.get(username=note.user)}'s note: {note.title}?",
+                    message_pl=f'Czy chcesz dołączyć do notatki użytkownika {User.objects.get(username=note.user)}: {note.title}?',
                     user=User.objects.get(username=username),
                     note_id=note.id
                 )
@@ -294,6 +295,7 @@ class NotificationsListView(LoginRequiredMixin, ListView):
         unread_notifications = Notification.objects.filter(user=self.request.user, is_read=False).count()
         context["unread_notifications"] = unread_notifications
         context['notifications'] = notifications_page
+        context['current_language'] = self.request.LANGUAGE_CODE
         return context
 
     def get_queryset(self):

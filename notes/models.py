@@ -57,6 +57,7 @@ class NoteFile(models.Model):
 class Notification(models.Model):
     is_read = models.BooleanField(default=False)
     message = models.TextField()
+    message_pl = models.TextField(default="")
     timestamp = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     note = models.ForeignKey(Note, on_delete=models.CASCADE)
