@@ -18,6 +18,27 @@
                         <p class="card-text h1 text-start">First name: <br><span style="color: #e8594f;">{% if user.first_name %}{{ user.first_name }}{% else %}<br>{% endif %}</span></p>
                         <p class="card-text h1 text-start">Last name: <br><span style="color: #e8594f;">{% if user.last_name %}{{ user.last_name }}{% else %}<br>{% endif %}</span></p>
                         <p class="card-text h1 text-start mb-3">E-mail: <br><span style="color: #e8594f;">{{ user.email }}</span></p>
+
+                        <p class="card-text h3 text-start mt-5">Choose language:</p>
+                        <form action="{% url 'set_language' %}" method="post" id="language-form" onsubmit="return changeLanguage()" class="text-start">
+                            {% csrf_token %}
+                            <input name="next" type="hidden" value="{{ request.path }}">
+                            <select name="language" id="language-select" class="form-control" style="width: 80px">
+                                <option value="pl" {% if request.LANGUAGE_CODE == "pl" %}selected{% endif %}>Polski</option>
+                                <option value="en" {% if request.LANGUAGE_CODE == "en" %}selected{% endif %}>English</option>
+                            </select>
+                            <input type="submit" value="Change" class="btn btn-primary mt-2 fs-6">
+                        </form>
+                        
+                        <script>
+                            function changeLanguage() {
+                                const selectedLanguage = document.querySelector('#language-select').value;
+                                const form = document.querySelector('#language-form');
+                                const action = form.action;
+                                form.action = action + '?language=' + selectedLanguage;
+                                return true;
+                            }
+                        </script>
                     </div>
                     <div class="col-md-6">
                         <h1 class="display-5 card-title text-start">Summary</h1>

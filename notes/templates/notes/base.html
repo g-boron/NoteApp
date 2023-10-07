@@ -112,27 +112,6 @@
                             </a>
                         </li>
                         {% endif %}
-                        <li>
-                            <form action="{% url 'set_language' %}" method="post" id="language-form">
-                                {% csrf_token %}
-                                <input name="next" type="hidden" value="{{ request.path }}">
-                                <button type="submit" class="mx-5" name="language" value="pl"><img src="{% static 'notes/images/pl.png' %}" alt="PL" width="5%"></button>
-                                <button type="submit" class="mx-5" name="language" value="en"><img src="{% static 'notes/images/eng.png' %}" alt="EN" width="5%"></button>
-                            </form>
-                            
-                            <script>
-                                document.addEventListener('DOMContentLoaded', function() {
-                                    const buttons = document.querySelectorAll('#language-form button');
-                                    buttons.forEach(button => {
-                                        button.addEventListener('click', function(event) {
-                                            const languageCode = event.target.value;
-                                            document.querySelector('#language-form [name="language"]').value = languageCode;
-                                            document.querySelector('#language-form').submit();
-                                        });
-                                    });
-                                });
-                            </script>
-                        </li>
                     </ul>
                     
                 </div>
