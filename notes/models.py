@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.postgres.fields import ArrayField
 from django.utils.text import slugify
 import os
+from django.utils.translation import get_language
 
 
 # Create your models here.
@@ -12,7 +13,12 @@ class Category(models.Model):
     slug = models.SlugField()
 
     def __str__(self):
-        return self.name
+        lang = get_language()
+
+        if lang == 'en':
+            return self.name
+        elif lang == 'pl':
+            return self.name_pl
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
