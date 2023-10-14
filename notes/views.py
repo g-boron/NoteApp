@@ -19,6 +19,7 @@ from collections import Counter
 from django.core.serializers.json import DjangoJSONEncoder
 from django.http import JsonResponse
 from django.utils.translation import get_language
+from django.http import FileResponse
 
 
 # Create your views here.
@@ -466,3 +467,24 @@ def delete_reminder(request, pk, note_id):
     reminder.delete()
 
     return redirect('show', pk=note.id)
+
+
+def download_note(request, pk):
+    note = get_object_or_404(Note, pk=pk)
+    file_path = f'notes/media/downloaded_notes/note{note.id}.txt'
+
+    if get_language() == 'en':
+        content = f'Title: {note.title}, Author: {note.user}, Date: {note.add_date.strftime("%d-%m-%Y %H:%M:%S")}\n' \
+                   f'Category: {note.category}\n' \
+                   f'Note:\n{note.note_text}'
+    else:
+        content = f'Tytuł: {note.title}, Autor: {note.user}, Data: {note.add_date.strftime("%d-%m-%Y %H:%M:%S")}\n' \
+                   f'Kategoria: {note.category}\n' \
+                   f'Notatka:\n{note.note_text}'
+
+    with open(file_path, 'w', encoding='utf-8') as f:
+        f.write(content)
+
+    response = FileResponse(open(file_path, 'rb'))
+    response['Content-Disposition'] = f'attachment; filename="{file_path.split("/")[-1]}"'
+    return response

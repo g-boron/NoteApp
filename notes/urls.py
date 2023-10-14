@@ -27,6 +27,7 @@ urlpatterns = [
     path('reminders/', views.RemindersListView.as_view(), name='reminders'),
     path('events/', views.events, name='events'),
     path('delete_reminder/<int:pk>/<int:note_id>', views.delete_reminder, name='delete_reminder'),
+    path('download_note/<int:pk>', views.download_note, name='download_note'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
