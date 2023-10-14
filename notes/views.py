@@ -18,6 +18,7 @@ from django.contrib import messages
 from collections import Counter
 from django.core.serializers.json import DjangoJSONEncoder
 from django.http import JsonResponse
+from django.utils.translation import get_language
 
 
 # Create your views here.
@@ -30,6 +31,7 @@ class IndexPageView(TemplateView):
             unread_notifications = Notification.objects.filter(user=self.request.user, is_read=False).count()
             context["unread_notifications"] = unread_notifications
             context['last_note'] = Note.objects.filter(user=self.request.user).last()
+            context['language'] = get_language()
         else:
             context['last_note'] = None
 

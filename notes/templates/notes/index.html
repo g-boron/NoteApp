@@ -1,54 +1,56 @@
 {% extends 'notes/base.html' %}
 
+{% load i18n %}
+
 {% block title %} NoteApp {% endblock %}
 
 {% block content %}
     {% if user.is_authenticated %}
-        <h1 class="display-3"><span style="color: #e8594f;">{{ user }}</span> welcome to NoteApp - your personal note center!</h1>
+        <h1 class="display-3"><span style="color: #e8594f;">{{ user }}</span> {% trans 'welcome to NoteApp - your personal note center!' %}</h1>
     {% else %}
-        <h1 class="display-3">Welcome to NoteApp - your personal note center!</h1>
+        <h1 class="display-3">{% trans 'Welcome to NoteApp - your personal note center!' %}</h1>
     {% endif %}
     <br><br>
 
-    <h1 class="display-6 mt-5">NoteApp is an advanced application responsible for creating, storing and sharing notes. Whether you need notes for work, school or personal projects, NoteApp is here to help. <span style="color: #e8594f;">Create, manage and share notes easily.</span></h1>
+    <h1 class="display-6 mt-5">{% trans 'NoteApp is an advanced application responsible for creating, storing and sharing notes. Whether you need notes for work, school or personal projects, NoteApp is here to help.' %} <br><span style="color: #e8594f;">{% trans 'Create, manage and share notes easily.' %}</span></h1>
 
     <div class="row mt-5 mx-3 pb-5">
         <div class="col-md-4 mt-5">
-            <p class="h1">Create notes</p>
+            <p class="h1">{% trans 'Create notes' %}</p>
             <svg xmlns="http://www.w3.org/2000/svg" width="75" height="75" fill="currentColor" class="bi bi-pencil-square mt-3" viewBox="0 0 16 16">
                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                 <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
             </svg>
-            <p class="h4 mt-3">Create notes effortlessly with NoteApp - a user-friendly application that allows you to jot down and organize your ideas, tasks, and important information. Stay organized and never miss a beat with our intuitive note-taking platform.</p>
+            <p class="h4 mt-3">{% trans 'Create notes effortlessly with NoteApp - a user-friendly application that allows you to jot down and organize your ideas, tasks, and important information. Stay organized and never miss a beat with our intuitive note-taking platform.' %}</p>
         </div>
         <div class="col-md-4 mt-5">
-            <p class="h1">Add files</p>
+            <p class="h1">{% trans 'Add files' %}</p>
             <svg xmlns="http://www.w3.org/2000/svg" width="75" height="75" fill="currentColor" class="bi bi-file-earmark-medical mt-3" viewBox="0 0 16 16">
                 <path d="M7.5 5.5a.5.5 0 0 0-1 0v.634l-.549-.317a.5.5 0 1 0-.5.866L6 7l-.549.317a.5.5 0 1 0 .5.866l.549-.317V8.5a.5.5 0 1 0 1 0v-.634l.549.317a.5.5 0 1 0 .5-.866L8 7l.549-.317a.5.5 0 1 0-.5-.866l-.549.317V5.5zm-2 4.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 2a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5z"/>
                 <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
             </svg>
-            <p class="h4 mt-3">Attach documents, images, and multimedia files to your notes, making them more comprehensive and providing quick access to relevant information. Keep all your important resources in one place for seamless note management.</p>
+            <p class="h4 mt-3">{% trans 'Attach documents, images, and multimedia files to your notes, making them more comprehensive and providing quick access to relevant information. Keep all your important resources in one place for seamless note management.' %}</p>
         </div>
         <div class="col-md-4 mt-5">
-            <p class="h1">Share with others</p>
+            <p class="h1">{% trans 'Share with others' %}</p>
             <svg xmlns="http://www.w3.org/2000/svg" width="75" height="75" fill="currentColor" class="bi bi-share mt-3" viewBox="0 0 16 16">
                 <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
             </svg>
-            <p class="h4 mt-3">Collaborate and share your notes easily with NoteApp. Invite others to view and contribute to specific notes, enabling seamless teamwork and knowledge sharing</p>
+            <p class="h4 mt-3">{% trans 'Collaborate and share your notes easily with NoteApp. Invite others to view and contribute to specific notes, enabling seamless teamwork and knowledge sharing' %}</p>
         </div>
     </div>
 
     {% if user.is_authenticated and last_note%}
-        <h1 class="display-5 mt-5">Your last note:</h1>
+        <h1 class="display-5 mt-5">{% trans 'Your last note' %}:</h1>
 
         <a class="btn btn-primary m-2 p-4 fs-4 my-5" href="{% url 'show' last_note.id %}">{{ last_note.title }}</a>
     {% else %}
-        <h1 class="display-6 mt-5">Join the growing community of NoteApp users. Get started now! Log in or register to start using NoteApp and take advantage of its powerful features.</h1>
+        <h1 class="display-6 mt-5">{% trans 'Join the growing community of NoteApp users. Get started now! Log in or register to start using NoteApp and take advantage of its powerful features.' %}</h1>
 
-        <a href="{% url 'login' %}" class="btn btn-primary fs-3 my-5">Login</a>
+        <a href="{% url 'login' %}" class="btn btn-primary fs-3 my-5">{% trans 'Login' %}</a>
     {% endif %}
     {% if unread_notifications %}
-        <h1 class="display-5 mt-5">You have {{ unread_notifications }} unread notification{{ unread_notifications|pluralize }}.</h1>
-        <a href="{% url 'show_notifications' %}" class="btn btn-primary fs-4 p-4 m-2 my-5">See</a>
+        <h1 class="display-5 mt-5">{% trans 'You have' %} {{ unread_notifications }} {% if language == 'en' %} unread notification{{ unread_notifications|pluralize }} {% endif %}.</h1>
+        <a href="{% url 'show_notifications' %}" class="btn btn-primary fs-4 p-4 m-2 my-5">{% trans 'See' %}</a>
     {% endif %}
 {% endblock %}

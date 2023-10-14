@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-14 15:52+0200\n"
+"POT-Creation-Date: 2023-10-14 22:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1308,6 +1308,101 @@ msgstr "Rejestracja"
 msgid "Edit profile"
 msgstr "Edytuj profil"
 
+#: .\notes\templates\notes\index.html:9
+msgid "welcome to NoteApp - your personal note center!"
+msgstr "witaj w NoteApp - Twoim osobistym centrum notatek!"
+
+#: .\notes\templates\notes\index.html:11
+msgid "Welcome to NoteApp - your personal note center!"
+msgstr "Witaj w NoteApp - Twoim osobistym centrum notatek!"
+
+#: .\notes\templates\notes\index.html:15
+msgid ""
+"NoteApp is an advanced application responsible for creating, storing and "
+"sharing notes. Whether you need notes for work, school or personal projects, "
+"NoteApp is here to help."
+msgstr ""
+"NoteApp jest zaawansowaną aplikacją odpowiedzialną za tworzenie, "
+"przechowywanie i udostępnianie notatek. Niezależnie od tego czy potrzebujesz "
+"notatek do pracy, szkoły albo prywatnych projektów, NoteApp jest tutaj, aby "
+"Ci pomóc."
+
+#: .\notes\templates\notes\index.html:15
+msgid "Create, manage and share notes easily."
+msgstr "Twórz, zarządzaj i dziel się notatkami w prosty sposób."
+
+#: .\notes\templates\notes\index.html:19
+msgid "Create notes"
+msgstr "Twórz notatki"
+
+#: .\notes\templates\notes\index.html:24
+msgid ""
+"Create notes effortlessly with NoteApp - a user-friendly application that "
+"allows you to jot down and organize your ideas, tasks, and important "
+"information. Stay organized and never miss a beat with our intuitive note-"
+"taking platform."
+msgstr ""
+"Twórz notatki bez wysiłku z NoteApp - przyjazną użytkownikowi aplikacją, "
+"która pozwala na zanotowanie i uporządkowanie Twoich pomysłów, zadań i "
+"ważnych informacji. Zachowaj porządek i nigdy nie przegap żadnych spraw "
+"dzięki tej intuicyjnej platformie wspomagającej tworzenie notatek."
+
+#: .\notes\templates\notes\index.html:27
+msgid "Add files"
+msgstr "Dodawaj pliki"
+
+#: .\notes\templates\notes\index.html:32
+msgid ""
+"Attach documents, images, and multimedia files to your notes, making them "
+"more comprehensive and providing quick access to relevant information. Keep "
+"all your important resources in one place for seamless note management."
+msgstr ""
+"Załącz dokumenty, zdjęcia i pliki multimedialne do Twojej notatki czyniąc ją "
+"bardziej obszerną i pozwalającą na szybki dostęp do istotnych informacji. "
+"Trzymaj Twoje wszystkie ważne zasoby w jednym miejscu, aby płynnie zarządzać "
+"notatkami."
+
+#: .\notes\templates\notes\index.html:35
+msgid "Share with others"
+msgstr "Dziel się z innymi"
+
+#: .\notes\templates\notes\index.html:39
+msgid ""
+"Collaborate and share your notes easily with NoteApp. Invite others to view "
+"and contribute to specific notes, enabling seamless teamwork and knowledge "
+"sharing"
+msgstr ""
+"Współpracuj i dziel się Twoimi notatkami w prosty sposób z NoteApp. "
+"Zapraszaj innych, aby zobaczyli i wnieśli swój wkład do notatek umożliwiając "
+"bezproblemową pracę zespołową i dzielenie się wiedzą."
+
+#: .\notes\templates\notes\index.html:44
+msgid "Your last note"
+msgstr "Twoja ostatnia notatka"
+
+#: .\notes\templates\notes\index.html:48
+msgid ""
+"Join the growing community of NoteApp users. Get started now! Log in or "
+"register to start using NoteApp and take advantage of its powerful features."
+msgstr ""
+"Dołącz do rosnącej społeczności użytkowników NoteApp. Zacznij już teraz! "
+"Zaloguj się albo zarejestruj nowe konto, aby zacząć używać NoteApp i "
+"wykorzystywać zaawansowane funkcjonalności."
+
+#: .\notes\templates\notes\index.html:50
+#, fuzzy
+#| msgid "notes_Login"
+msgid "Login"
+msgstr "Logowanie"
+
+#: .\notes\templates\notes\index.html:53
+msgid "You have"
+msgstr "Liczba nieprzeczytanych powiadomień: "
+
+#: .\notes\templates\notes\index.html:54
+msgid "See"
+msgstr "Zobacz"
+
 #: .\notes\templates\notes\notifications.html:8
 msgid "My notifications"
 msgstr "Moje powiadomienia"
@@ -1489,3 +1584,8 @@ msgstr "Ilość edycji w "
 #: .\notes\templates\notes\stats.html:23
 msgid "Number of edits"
 msgstr "Ilość edycji"
+
+#, fuzzy
+#~| msgid "unread notification{{ unread_notifications|pluralize }}"
+#~ msgid "unread notification{{ unread_notifications|pluralize }}"
+#~ msgstr " "
