@@ -20,10 +20,26 @@ msgstr ""
 "%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
 "%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
-#: .\NoteApp\settings.py:20
-msgid "Polish"
-msgstr ""
+#: .\user_login\templates\registration\login.html:12
+msgid "Login"
+msgstr "Logowanie"
 
-#: .\NoteApp\settings.py:21
-msgid "English"
-msgstr ""
+#: .\user_login\templates\registration\login.html:17
+msgid "Login_btn"
+msgstr "Zaloguj"
+
+#: .\user_login\templates\registration\login.html:16
+msgid "If you don't have an account you can create"
+msgstr "Jeżeli nie masz jeszcze konta możesz je utworzyć"
+
+#: .\user_login\templates\registration\login.html:16
+msgid "here"
+msgstr "tutaj"
+
+#: .\user_login\templates\user_login\register.html:11
+msgid "Register new account"
+msgstr "Zarejestruj nowe konto"
+
+#: .\user_login\templates\user_login\register.html:16
+msgid "user_login_Register"
+msgstr "Zarejestruj"

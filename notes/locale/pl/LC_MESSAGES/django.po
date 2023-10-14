@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-07 14:16+0200\n"
+"POT-Creation-Date: 2023-10-14 15:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1262,7 +1262,7 @@ msgid "Current files:"
 msgstr "Wybrane pliki:"
 
 #: .\notes\templates\notes\add_note.html:24
-#: .\notes\templates\notes\edit_profile.html:15
+#: .\notes\templates\notes\edit_profile.html:16
 msgid "Save"
 msgstr "Zapisz"
 
@@ -1297,14 +1297,14 @@ msgid "Logout"
 msgstr "Wyloguj"
 
 #: .\notes\templates\notes\base.html:102
-msgid "Login"
+msgid "notes_Login"
 msgstr "Logowanie"
 
 #: .\notes\templates\notes\base.html:111
 msgid "Register"
 msgstr "Rejestracja"
 
-#: .\notes\templates\notes\edit_profile.html:10
+#: .\notes\templates\notes\edit_profile.html:11
 msgid "Edit profile"
 msgstr "Edytuj profil"
 

@@ -1,4 +1,7 @@
 {% extends 'notes/base.html' %}
+
+{% load i18n %}
+
 {% block title %}Login{% endblock %}
 
 {% load crispy_forms_tags %}
@@ -6,12 +9,12 @@
 {% block content %}
     <div class="container h-100 d-flex justify-content-center align-items-center">
         <div class="w-xl-50 w-lg-50 w-md-25 w-sm-75 mt-5 mx-auto">
-            <h1 class="display-4 text-center">Login</h1>
+            <h1 class="display-4 text-center">{% trans 'Login' %}</h1>
             <form method='POST' class="fs-5 text-start">
                 {% csrf_token %}
                 {{form|crispy}}
-                <p>If you don't have an account you can create <a href="{% url 'register' %}">here</a>!</p>
-                <button type="submit" class="btn btn-success fs-5">Login</button>
+                <p>{% trans "If you don't have an account you can create" %} <a href="{% url 'register' %}">{% trans 'here' %}</a>!</p>
+                <button type="submit" class="btn btn-success fs-5">{{ _('Login_btn') }}</button>
             </form>
     
         </div>
