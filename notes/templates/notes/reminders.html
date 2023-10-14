@@ -4,7 +4,7 @@
 
 {% block content %}
     <div id="calendar"></div>
-
+ 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
         var calendarEl = document.getElementById('calendar');
@@ -28,9 +28,20 @@
             },
             initialView: window.innerWidth < 576 ? 'timeGridDay' : 'dayGridMonth',
             height: window.innerWidth < 576 ? '90%' : '90%',
-            allDaySlot: false
+            allDaySlot: false,
+            {% if request.LANGUAGE_CODE == 'pl' %}
+                buttonText: {
+                    today: "Dzisiaj",
+                    month: "Miesiąc",
+                    week: "Tydzień",
+                    day: "Dzień",
+                    list: "Lista",
+                }
+            {% endif %}
         });
-
+        {% if request.LANGUAGE_CODE == 'pl' %}
+            calendar.setOption('locale', 'pl');
+        {% endif %}
         calendar.render();
         });
     </script>
