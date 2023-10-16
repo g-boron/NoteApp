@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-14 22:00+0200\n"
+"POT-Creation-Date: 2023-10-16 19:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,6 +20,7 @@ msgstr ""
 "%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
 "%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
+#: .\user_login\templates\registration\login.html:5
 #: .\user_login\templates\registration\login.html:12
 msgid "Login"
 msgstr "Logowanie"
@@ -36,6 +37,7 @@ msgstr "tutaj"
 msgid "Login_btn"
 msgstr "Zaloguj"
 
+#: .\user_login\templates\user_login\register.html:5
 #: .\user_login\templates\user_login\register.html:11
 msgid "Register new account"
 msgstr "Zarejestruj nowe konto"

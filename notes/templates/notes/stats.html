@@ -1,7 +1,7 @@
 {% extends 'notes/base.html' %}
 {% load i18n %}
 
-{% block title %}Statistics{% endblock %}
+{% block title %} {% trans 'Statistics' %} {% endblock %}
 
 {% block content %}
     <h1 class="display-4 mb-5">{% trans 'Number of edits in' %} {{ note.title }}</h1>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-14 22:00+0200\n"
+"POT-Creation-Date: 2023-10-16 19:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1257,6 +1257,10 @@ msgstr "Kategoria"
 msgid "Username"
 msgstr "Użytkownik"
 
+#: .\notes\templates\notes\add_note.html:4 .\notes\templates\notes\base.html:48
+msgid "Add new note"
+msgstr "Dodaj nową notatkę"
+
 #: .\notes\templates\notes\add_note.html:17
 msgid "Current files:"
 msgstr "Wybrane pliki:"
@@ -1271,24 +1275,23 @@ msgid "Home"
 msgstr "Strona główna"
 
 #: .\notes\templates\notes\base.html:39
+#: .\notes\templates\notes\show_notes.html:3
 #: .\notes\templates\notes\show_notes.html:7
 msgid "My notes"
 msgstr "Moje notatki"
 
-#: .\notes\templates\notes\base.html:48
-msgid "Add new note"
-msgstr "Dodaj nową notatkę"
-
 #: .\notes\templates\notes\base.html:57 .\notes\templates\notes\base.html:64
+#: .\notes\templates\notes\notifications.html:4
 msgid "Notifications"
 msgstr "Powiadomienia"
 
-#: .\notes\templates\notes\base.html:74
+#: .\notes\templates\notes\base.html:74 .\notes\templates\notes\profile.html:4
 msgid "Profile"
 msgstr "Profil"
 
-#: .\notes\templates\notes\base.html:83 .\notes\templates\notes\show.html:205
-#: .\notes\templates\notes\show.html:212
+#: .\notes\templates\notes\base.html:83
+#: .\notes\templates\notes\reminders.html:5
+#: .\notes\templates\notes\show.html:208 .\notes\templates\notes\show.html:215
 msgid "Reminders"
 msgstr "Przypomnienia"
 
@@ -1296,17 +1299,28 @@ msgstr "Przypomnienia"
 msgid "Logout"
 msgstr "Wyloguj"
 
-#: .\notes\templates\notes\base.html:102
-msgid "notes_Login"
+#: .\notes\templates\notes\base.html:102 .\notes\templates\notes\index.html:50
+#, fuzzy
+#| msgid "notes_Login"
+msgid "Login"
 msgstr "Logowanie"
 
 #: .\notes\templates\notes\base.html:111
 msgid "Register"
 msgstr "Rejestracja"
 
+#: .\notes\templates\notes\edit_profile.html:4
 #: .\notes\templates\notes\edit_profile.html:11
 msgid "Edit profile"
 msgstr "Edytuj profil"
+
+#: .\notes\templates\notes\error.html:3
+msgid "Error"
+msgstr "Błąd"
+
+#: .\notes\templates\notes\error.html:7
+msgid "Access denied!"
+msgstr "Brak dostępu!"
 
 #: .\notes\templates\notes\index.html:9
 msgid "welcome to NoteApp - your personal note center!"
@@ -1389,12 +1403,6 @@ msgstr ""
 "Zaloguj się albo zarejestruj nowe konto, aby zacząć używać NoteApp i "
 "wykorzystywać zaawansowane funkcjonalności."
 
-#: .\notes\templates\notes\index.html:50
-#, fuzzy
-#| msgid "notes_Login"
-msgid "Login"
-msgstr "Logowanie"
-
 #: .\notes\templates\notes\index.html:53
 msgid "You have"
 msgstr "Liczba nieprzeczytanych powiadomień: "
@@ -1416,7 +1424,7 @@ msgid "Accept"
 msgstr "Akceptuj"
 
 #: .\notes\templates\notes\notifications.html:56
-#: .\notes\templates\notes\show.html:287
+#: .\notes\templates\notes\show.html:290
 msgid "Are you sure you want to delete this?"
 msgstr "Czy na pewno chcesz to usunąć?"
 
@@ -1516,35 +1524,39 @@ msgstr "Zaproś"
 msgid "Allow edits?"
 msgstr "Zezwolić na edycję?"
 
-#: .\notes\templates\notes\show.html:196 .\notes\templates\notes\show.html:268
+#: .\notes\templates\notes\show.html:194
+msgid "Download note"
+msgstr "Pobierz notatkę"
+
+#: .\notes\templates\notes\show.html:199 .\notes\templates\notes\show.html:271
 msgid "Close"
 msgstr "Zamknij"
 
-#: .\notes\templates\notes\show.html:217
+#: .\notes\templates\notes\show.html:220
 msgid "Set reminder"
 msgstr "Ustaw przypomnienie"
 
-#: .\notes\templates\notes\show.html:221
+#: .\notes\templates\notes\show.html:224
 msgid "Title:"
 msgstr "Tytuł:"
 
-#: .\notes\templates\notes\show.html:225
+#: .\notes\templates\notes\show.html:228
 msgid "Date:"
 msgstr "Data:"
 
-#: .\notes\templates\notes\show.html:229
+#: .\notes\templates\notes\show.html:232
 msgid "Time:"
 msgstr "Czas:"
 
-#: .\notes\templates\notes\show.html:232
+#: .\notes\templates\notes\show.html:235
 msgid "Add a reminder"
 msgstr "Ustaw przypomnienie"
 
-#: .\notes\templates\notes\show.html:258
+#: .\notes\templates\notes\show.html:261
 msgid "My reminders"
 msgstr "Moje przypomnienia"
 
-#: .\notes\templates\notes\show.html:279
+#: .\notes\templates\notes\show.html:282
 msgid "Edit"
 msgstr "Edytuj"
 
@@ -1577,6 +1589,10 @@ msgstr "Zobacz notatkę"
 msgid "No notes are available."
 msgstr "Nie ma żadnych notatek"
 
+#: .\notes\templates\notes\stats.html:4
+msgid "Statistics"
+msgstr "Statystyki"
+
 #: .\notes\templates\notes\stats.html:7
 msgid "Number of edits in"
 msgstr "Ilość edycji w "
@@ -1584,6 +1600,9 @@ msgstr "Ilość edycji w "
 #: .\notes\templates\notes\stats.html:23
 msgid "Number of edits"
 msgstr "Ilość edycji"
+
+#~ msgid "notes_Login"
+#~ msgstr "Logowanie"
 
 #, fuzzy
 #~| msgid "unread notification{{ unread_notifications|pluralize }}"
