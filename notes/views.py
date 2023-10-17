@@ -19,7 +19,7 @@ from collections import Counter
 from django.core.serializers.json import DjangoJSONEncoder
 from django.http import JsonResponse
 from django.utils.translation import get_language
-from django.http import FileResponse
+from django.http import FileResponse, HttpResponse
 
 
 # Create your views here.
@@ -472,7 +472,8 @@ def delete_reminder(request, pk, note_id):
 def download_note(request, pk):
     note = get_object_or_404(Note, pk=pk)
     file_path = f'notes/media/downloaded_notes/note{note.id}.txt'
-
+    notefiles = NoteFile.objects.filter(note=note)
+    urls = [f.file.url for f in notefiles]
     if get_language() == 'en':
         content = f'Title: {note.title}, Author: {note.user}, Date: {note.add_date.strftime("%d-%m-%Y %H:%M:%S")}\n' \
                    f'Category: {note.category}\n' \
@@ -484,7 +485,24 @@ def download_note(request, pk):
 
     with open(file_path, 'w', encoding='utf-8') as f:
         f.write(content)
+    
+    import zipfile
+    from django.conf import settings
+    zip_file_path = f'notes/media/downloaded_notes/note{note.id}.zip'
+    with zipfile.ZipFile(zip_file_path, 'w') as zipf:
+        zipf.write(file_path, os.path.basename(file_path))
+        media_root = settings.MEDIA_ROOT.replace('\\', '/')
+        print(media_root)
+        for url in urls:
+            print(f'{media_root}{url[6:]}')
+            #file_url = os.path.join(media_root, url[6:])
+            #zipf.write(file_url, os.path.basename(url[6:]))
+            file_name = os.path.basename(url)
+            zipf.write(f'{media_root}{url[6:]}', file_name)
+    
+    with open(zip_file_path, 'rb') as f:
+        response = HttpResponse(f.read(), content_type='application/zip')
+        response['Content-Disposition'] = f'attachment; filename="note{note.id}.zip"'
 
-    response = FileResponse(open(file_path, 'rb'))
-    response['Content-Disposition'] = f'attachment; filename="{file_path.split("/")[-1]}"'
+
     return response
