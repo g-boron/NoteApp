@@ -492,11 +492,7 @@ def download_note(request, pk):
     with zipfile.ZipFile(zip_file_path, 'w') as zipf:
         zipf.write(file_path, os.path.basename(file_path))
         media_root = settings.MEDIA_ROOT.replace('\\', '/')
-        print(media_root)
         for url in urls:
-            print(f'{media_root}{url[6:]}')
-            #file_url = os.path.join(media_root, url[6:])
-            #zipf.write(file_url, os.path.basename(url[6:]))
             file_name = os.path.basename(url)
             zipf.write(f'{media_root}{url[6:]}', file_name)
     
