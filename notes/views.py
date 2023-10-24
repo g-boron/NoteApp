@@ -20,6 +20,8 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.http import JsonResponse
 from django.utils.translation import get_language
 from django.http import FileResponse, HttpResponse
+from django.conf import settings
+from django.core.mail import send_mail
 
 
 # Create your views here.
@@ -244,10 +246,6 @@ def download(request, file_id):
     return response
 
 
-from django.conf import settings
-from django.core.mail import send_mail
-
-
 def invite_user(request, pk):
     note = get_object_or_404(Note, pk=pk)
     form = InviteUser()
@@ -269,17 +267,15 @@ def invite_user(request, pk):
                 if request.LANGUAGE_CODE == 'en':
                     subject = 'New invitation'
                     message = f'Hi {User.objects.get(username=username)}!\n\n{User.objects.get(username=note.user)} sent you an invitation to note!\nCheck this in NoteApp.\n\nBest regards,\nNoteApp Team.'
-                    email_from = settings.EMAIL_HOST_USER
-                    recipient_list = [User.objects.get(username=username).email, ]
-                    send_mail( subject, message, email_from, recipient_list )
                     messages.success(request, 'Successfully invited user!')
                 else:
                     subject = 'Nowe zaproszenie'
                     message = f'Cześć {User.objects.get(username=username)}!\n\n{User.objects.get(username=note.user)} wysłał Ci zaproszenie do notatki!\nSprawdź w NoteApp.\n\nPozdrawiamy,\nZespół NoteApp.'
-                    email_from = settings.EMAIL_HOST_USER
-                    recipient_list = [User.objects.get(username=username).email, ]
-                    send_mail( subject, message, email_from, recipient_list )
                     messages.success(request, 'Pomyślne zaproszono użytkownika!')
+                
+                email_from = settings.EMAIL_HOST_USER
+                recipient_list = [User.objects.get(username=username).email, ]
+                send_mail( subject, message, email_from, recipient_list )
             else:
                 print('Error')
                 if request.LANGUAGE_CODE == 'en':
