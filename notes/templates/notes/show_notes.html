@@ -8,11 +8,20 @@
         <form action="{% url 'show_notes' %}" method="get">
             <div class="row">
                 <div class="col-md-4">
-                    {% if searched %}
-                        <input name="q" type="text" class="fs-5" placeholder="{% trans 'Search...'%}" style="border-radius: 8px;", value="{{ searched }}">
-                    {% else %}
-                        <input name="q" type="text" class="fs-5" placeholder="{% trans 'Search...'%}" style="border-radius: 8px;">
-                    {% endif %}
+                    <div class="col-md-2">
+                        {% if searched %}
+                            <input name="q" type="text" class="fs-5" placeholder="{% trans 'Search...'%}" style="border-radius: 8px;" value="{{ searched }}">
+                        {% else %}
+                            <input name="q" type="text" class="fs-5" placeholder="{% trans 'Search...'%}" style="border-radius: 8px;">
+                        {% endif %}
+                    </div>
+                    <div class="col-md-2 mt-1">
+                        <select name="search_type" type="text" class="p-2" aria-label="Select search type" style="width: auto; border-radius: 8px;">
+                            <option value="Title" selected>{% trans 'Title' %}</option>
+                            <option value="Author" {% if searched_type == 'Author' %} selected {% endif %}>{% trans 'Author' %}</option>
+                            <option value="Member" {% if searched_type == 'Member' %} selected {% endif %}>{% trans 'Member' %}</option>
+                        </select>  
+                    </div>
                 </div>
                 <div class="col-md-4 fs-5">
                     <select name="category" type="text" class="p-2" aria-label="Select category" style="width: auto; border-radius: 8px;">
@@ -60,7 +69,7 @@
             <ul class="pagination">
                 {% if notes.has_previous %}
                     <li class="page-item">
-                        <a class="page-link" href="?page={{ notes.previous_page_number }}{% if selected_category %}&category={{ selected_category }}{% endif %}{% if searched %}&q={{ searched }}{% endif %}{% if sort_value %}&sortby={{ sort_value }}{% endif %}">
+                        <a class="page-link" href="?page={{ notes.previous_page_number }}{% if searched %}&q={{ searched }}{% endif %}{% if searched_type %}&search_type={{ searched_type }}{% endif %}{% if selected_category %}&category={{ selected_category }}{% endif %}{% if sort_value %}&sortby={{ sort_value }}{% endif %}">
                             {% trans 'Previous' %}
                         </a>
                     </li>
@@ -74,7 +83,7 @@
         
                 {% if notes.has_next %}
                     <li class="page-item">
-                        <a class="page-link" href="?page={{ notes.next_page_number }}{% if selected_category %}&category={{ selected_category }}{% endif %}{% if searched %}&q={{ searched }}{% endif %}{% if sort_value %}&sortby={{ sort_value }}{% endif %}">
+                        <a class="page-link" href="?page={{ notes.next_page_number }}{% if searched %}&q={{ searched }}{% endif %}{% if searched_type %}&search_type={{ searched_type }}{% endif %}{% if selected_category %}&category={{ selected_category }}{% endif %}{% if sort_value %}&sortby={{ sort_value }}{% endif %}">
                             {% trans 'Next' %}
                         </a>
                     </li>

@@ -63,6 +63,7 @@ class NotesListView(LoginRequiredMixin, ListView):
         context['searched'] = self.request.GET.get('q')
         context['sort_value'] = self.request.GET.get('sortby')
         context['current_language'] = self.request.LANGUAGE_CODE
+        context['searched_type'] = self.request.GET.get('search_type')
         return context
 
     def get_queryset(self):
@@ -70,16 +71,27 @@ class NotesListView(LoginRequiredMixin, ListView):
         category = self.request.GET.get('category')
         search = self.request.GET.get('q')
         sort = self.request.GET.get('sortby')
+        search_type = self.request.GET.get('search_type')
         
         if category == 'Wszystkie':
             category = 'All'
         
         if search and category and category != 'All':
-            queryset = queryset.filter(Q(title__icontains=search) & Q(category__slug=category))
+            if search_type == 'Title':
+                queryset = queryset.filter(Q(title__icontains=search) & Q(category__slug=category))
+            elif search_type == 'Author':
+                queryset = queryset.filter(Q(user__username=search) & Q(category__slug=category))
+            elif search_type == 'Member':
+                queryset = queryset.filter(Q(members__contains=[search]) & Q(category__slug=category))
         elif category and category != 'All':
             queryset = queryset.filter(category__slug=category)
-        elif search:
-            queryset = queryset.filter(title__icontains=search)
+        elif search and search_type:
+            if search_type == 'Title':
+                queryset = queryset.filter(title__icontains=search)
+            elif search_type == 'Author':
+                queryset = queryset.filter(user__username=search)
+            elif search_type == 'Member':
+                queryset = queryset.filter(members__contains=[search])
         
         if sort == 'Najnowsze':
             sort = 'Latest'
