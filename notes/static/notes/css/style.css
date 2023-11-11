@@ -181,3 +181,12 @@ body {
 #language-form button[value="en"] {
     background-image: url('{% static "notes/images/en.png" %}');
 }
+
+.nav-link .ms-1{
+    color: #61a6fa;
+}
+
+.nav-link:hover .ms-1{
+    color: #3c6699;
+    transition: color 0.3s ease;
+}
