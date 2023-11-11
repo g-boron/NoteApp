@@ -14,7 +14,7 @@
                 {% csrf_token %}
                 {{form|crispy}}
                 <p>{% trans "If you don't have an account you can create" %} <a href="{% url 'register' %}">{% trans 'here' %}</a>!</p>
-                <button type="submit" class="btn btn-success fs-5">{{ _('Login_btn') }}</button>
+                <button type="submit" class="btn btn-success fs-5">{{ _('Sign in') }}</button>
             </form>
     
         </div>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-16 19:26+0200\n"
+"POT-Creation-Date: 2023-11-11 19:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1257,7 +1257,7 @@ msgstr "Kategoria"
 msgid "Username"
 msgstr "Użytkownik"
 
-#: .\notes\templates\notes\add_note.html:4 .\notes\templates\notes\base.html:48
+#: .\notes\templates\notes\add_note.html:5 .\notes\templates\notes\base.html:48
 msgid "Add new note"
 msgstr "Dodaj nową notatkę"
 
@@ -1314,11 +1314,11 @@ msgstr "Rejestracja"
 msgid "Edit profile"
 msgstr "Edytuj profil"
 
-#: .\notes\templates\notes\error.html:3
+#: .\notes\templates\notes\error.html:4
 msgid "Error"
 msgstr "Błąd"
 
-#: .\notes\templates\notes\error.html:7
+#: .\notes\templates\notes\error.html:8
 msgid "Access denied!"
 msgstr "Brak dostępu!"
 
