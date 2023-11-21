@@ -9,6 +9,13 @@
     <div class="chart-container p-1" style="position: relative; height: 60%; width: 95%;">
         <canvas id="myChart"></canvas>
     </div>
+
+    <div class="container mt-5">
+        <h1 class="display-5 mb-3">History of edits</h1>
+        {% for history in edit_history %}
+            <h1 class="display-6 text-start">{{ history }}</h1>
+        {% endfor %}
+    </div>
       
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
       

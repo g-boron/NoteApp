@@ -191,11 +191,15 @@ class EditNoteView(LoginRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
-        if self.object.edit_dates is None:
+        if not self.object.edit_dates:
             self.object.edit_dates = []
         date = dj_timezone.now()
         correct_date = date + timedelta(hours=1) 
         self.object.edit_dates.append(correct_date.strftime("%Y-%m-%d %H:%M:%S"))
+        self.object.save()
+        if not self.object.edit_authors:
+            self.object.edit_authos = []
+        self.object.edit_authors.append(self.request.user)
         self.object.save()
 
         form_files = self.request.FILES.getlist('file_field')
@@ -235,6 +239,11 @@ class StatsNoteView(LoginRequiredMixin, DetailView):
         
         context['labels'] = labels
         context['data'] = data
+        edit_history = [
+            f'{(edit_date + timedelta(hours=1)).strftime("%Y-%m-%d %H:%M:%S")} - user {edit_author} has edited this note.' 
+            for edit_date, edit_author in zip(note.edit_dates, note.edit_authors)
+        ]
+        context['edit_history'] = edit_history
 
         return context
 

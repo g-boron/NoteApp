@@ -38,6 +38,10 @@ class Note(models.Model):
         models.DateTimeField('edit dates', blank=True, null=True),
         default=list,
     )
+    edit_authors = ArrayField(
+        models.CharField(max_length=200),
+        default=list,
+    )
     members = ArrayField(
         models.CharField(max_length=200)
     )
