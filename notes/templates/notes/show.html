@@ -124,7 +124,7 @@
         <div class="d-flex justify-content-center">
             <ul class="list-group">
                 {% for member in note.members %}
-                    <li class="list-group-item text-white fs-3" style="background-color: #051537; border-color: #777b8c;">{{ member }} {% if member != note.user.username and note.user == user %} <a href="{% url 'delete_member' note.id member %}" class="btn btn-danger p-1 ms-3 confirm-delete"> </a> {% endif %}</li>
+                    <li class="list-group-item text-white fs-3" style="background-color: #051537; border-color: #777b8c;">{{ member }} {% if member != note.user.username and note.user == user %} <a href="{% url 'delete_member' note.id member %}" class="btn btn-danger p-1 ms-3 confirm-delete">X</a> {% endif %}</li>
                 {% endfor %}
             </ul>
         </div>

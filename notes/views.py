@@ -239,10 +239,16 @@ class StatsNoteView(LoginRequiredMixin, DetailView):
         
         context['labels'] = labels
         context['data'] = data
-        edit_history = [
-            f'{(edit_date + timedelta(hours=1)).strftime("%Y-%m-%d %H:%M:%S")} - user {edit_author} has edited this note.' 
-            for edit_date, edit_author in zip(note.edit_dates, note.edit_authors)
-        ]
+        if get_language() == 'en':
+            edit_history = [
+                f'{(edit_date + timedelta(hours=1)).strftime("%Y-%m-%d %H:%M:%S")} - user {edit_author} has edited this note.' 
+                for edit_date, edit_author in zip(note.edit_dates, note.edit_authors)
+            ]
+        else:
+            edit_history = [
+                f'{(edit_date + timedelta(hours=1)).strftime("%Y-%m-%d %H:%M:%S")} - użytkownik {edit_author} edytował notatkę.' 
+                for edit_date, edit_author in zip(note.edit_dates, note.edit_authors)
+            ]
         context['edit_history'] = edit_history
 
         return context

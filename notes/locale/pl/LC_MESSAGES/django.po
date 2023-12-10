@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-11 19:41+0100\n"
+"POT-Creation-Date: 2023-12-10 14:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1241,7 +1241,7 @@ msgstr ""
 msgid "Files"
 msgstr "Pliki"
 
-#: .\notes\forms.py:23
+#: .\notes\forms.py:23 .\notes\templates\notes\show_notes.html:20
 msgid "Title"
 msgstr "Tytuł"
 
@@ -1429,22 +1429,22 @@ msgid "Are you sure you want to delete this?"
 msgstr "Czy na pewno chcesz to usunąć?"
 
 #: .\notes\templates\notes\notifications.html:66
-#: .\notes\templates\notes\show_notes.html:64
+#: .\notes\templates\notes\show_notes.html:73
 msgid "Previous"
 msgstr "Poprzednia"
 
 #: .\notes\templates\notes\notifications.html:73
-#: .\notes\templates\notes\show_notes.html:71
+#: .\notes\templates\notes\show_notes.html:80
 msgid "Page"
 msgstr "Strona"
 
 #: .\notes\templates\notes\notifications.html:73
-#: .\notes\templates\notes\show_notes.html:71
+#: .\notes\templates\notes\show_notes.html:80
 msgid "of"
 msgstr "z"
 
 #: .\notes\templates\notes\notifications.html:80
-#: .\notes\templates\notes\show_notes.html:78
+#: .\notes\templates\notes\show_notes.html:87
 msgid "Next"
 msgstr "Następna"
 
@@ -1497,6 +1497,7 @@ msgid "(edited)"
 msgstr "(edytowano)"
 
 #: .\notes\templates\notes\show.html:38
+#: .\notes\templates\notes\show_notes.html:21
 msgid "Author"
 msgstr "Autor"
 
@@ -1560,32 +1561,36 @@ msgstr "Moje przypomnienia"
 msgid "Edit"
 msgstr "Edytuj"
 
-#: .\notes\templates\notes\show_notes.html:12
-#: .\notes\templates\notes\show_notes.html:14
+#: .\notes\templates\notes\show_notes.html:13
+#: .\notes\templates\notes\show_notes.html:15
 msgid "Search..."
 msgstr "Wyszukaj..."
 
-#: .\notes\templates\notes\show_notes.html:19
+#: .\notes\templates\notes\show_notes.html:22
+msgid "Member"
+msgstr "Członek"
+
+#: .\notes\templates\notes\show_notes.html:28
 msgid "All"
 msgstr "Wszystkie"
 
-#: .\notes\templates\notes\show_notes.html:27
+#: .\notes\templates\notes\show_notes.html:36
 msgid "Latest"
 msgstr "Najnowsze"
 
-#: .\notes\templates\notes\show_notes.html:28
+#: .\notes\templates\notes\show_notes.html:37
 msgid "Oldest"
 msgstr "Najstarsze"
 
-#: .\notes\templates\notes\show_notes.html:34
+#: .\notes\templates\notes\show_notes.html:43
 msgid "Search"
 msgstr "Wyszukaj"
 
-#: .\notes\templates\notes\show_notes.html:53
+#: .\notes\templates\notes\show_notes.html:62
 msgid "See note"
 msgstr "Zobacz notatkę"
 
-#: .\notes\templates\notes\show_notes.html:85
+#: .\notes\templates\notes\show_notes.html:94
 msgid "No notes are available."
 msgstr "Nie ma żadnych notatek"
 
@@ -1597,7 +1602,11 @@ msgstr "Statystyki"
 msgid "Number of edits in"
 msgstr "Ilość edycji w "
 
-#: .\notes\templates\notes\stats.html:23
+#: .\notes\templates\notes\stats.html:14
+msgid "History of edits"
+msgstr "Historia edycji"
+
+#: .\notes\templates\notes\stats.html:30
 msgid "Number of edits"
 msgstr "Ilość edycji"
 
