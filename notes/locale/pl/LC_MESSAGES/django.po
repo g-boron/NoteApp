@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-10 14:41+0100\n"
+"POT-Creation-Date: 2023-12-10 16:04+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1308,6 +1308,10 @@ msgstr "Logowanie"
 #: .\notes\templates\notes\base.html:111
 msgid "Register"
 msgstr "Rejestracja"
+
+#: .\notes\templates\notes\base.html:121
+msgid "Contrast"
+msgstr "Kontrast"
 
 #: .\notes\templates\notes\edit_profile.html:4
 #: .\notes\templates\notes\edit_profile.html:11

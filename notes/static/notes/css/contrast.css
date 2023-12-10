@@ -1,3 +1,78 @@
+body {
+    background: black !important;
+}
+
+#main_content {
+    color: white !important;
+}
+
+#main_content .card {
+    background-color: white !important;
+    color: black;
+}
+
+#main_content .btn {
+    background-color: black;
+    color: yellow
+}
+
+#main_content a {
+    color: yellow;
+    background-color: black;
+}
+
+#main_content a:hover {
+    color: #a8b02c;
+}
+
+#main_content span.page-link {
+    background-color: black !important;
+    color: yellow !important;
+}
+
+#main_content .modal-content {
+    background-color: black;
+    color: white !important;
+}
+
+#main_content .modal-content p {
+    color: white !important;
+}
+
+#main_content .modal-content label {
+    color: white !important;
+}
+
+#main_content .modal-title {
+    color: white !important;
+}
+
+svg.bi.bi-bookmark-fill.text-white.checkmark {
+    color: black !important;
+    background-color: white !important;
+}
+
+#nav_menu {
+    background-color: black !important;
+    border-right: 1px solid white;
+}
+
+#nav_menu span {
+    color: yellow;
+}
+
+#nav_menu svg {
+    color: yellow;
+}
+
+#nav_menu span:hover {
+    color: #a8b02c;
+}
+
+#nav_menu svg:hover {
+    color: #a8b02c;
+}
+
 .bi 
 {
     vertical-align: -.125em;
@@ -154,13 +229,6 @@ svg.checkmark
 svg.checkmark:hover
 {
     opacity: 0.6;
-}
-
-body {
-    background: #fff;
-    background-image: linear-gradient(#eee .1em,
-            transparent .1em);
-    background-size: 100% 2em;
 }
 
 #calendar {

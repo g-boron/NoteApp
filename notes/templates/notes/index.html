@@ -44,7 +44,7 @@
         <h1 class="display-5 mt-5">{% trans 'Your last note' %}:</h1>
 
         <a class="btn btn-primary m-2 p-4 fs-4 my-5" href="{% url 'show' last_note.id %}">{{ last_note.title }}</a>
-    {% else %}
+    {% elif not user.is_authenticated %}
         <h1 class="display-6 mt-5">{% trans 'Join the growing community of NoteApp users. Get started now! Log in or register to start using NoteApp and take advantage of its powerful features.' %}</h1>
 
         <a href="{% url 'login' %}" class="btn btn-primary fs-3 my-5">{% trans 'Login' %}</a>

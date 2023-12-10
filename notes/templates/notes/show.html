@@ -261,7 +261,7 @@
                                     <h1 class="display-6 mt-3">{% trans 'My reminders' %}</h1>
                                     <ul class="list-group">
                                         {% for reminder in reminders %}
-                                            <li class="list-group-item fs-4 text-white" style="background-color: #051537; border-color: #777b8c;"><a href="{% url 'reminders' %}" style="text-decoration: none;">{{ reminder.title }}</a><a href="{% url 'delete_reminder' reminder.id note.id %}" class="btn btn-danger p-1 ms-3 confirm-delete"></a></li>
+                                            <li class="list-group-item fs-4 text-white" style="background-color: #051537; border-color: #777b8c;"><a href="{% url 'reminders' %}" style="text-decoration: none;">{{ reminder.title }}</a><a href="{% url 'delete_reminder' reminder.id note.id %}" class="btn btn-danger p-1 ms-3 confirm-delete">X</a></li>
                                         {% endfor %}
                                     </ul>
                                 {% endif %}
