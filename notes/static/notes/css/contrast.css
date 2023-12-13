@@ -2,6 +2,14 @@ body {
     background: black !important;
 }
 
+#main_content .contrast-style {
+    color: white !important;
+}
+
+#main_content .notify-contrast {
+    color: black !important;
+}
+
 #main_content {
     color: white !important;
 }

@@ -20,41 +20,41 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
       
     <script>
-    const ctx = document.getElementById('myChart');
-    
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: {{ labels|safe }},
-            datasets: [{
-                label: '{% trans "Number of edits" %}',
-                data: {{ data|safe }},
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                y: {
-                    beginAtZero:true,
-                    ticks: {
-                        stepSize: 1,
-                        font: {
-                            size: 20,
-                        }
-                    }
-                },
-                x: {
-                    ticks: {
-                        font: {
-                            size: 20,
-                        },
-                    }
-                }
+        const ctx = document.getElementById('myChart');
+        
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {{ labels|safe }},
+                datasets: [{
+                    label: '{% trans "Number of edits" %}',
+                    data: {{ data|safe }},
+                    borderWidth: 1
+                }]
             },
-          
-        }
-    });
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero:true,
+                        ticks: {
+                            stepSize: 1,
+                            font: {
+                                size: 20,
+                            },
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            font: {
+                                size: 20,
+                            },
+                        },
+                    },
+                },
+            }
+        });
+   
     </script>
 {% endblock %}

@@ -14,7 +14,7 @@
             <div class="card mx-auto" style="background-color: #738FA7;">
                 <div class="card-body">
                     <h5 class="card-title text-dark text-start fs-3">{% trans 'New notification!' %}</h5>
-                    <h6 class="card-subtitle mb-2 text-white-50 text-end">{{ notification.timestamp|date:'d-m-Y H:i:s' }}</h6>
+                    <h6 class="card-subtitle mb-2 text-white-50 text-end notify-contrast">{{ notification.timestamp|date:'d-m-Y H:i:s' }}</h6>
                     <div class="card-text text-dark mb-5 mx-auto">
                         <h2 class="pt-5 text-start mb-5">{% if current_language == 'en' %} {{ notification.message }} {% else %} {{ notification.message_pl }} {% endif %}</h2>
                     </div>
