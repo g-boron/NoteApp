@@ -67,7 +67,7 @@
                     {% if note_file.extension|lower == '.png' or note_file.extension|lower == '.jpg' or note_file.extension|lower == '.jpeg' or note_file.extension|lower == '.gif' %}
                         <div class="col-lg-3 col-md-4 col-6">
                             <a href="#" class="d-block mb-4 h-100" data-bs-toggle="modal" data-bs-target="#modal-id">
-                                <img class="img-fluid img-thumbnail" src="{{ note_file.file.url }}" alt="">
+                                <img class="img-fluid img-thumbnail" src="{{ note_file.file.url }}" alt="Image added to the note.">
                             </a>
                         </div>
                     {% endif %}
@@ -79,7 +79,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-body">
-                  <img class="img-fluid" src="" alt="" id="modal-image">
+                  <img class="img-fluid" src="" alt="Enlarged image." id="modal-image">
                 </div>
               </div>
             </div>
