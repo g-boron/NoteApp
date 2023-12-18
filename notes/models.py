@@ -33,7 +33,7 @@ class Note(models.Model):
     title = models.CharField(max_length=200)
     note_text = models.TextField()
     add_date = models.DateTimeField('added date', auto_now_add=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, default=7)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, default=8)
     edit_dates = ArrayField(
         models.DateTimeField('edit dates', blank=True, null=True),
         default=list,
