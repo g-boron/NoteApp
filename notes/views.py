@@ -19,7 +19,7 @@ from collections import Counter
 from django.core.serializers.json import DjangoJSONEncoder
 from django.http import JsonResponse
 from django.utils.translation import get_language
-from django.http import FileResponse, HttpResponse
+from django.http import FileResponse, HttpResponse, HttpRequest
 from django.conf import settings
 from django.core.mail import send_mail
 
@@ -498,7 +498,10 @@ def events(request):
     return JsonResponse(events_list, safe=False, encoder=DjangoJSONEncoder)
 
 
-def delete_reminder(request, pk, note_id):
+def delete_reminder(request: HttpRequest, pk: int, note_id: int) -> HttpResponseRedirect:
+    """
+    Deletes previously added reminder from the database. Then redirects to the note's page.
+    """
     note = get_object_or_404(Note, pk=note_id)
     reminder = get_object_or_404(Reminder, pk=pk)
     reminder.delete()
